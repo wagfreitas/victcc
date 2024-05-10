@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+
+    <div class="parte-branca">
+      <img class="menina" src="../../assets/images/img.entrar.png">
+      <img class="logo" src="../../assets/images/Logo.png" />
+      <button class="botao-seta"(click)="voltar()">
+        <img class="seta" src="../../assets/images/seta.png" />
+      </button>
+    </div>
+
+    <div class="formulario">
+      <p class="texto">Entrar</p>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <ion-input class="caixa"
+            placeholder="    E-mail"
+            formControlName="email"
+            type="email"
+            required>
+          </ion-input>
+          <ion-input class="caixa"
+            placeholder="    Senha"
+            formControlName="senha"
+            type="password"
+            required>
+          </ion-input>
+      </form>
+      <button class="senhaEsquecida"(click)="testar()">
+        Esqueceu sua senha?
+      </button>
+      <button class="botao" (click)="entrar()">
+        ENTRAR
+      </button>
+    </div>
+
+  </div>
+
+</ion-content>

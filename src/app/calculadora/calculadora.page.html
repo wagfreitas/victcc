@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+    <p class="titulo">CALCULADORA</p>
+
+    <div class="parte-amarela" >
+
+      <ion-select class="caixa" placeholder="Material" interface="popover" [(ngModel)]="material" (ionChange)="atualizarOpcoes()" >
+        <ion-select-option>Concreto</ion-select-option>
+        <ion-select-option>Areia</ion-select-option>
+        <ion-select-option>Tinta</ion-select-option>
+      </ion-select>
+
+      <div>
+        <ion-select class="caixa" *ngIf="material === ''" placeholder="Conversão"></ion-select>
+        <ion-select class="caixa" *ngIf="material === 'Concreto'" placeholder="Conversão" interface="popover" [(ngModel)]="unidade">
+          <ion-select-option>c1</ion-select-option>
+          <ion-select-option>c2</ion-select-option>
+          <ion-select-option>c3</ion-select-option>
+        </ion-select>
+        <ion-select class="caixa" *ngIf="material === 'Areia'" placeholder="Conversão" interface="popover" [(ngModel)]="unidade">
+          <ion-select-option>a1</ion-select-option>
+          <ion-select-option>a2</ion-select-option>
+          <ion-select-option>a3</ion-select-option>
+        </ion-select>
+        <ion-select class="caixa" *ngIf="material === 'Tinta'" placeholder="Conversão" interface="popover" [(ngModel)]="unidade">
+          <ion-select-option>m² para Lata (900ml)</ion-select-option>
+          <ion-select-option>m² para Lata (3.6L)</ion-select-option>
+          <ion-select-option>m² para Lata (18L)</ion-select-option>
+        </ion-select>
+      </div>
+
+
+      <div class="caixa" style="padding-top: 18px;">
+        <ion-input placeholder="Quantidade" [(ngModel)]="quantidade" [clearOnEdit]="true" type="number"></ion-input>
+      </div>
+
+      <button class="botao-calcular"
+        (click)="calcular()">
+        CALCULAR
+      </button>
+
+      <div class="resultado">
+        {{resultado}}
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,26 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <p class="titulo">NOVO PROJETO</p>
+
+    <ion-button id ="arroz" class="caixa"> oi </ion-button>
+    <ion-popover trigger="arroz">
+      <ng-template>
+        <ion-content> popover </ion-content>
+      </ng-template>
+    </ion-popover>
+
+    <button
+      class="botao-finalizar"
+      (click)="testar()">
+      FINALIZAR
+    </button>
+
+  </div>
+
+
+
+</ion-content>

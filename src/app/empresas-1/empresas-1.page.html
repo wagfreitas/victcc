@@ -1,0 +1,26 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+
+    <div class="parte-branca">
+      <button class="botao-seta" (click)="voltar()">
+        <img class="seta" src="../../assets/images/seta.png" />
+      </button>
+      <p class="texto">Cadastre sua <br> empresa</p>
+    </div>
+
+    <div class="formulario">
+        <form>
+          <input class="caixa" type="text" placeholder="Nome">
+          <input class="caixa" type="text" placeholder="Contato">
+          <ion-select class="caixa" placeholder="Serviços oferecidos" [multiple]="true" interface="popover" >
+            <ion-select-option>Encanador</ion-select-option>
+            <ion-select-option>Eletricista</ion-select-option>
+            <ion-select-option>Pintor</ion-select-option>
+          </ion-select>
+          <button class="botao" (click)="testar()">CADASTRAR</button>
+        </form>
+    </div>
+
+  </div>
+
+</ion-content>
