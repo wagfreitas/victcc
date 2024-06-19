@@ -1,0 +1,72 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+
+    <div class="parte-amarela" >
+      <p class="titulo">BLOCOS</p>
+      <ion-row>
+        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
+          <ion-input label="Altura bloco:" [(ngModel)]="altbloco" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unialtbloco">
+            <ion-select-option>mm</ion-select-option>
+            <ion-select-option>dm</ion-select-option>
+            <ion-select-option default >cm</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
+          <ion-input label="Largura bloco:" [(ngModel)]="largbloco" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unilargbloco">
+            <ion-select-option>mm</ion-select-option>
+            <ion-select-option>dm</ion-select-option>
+            <ion-select-option default >cm</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="caixa" size="8" style="margin-right: 6px;">
+          <ion-input label="Altura parede:" [(ngModel)]="altparede" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="2.5" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unialtparede">
+            <ion-select-option>cm</ion-select-option>
+            <ion-select-option default >m</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="caixa" size="8" style="margin-right: 6px;">
+          <ion-input label="Largura parede:" [(ngModel)]="largparede" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="2.5" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unilargparede">
+            <ion-select-option>cm</ion-select-option>
+            <ion-select-option default >m</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-button class="caixa" (click)="calcular()" style="background-color: black; color: white; padding-left: 0px;">
+        CALCULAR
+      </ion-button>
+      <div class="caixa" style="color:#FFC71E;">{{resultado}}</div>
+      <ion-button class="duvida" id="duvida">?</ion-button>
+      <ion-alert trigger="duvida"
+      header="Ajuda"
+      message="Não esqueça de colocar a altura e largura de acordo com a posição usada do bloco">
+      </ion-alert>
+
+    </div>
+
+  </div>
+</ion-content>
+

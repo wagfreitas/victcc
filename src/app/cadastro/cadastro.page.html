@@ -1,0 +1,68 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+    <div class="parte-branca">
+      <img class="logo" src="../../assets/images/Logo.png" />
+      <button class="botao-seta"
+        (click)="voltar()">
+        <img class="seta" src="../../assets/images/seta.png" />
+      </button>
+    </div>
+    <p class="texto1">Cadastre-se</p>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-item
+        class="caixa">
+        <ion-label
+          position="floating">
+          Nome
+        </ion-label>
+        <ion-input
+          formControlName="nome"
+          type="text"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-item
+        class="caixa">
+        <ion-label
+          position="floating">
+          Sobrenome
+        </ion-label>
+        <ion-input
+          formControlName="sobrenome"
+          type="text"
+          required/>
+      </ion-item>
+      <ion-item
+        class="caixa">
+        <ion-label
+          position="floating">
+          E-mail
+        </ion-label>
+        <ion-input
+          formControlName="email"
+          type="email"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-item
+        class="caixa">
+        <ion-label
+          position="floating">
+          Senha
+        </ion-label>
+        <ion-input
+          formControlName="senha"
+          type="password"
+          required>
+        </ion-input>
+      </ion-item>
+
+          <ion-button
+            class="botao-finalizar"
+            type="submit">
+            FINALIZAR
+          </ion-button>
+
+    </form>
+  </div>
+</ion-content>

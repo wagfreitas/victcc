@@ -1,0 +1,88 @@
+ion-grid {
+  --ion-grid-columns: 10;
+}
+
+.fundo {
+  border-radius: 35px;
+  background: #ffffff;
+  height: 20%;
+  width: 100%;
+}
+
+.info {
+  border-radius: 35px;
+  background: #ffffff;
+  top: 20%;
+  height: 65%;
+  width: 100%;
+  padding: 0px;
+}
+
+.seta {
+  display: flex;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+
+.logo {
+  display: flex;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  top: 60px;
+  left: 50%;
+}
+
+.titulo {
+  position: relative;
+  width: calc(100% - 60px);
+  transform: translate(-50%, 0%);
+  left: 50%;
+  top: 50px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.caixa {
+  background-color:#ffffff;
+  border-radius: 20px;
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 12px;
+  margin-right: 12px;
+  position: relative;
+  padding: 20px;
+}
+
+.cinza {
+  background-color: gainsboro;
+  position: relative;
+  width: calc(100% - 60px);
+  left: 30px;
+  border-radius: 20px;
+  padding: 20px;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.menu {
+  background-color: #ff4c4c;
+  position: relative;
+  height: 80px;
+  width: calc(100% - 60px);
+  left: 30px;
+  margin-top: 0px;
+}
+
+ion-icon {
+  color: white;
+}
