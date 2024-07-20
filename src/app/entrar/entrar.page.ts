@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../_services/authentication.service';
 
 
 @Component({
@@ -11,7 +12,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EntrarPage implements OnInit {
   form!: FormGroup
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor(
+    private router: Router, private formBuilder: FormBuilder,
+    public authService: AuthenticationService,
+  ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -33,6 +37,17 @@ export class EntrarPage implements OnInit {
   }
 
   entrar() {
-    this.router.navigate(["inicial"]);
+    const email = this.form.value.email;
+    const senha = this.form.value.senha;
+    this.authService
+    .SignIn(email, senha)
+    .then((retorno) => {
+      console.log(retorno.user?.email);
+      this.router.navigate(["inicial"]);
+    })
+    .catch((error) => {
+      window.alert(error.message);
+    });
+
   }
 }
