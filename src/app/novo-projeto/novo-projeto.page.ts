@@ -86,5 +86,8 @@ export class NovoProjetoPage {
       this.estMetalicaSelecionada = event.detail.checked;
     }
 
+    console.log(this.remocaoSelecionada, this.nivelSelecionado, this.marcacaoSelecionada, this.blocoSelecionado, this.radierSelecionado, this.sapataSelecionada, this.estConcretoSelecionada, this.estMetalicaSelecionada);
+    console.log(this.quantidadeRemocao, this.volumeNivel, this.areaMarcacao);
   }
+
 }
