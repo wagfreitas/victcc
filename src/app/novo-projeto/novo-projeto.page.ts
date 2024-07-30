@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
 
 interface Item {
-  name: string;
+  opcao: string;
   values: Medidas[];
   selected: false;
   [key: string]: any;
@@ -37,26 +37,40 @@ export class NovoProjetoPage {
     {
       name: 'Preparacão do terreno',
       items: [
-        { name: 'Remocao da Vegetacao', values: [{ 'Quantidade': 0}], selected: false },
-        { name: 'Nivelamento', values: [{ 'Volume': 0}], selected: false },
+        { opcao: 'Remocao da Vegetacao', values: [{ 'Quantidade': 0}], selected: false },
+        { opcao: 'Nivelamento', values: [{ 'Volume': 0}], selected: false },
       ],
     },
     {
       name: 'Fundacão',
       items: [
-        { name: 'Bloco de Concreto', values: [{ 'Volume': 0, 'Quantidade': 0}], selected: false },
-        { name: 'Radier', values: [{ 'Área': 0, 'Altura': 0}], selected: false },
+        { opcao: 'Bloco de Concreto', values: [{ 'Volume': 0, 'Quantidade': 0}], selected: false },
+        { opcao: 'Radier', values: [{ 'Área': 0, 'Altura': 0}], selected: false },
       ],
     },
     {
       name: 'Estruturas',
       items: [
         {
-          name: 'Pilar',
+          opcao: 'Pilar',
          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0}], selected: false
         },
         {
-          name: 'Viga',
+          opcao: 'Viga',
+          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0}], selected: false
+        },
+      ],
+    },
+
+    {
+      name: 'Estruturas',
+      items: [
+        {
+         opcao: 'Pilar',
+         values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0}], selected: false
+        },
+        {
+          opcao: 'Viga',
           values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0}], selected: false
         },
       ],
@@ -151,7 +165,7 @@ export class NovoProjetoPage {
             values[key] = item.values[0][key];
           }
         }
-        return { name: item.name, values: values };
+        return { name: item.opcao, values: values };
       });
       return { name: category.name, items: items };
     });
@@ -163,7 +177,7 @@ export class NovoProjetoPage {
     let data = {projeto: this.generateJson()};
     this.projService.createProject(data).then(() => {
       console.log("Projeto criado com sucesso");
-    }).catch((error) => {
+    }).catch((error: any) => {
       console.error("Erro ao criar projeto: ", error);
     });
   }
