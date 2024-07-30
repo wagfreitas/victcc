@@ -1,0 +1,58 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+
+    <div class="busca">
+      <button class="botao-seta"(click)="voltar()">
+        <img class="seta" src="../../assets/images/seta.png" />
+      </button>
+      <p class="texto">Encontre seu <br> profissional</p>
+      <ion-select class="caixa" placeholder="Buscar" [(ngModel)]="profissional" interface="popover">
+        <ion-select-option *ngFor="let profissional of profissionais" [value]="profissional">
+          {{ profissional }}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="parte-branca">
+        <ion-content *ngIf="profissional === 'Eletricista'">
+          <ion-list>
+            <ion-card *ngFor="let item of items">
+              <ion-card-header>
+                {{ item.title }}
+              </ion-card-header>
+              <ion-card-content>
+                {{ item.description }}
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-content>
+        <ion-content *ngIf="profissional === 'Encanador'">
+          <ion-list>
+            <ion-card *ngFor="let item of items">
+              <ion-card-header>
+                {{ item.title }}
+              </ion-card-header>
+              <ion-card-content>
+                {{ item.description }}
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-content>
+        <ion-content *ngIf="profissional === 'Pintor'">
+          <ion-list>
+            <ion-card *ngFor="let item of items">
+              <ion-card-header>
+                {{ item.title }}
+              </ion-card-header>
+              <ion-card-content>
+                {{ item.description }}
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-content>
+    </div>
+
+
+
+  </div>
+</ion-content>

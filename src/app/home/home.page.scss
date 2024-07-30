@@ -1,0 +1,68 @@
+.fundo {
+  border-radius: 35px;
+  background: #FFC71E;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.parte-branca {
+  background-color: #ffffff;
+  border-radius: 35px;
+  height: 60%;
+  position: relative;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  position: fixed;
+  top: 90px;
+  left: 50%;
+}
+
+.botao {
+  position: relative;
+  width: calc(100% - 80px);
+  height: 80px;
+  left: 40px;
+  margin-top: 40px;
+  border-radius: 20px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  font-style: bold;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.cara {
+  height: 280px;
+  position: fixed;
+  right: 0;
+  bottom: 40%;
+  border-radius: 35px;
+}
+
+.texto1 {
+position: fixed;
+width: 250px;
+left: 30px;
+top: 170px;
+font-weight: 700;
+font-size: 32px;
+line-height: 40px;
+color: #000000;
+}
+
+.texto2 {
+  position: fixed;
+  width: 250px;
+  left: 30px;
+  top: 220px;
+  font-weight: 200;
+  font-size: 26px;
+  color: #000000;
+  }

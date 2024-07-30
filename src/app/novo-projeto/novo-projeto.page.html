@@ -1,0 +1,231 @@
+<ion-content [fullscreen]="true" style="--background: #3D8FEF;">
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+
+    <ion-input class="titulo" placeholder="NOVO PROJETO" [(ngModel)]="nome" type="string"></ion-input>
+
+    <ion-accordion-group class="caixa" expand="inset">
+      <ion-accordion value="preparação">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>PREPARAÇÃO DO TERRENO</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="remocaoSelecionada" (ionChange)="toggleInputs('remocao', $event)">Remoção de vegetação</ion-checkbox>
+            <div *ngIf="remocaoSelecionada">
+              <div class="caixa3">
+                <ion-input label="Quantidade (un):" [(ngModel)]="quantidadeRemocao" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+            </div>
+          <br />
+          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="nivelSelecionado" (ionChange)="toggleInputs('nivel', $event)">Nivelamento</ion-checkbox>
+            <div *ngIf="nivelSelecionado">
+              <div class="caixa3">
+                <ion-input label="Volume (m³):" [(ngModel)]="volumeNivel" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+            </div>
+        <br />
+        <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="marcacaoSelecionada" (ionChange)="toggleInputs('marcacao', $event)">Marcação de obra</ion-checkbox>
+        <div *ngIf="marcacaoSelecionada">
+          <div class="caixa3">
+            <ion-input label="Área (m²):" [(ngModel)]="areaMarcacao" type="number" [clearOnEdit]="true"></ion-input>
+          </div>
+        </div>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="fundação">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>FUNDAÇÃO</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="blocoSelecionado" (ionChange)="toggleInputs('bloco', $event)">Bloco de concreto</ion-checkbox>
+            <div *ngIf="blocoSelecionado">
+              <div class="caixa3">
+                <ion-input label="Volume (m³):" [(ngModel)]="volumeBloco" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Quantidade (un):" [(ngModel)]="quantidadeBloco" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+            </div>
+          <br />
+          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="radierSelecionado" (ionChange)="toggleInputs('radier', $event)">Radier</ion-checkbox>
+            <div *ngIf="radierSelecionado">
+              <div class="caixa3">
+                <ion-input label="Área (m²):" [(ngModel)]="areaRadier" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Altura (cm):" [(ngModel)]="alturaRadier" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+            </div>
+        <br />
+        <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="sapataSelecionada" (ionChange)="toggleInputs('sapata', $event)">Sapata</ion-checkbox>
+        <div *ngIf="sapataSelecionada">
+          <ion-select class="caixa3" label="Tipo" [(ngModel)]="tipoSapata">
+            <ion-select-option value="isolada" default >Isolada</ion-select-option>
+            <ion-select-option value="corrida">Corrida</ion-select-option>
+            <ion-select-option value="associada">Associada</ion-select-option>
+          </ion-select>
+          <div class="caixa3">
+            <ion-input label="Volume (m³):" [(ngModel)]="volumeSapata" type="number" [clearOnEdit]="true"></ion-input>
+          </div>
+          <div class="caixa3">
+            <ion-input label="Quantidade (un):" [(ngModel)]="quantidadeSapata" type="number" [clearOnEdit]="true"></ion-input>
+          </div>
+        </div>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="estrutura">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>ESTRUTURAS</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="estConcretoSelecionada" (ionChange)="toggleInputs('estconcreto', $event)">Concreto</ion-checkbox>
+            <div *ngIf="estConcretoSelecionada">
+              <p class="p">Pilar</p>
+              <div class="caixa3">
+                <ion-input label="Dimensão A (cm):" [(ngModel)]="compPilar" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Dimensão B (cm):" [(ngModel)]="largPilar" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Altura (m):" [(ngModel)]="altPilar" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Quantidade (un):" [(ngModel)]="quantPilar" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <p class="p">Viga</p>
+              <div class="caixa3">
+                <ion-input label="Dimensão A (cm):" [(ngModel)]="compViga" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Dimensão B (cm):" [(ngModel)]="largViga" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Altura (m):" [(ngModel)]="altViga" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Quantidade (un):" [(ngModel)]="quantViga" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <p class="p">Laje</p>
+              <div class="caixa3">
+                <ion-input label="Área (m²):" [(ngModel)]="areaLaje" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+              <div class="caixa3">
+                <ion-input label="Espessura (cm):" [(ngModel)]="espLaje" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+            </div>
+          <br />
+          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="estMetalicaSelecionada" (ionChange)="toggleInputs('estmetalica', $event)">Metálica</ion-checkbox>
+            <div *ngIf="estMetalicaSelecionada">
+              <div class="caixa3">
+                <ion-input label="Tempo estipulado (dias):" [(ngModel)]="diasMetalica" type="number" [clearOnEdit]="true"></ion-input>
+              </div>
+            </div>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="alvenaria">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>ALVENARIA</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <ion-select class="caixa3" label="Tipo" [(ngModel)]="tipoBloco">
+            <ion-select-option value="ceramico" default >Cerâmico</ion-select-option>
+            <ion-select-option value="concreto">Concreto</ion-select-option>
+          </ion-select>
+          <img src="../../assets/images/dimBloco.png" />
+          <p class="p">Dimensões bloco:</p>
+          <div class="caixa3">
+            <ion-input label="Dimensão A (cm):" [(ngModel)]="ABloco" type="number" [clearOnEdit]="true"></ion-input>
+          </div>
+          <div class="caixa3">
+            <ion-input label="Dimensão B (cm):" [(ngModel)]="BBloco" type="number" [clearOnEdit]="true"></ion-input>
+          </div>
+          <p class="p">Dimensão paredes:</p>
+          <div class="caixa3">
+            <ion-input label="Largura (m):" [(ngModel)]="largParede" type="number" [clearOnEdit]="true"></ion-input>
+          </div>
+          <div class="caixa3">
+            <ion-input label="Altura (m):" [(ngModel)]="altParede" type="number" [clearOnEdit]="true"></ion-input>
+          </div>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="cobertura">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>COBERTURA</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="hidraulica">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>HIDRÁULICA</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="eletrica">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>ELÉTRICA</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="acabamentos">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>ACABAMENTOS</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="complementares">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>SISTEMAS COMPLEMENTARES</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+        </ion-list>
+      </ion-accordion>
+
+      <ion-accordion value="final">
+        <ion-item slot="header" class="caixa1">
+          <ion-label>FINALIZAÇÃO</ion-label>
+        </ion-item>
+        <ion-list slot="content" style="background-color:#ECEBED;">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+        </ion-list>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <button
+      class="botao-finalizar"
+      (click)="finalizar()">
+      FINALIZAR
+    </button>
+
+</ion-content>

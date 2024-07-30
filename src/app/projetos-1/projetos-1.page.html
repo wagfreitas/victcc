@@ -1,0 +1,91 @@
+<ion-content [fullscreen]="true">
+  <button class="botao-seta"(click)="voltar()">
+    <img class="seta" src="../../assets/images/seta.png" />
+  </button>
+  <img class="logo" src="../../assets/images/Logo.png" />
+  <p class="titulo">Obra A</p>
+
+  <ion-footer>
+    <ion-segment value="home" (ionChange)=menu($event) style="height: 100%;">
+      <ion-segment-button value="checklist">
+        <ion-icon name="checkmark-circle-outline" size="large" aria-hidden="true"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="compras">
+        <ion-icon name="bag" size="large" aria-hidden="true"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="home">
+        <ion-icon name="home" size="large" aria-hidden="true"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="diario">
+        <ion-icon name="book" size="large" aria-hidden="true"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="calendario" size="large" aria-hidden="true">
+        <ion-icon name="calendar"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-footer>
+
+  <div class="info">
+    <div *ngIf="abaselecionada === 'checklist'">
+      <p class="titulo2">CHECKLIST</p>
+
+      <div class="conteudo">
+        <div class="caixa">
+          <p class="titulo3">Preparação do terreno</p>
+          <div class="checkbox-item" *ngFor="let option of options; let i = index">
+            <ion-label>{{ option }}</ion-label>
+            <ion-checkbox [(ngModel)]="selectedOptions[i]" (ionChange)="updateProgress()"></ion-checkbox>
+          </div>
+        </div>
+        <div class="caixa">
+          <p class="titulo3">Preparação do terreno</p>
+          <div class="checkbox-item" *ngFor="let option of options; let i = index">
+            <ion-label>{{ option }}</ion-label>
+            <ion-checkbox [(ngModel)]="selectedOptions[i]" (ionChange)="updateProgress()"></ion-checkbox>
+          </div>
+        </div>
+        <div class="caixa">
+          <p class="titulo3">Preparação do terreno</p>
+          <div class="checkbox-item" *ngFor="let option of options; let i = index">
+            <ion-label>{{ option }}</ion-label>
+            <ion-checkbox [(ngModel)]="selectedOptions[i]" (ionChange)="updateProgress()"></ion-checkbox>
+          </div>
+        </div>
+        <div class="caixa">
+          <p class="titulo3">Preparação do terreno</p>
+          <div class="checkbox-item" *ngFor="let option of options; let i = index">
+            <ion-label>{{ option }}</ion-label>
+            <ion-checkbox [(ngModel)]="selectedOptions[i]" (ionChange)="updateProgress()"></ion-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <div class="caixa">
+        <p class="titulo3">PROGRESSO</p>
+        <div class="barra">
+          <div class="progresso" [style.width.%]="progress"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="abaselecionada === 'compras'">
+      <p class="titulo2">COMPRAS</p>
+    </div>
+
+    <div *ngIf="abaselecionada === 'home'">
+      home
+    </div>
+
+    <div *ngIf="abaselecionada === 'diario'">
+      diario
+    </div>
+
+    <div *ngIf="abaselecionada === 'calendario'">
+      Calendário
+    </div>
+
+  </div>
+
+</ion-content>
+
