@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  apiURL: 'https://us-central1-sistmvb.cloudfunctions.net/app',
   firebaseConfig: {
     apiKey: "AIzaSyBR82tEQDVBK5EC85-di9dL42RUCVcmApk",
     authDomain: "victcc-a6e00.firebaseapp.com",

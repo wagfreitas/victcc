@@ -32,6 +32,8 @@
   left: 50px;
 }
 
+
+
 .menina {
   position: fixed;
   width: 300px;
@@ -68,7 +70,7 @@
   width: calc(100% - 80px);
   margin-left: 40px;
   margin-top: 40px;
-  padding-left: 20px;
+  padding: 20px;
 }
 
 .botao {
@@ -96,4 +98,9 @@
   left: 50%;
   top: 10px;
   transform: translate(-50%, 0%);
+}
+
+
+ion-input {
+  padding: 20px
 }

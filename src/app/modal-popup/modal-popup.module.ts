@@ -1,23 +1,20 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Projetos1PageRoutingModule } from './projetos-1-routing.module';
+import { ModalPopupPageRoutingModule } from './modal-popup-routing.module';
 
-import { Projetos1Page } from './projetos-1.page';
-
+import { ModalPopupPage } from './modal-popup.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Projetos1PageRoutingModule,
-
+    ModalPopupPageRoutingModule
   ],
-  declarations: [Projetos1Page]
+  declarations: [ModalPopupPage]
 })
-export class Projetos1PageModule {}
+export class ModalPopupPageModule {}

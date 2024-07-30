@@ -19,7 +19,7 @@ export class ProjetosPage {
   }
 
   abrir() {
-    this.router.navigate(["projetos-1"]);
+    this.router.navigate(["tabnav"]);
   }
 
 

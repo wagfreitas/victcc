@@ -63,6 +63,12 @@ const routes: Routes = [
     path: 'tinta',
     loadChildren: () => import('./tinta/tinta.module').then( m => m.TintaPageModule)
   },
+
+  {
+    path: 'tabnav',
+    loadChildren: () => import('./tabnav/tabnav.module').then( m => m.TabnavPageModule)
+  },
+
 ];
 
 @NgModule({

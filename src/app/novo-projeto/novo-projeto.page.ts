@@ -1,6 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, model, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProjetoService } from '../_services/projeto.service';
 
+interface Item {
+  name: string;
+  values: Medidas[];
+  selected: false;
+  [key: string]: any;
+}
+
+interface Category {
+  name: string;
+  items: Item[];
+}
+
+interface Medidas{
+  Quantidade?: number;
+  Volume?: number;
+  Área?: number;
+  dimensaoA?: number;
+  dimensaoB?: number;
+  Altura?: number;
+  [key: string]: any;
+}
 
 @Component({
   selector: 'app-novo-projeto',
@@ -8,6 +30,40 @@ import { Router } from '@angular/router';
   styleUrls: ['./novo-projeto.page.scss'],
 })
 export class NovoProjetoPage {
+  modelData: any;
+
+  categories: Category[] = [
+
+    {
+      name: 'Preparacão do terreno',
+      items: [
+        { name: 'Remocao da Vegetacao', values: [{ 'Quantidade': 0}], selected: false },
+        { name: 'Nivelamento', values: [{ 'Volume': 0}], selected: false },
+      ],
+    },
+    {
+      name: 'Fundacão',
+      items: [
+        { name: 'Bloco de Concreto', values: [{ 'Volume': 0, 'Quantidade': 0}], selected: false },
+        { name: 'Radier', values: [{ 'Área': 0, 'Altura': 0}], selected: false },
+      ],
+    },
+    {
+      name: 'Estruturas',
+      items: [
+        {
+          name: 'Pilar',
+         values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0}], selected: false
+        },
+        {
+          name: 'Viga',
+          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0}], selected: false
+        },
+      ],
+    },
+  ];
+
+
 
   nome = ""
 
@@ -50,44 +106,66 @@ export class NovoProjetoPage {
 
   diasMetalica = 0;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private projService: ProjetoService) {
+    this.getSelectedItems();
+  }
+
+
+  objectKeys(item: any) {
+    return Object.keys(item.values[0]);
+  }
 
   testar() {
     console.log("Cliquei no botão");
+  }
+
+  getSelectedItems() {
+    const selectedItems = this.categories?.map(category => ({
+      category: category.name,
+      items: category.items,
+    }));
+    console.log(selectedItems);
+  }
+
+  onItemChange(item: any) {
+
   }
 
   voltar() {
     this.router.navigate(["inicial"]);
   }
 
-  toggleInputs(opcao: string, event: any) {
-    if (opcao === 'remocao') {
-      this.remocaoSelecionada = event.detail.checked;
-    }
-    else if (opcao === 'nivel') {
-      this.nivelSelecionado = event.detail.checked;
-    }
-    else if (opcao === 'marcacao') {
-      this.marcacaoSelecionada = event.detail.checked;
-    }
-    else if (opcao === 'bloco') {
-      this.blocoSelecionado = event.detail.checked;
-    }
-    else if (opcao === 'radier') {
-      this.radierSelecionado = event.detail.checked;
-    }
-    else if (opcao === 'sapata') {
-      this.sapataSelecionada = event.detail.checked;
-    }
-    else if (opcao === 'estconcreto') {
-      this.estConcretoSelecionada = event.detail.checked;
-    }
-    else if (opcao === 'estmetalica') {
-      this.estMetalicaSelecionada = event.detail.checked;
-    }
+  toggleInputs(opcao: any, event: any) {
+    console.log(event.detail.checked);
+    console.log(opcao);
+  }
 
-    console.log(this.remocaoSelecionada, this.nivelSelecionado, this.marcacaoSelecionada, this.blocoSelecionado, this.radierSelecionado, this.sapataSelecionada, this.estConcretoSelecionada, this.estMetalicaSelecionada);
-    console.log(this.quantidadeRemocao, this.volumeNivel, this.areaMarcacao);
+  generateJson() {
+    let result = this.categories.map(category => {
+      let items = category.items.filter(item => item.selected).map(item => {
+        let values: { [key: string]: any } = {}; // Adicione a assinatura do índice aqui
+        for (let key in item.values[0]) {
+          if (item.values[0][key]) {
+            values[key] = item.values[0][key];
+          }
+        }
+        return { name: item.name, values: values };
+      });
+      return { name: category.name, items: items };
+    });
+    return result;
+  }
+
+
+  saveToFirestore() {
+    let data = {projeto: this.generateJson()};
+    this.projService.createProject(data).then(() => {
+      console.log("Projeto criado com sucesso");
+    }).catch((error) => {
+      console.error("Erro ao criar projeto: ", error);
+    });
   }
 
 }

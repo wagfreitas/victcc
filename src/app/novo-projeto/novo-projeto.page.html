@@ -7,132 +7,43 @@
     <ion-input class="titulo" placeholder="NOVO PROJETO" [(ngModel)]="nome" type="string"></ion-input>
 
     <ion-accordion-group class="caixa" expand="inset">
-      <ion-accordion value="preparação">
+
+      <ion-accordion *ngFor="let category of categories" [value]="category.name">
         <ion-item slot="header" color="light" class="caixa1">
-          <ion-label>Preparação do terreno</ion-label>
+          <ion-label>{{ category.name }}</ion-label>
         </ion-item>
-        <ion-list slot="content">
-          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="remocaoSelecionada" (ionChange)="toggleInputs('remocao', $event)">Remoção de vegetação</ion-checkbox>
-            <div *ngIf="remocaoSelecionada">
-              <div class="caixa3">
-                <ion-input label="Quantidade (un):" [(ngModel)]="quantidadeRemocao" type="number"></ion-input>
-              </div>
-            </div>
-          <br />
-          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="nivelSelecionado" (ionChange)="toggleInputs('nivel', $event)">Nivelamento</ion-checkbox>
-            <div *ngIf="nivelSelecionado">
-              <div class="caixa3">
-                <ion-input label="Volume (m³):" [(ngModel)]="volumeNivel" type="number"></ion-input>
-              </div>
-            </div>
-        <br />
-        <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="marcacaoSelecionada" (ionChange)="toggleInputs('marcacao', $event)">Marcação de obra</ion-checkbox>
-        <div *ngIf="marcacaoSelecionada">
-          <div class="caixa3">
-            <ion-input label="Área (m²):" [(ngModel)]="areaMarcacao"></ion-input>
-          </div>
-        </div>
-        </ion-list>
-      </ion-accordion>
 
-      <ion-accordion value="fundação">
-        <ion-item slot="header" class="caixa1" color="light">
-          <ion-label>Fundação</ion-label>
-        </ion-item>
         <ion-list slot="content">
-          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="blocoSelecionado" (ionChange)="toggleInputs('bloco', $event)">Bloco de concreto</ion-checkbox>
-            <div *ngIf="blocoSelecionado">
-              <div class="caixa3">
-                <ion-input label="Volume (m³):" [(ngModel)]="volumeBloco" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Quantidade (un):" [(ngModel)]="quantidadeBloco" type="number"></ion-input>
-              </div>
-            </div>
-          <br />
-          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="radierSelecionado" (ionChange)="toggleInputs('radier', $event)">Radier</ion-checkbox>
-            <div *ngIf="radierSelecionado">
-              <div class="caixa3">
-                <ion-input label="Área (m²):" [(ngModel)]="areaRadier" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Altura (cm):" [(ngModel)]="alturaRadier" type="number"></ion-input>
-              </div>
-            </div>
-        <br />
-        <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="sapataSelecionada" (ionChange)="toggleInputs('sapata', $event)">Sapata</ion-checkbox>
-        <div *ngIf="sapataSelecionada">
-          <ion-select class="caixa3" label="Tipo" [(ngModel)]="tipoSapata">
-            <ion-select-option value="isolada" default >Isolada</ion-select-option>
-            <ion-select-option value="corrida">Corrida</ion-select-option>
-            <ion-select-option value="associada">Associada</ion-select-option>
-          </ion-select>
-          <div class="caixa3">
-            <ion-input label="Volume (m³):" [(ngModel)]="volumeSapata"></ion-input>
-          </div>
-          <div class="caixa3">
-            <ion-input label="Quantidade (un):" [(ngModel)]="quantidadeSapata"></ion-input>
-          </div>
-        </div>
-        </ion-list>
-      </ion-accordion>
 
-      <ion-accordion value="estrutura">
-        <ion-item slot="header" class="caixa1" color="light">
-          <ion-label>Estruturas</ion-label>
-        </ion-item>
-        <ion-list slot="content">
-          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="estConcretoSelecionada" (ionChange)="toggleInputs('estconcreto', $event)">Concreto</ion-checkbox>
-            <div *ngIf="estConcretoSelecionada">
-              <p class="p">Pilar</p>
-              <div class="caixa3">
-                <ion-input label="Dimensão A (cm):" [(ngModel)]="compPilar" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Dimensão B (cm):" [(ngModel)]="largPilar" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Altura (m):" [(ngModel)]="altPilar" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Quantidade (un):" [(ngModel)]="quantPilar" type="number"></ion-input>
-              </div>
-              <p class="p">Viga</p>
-              <div class="caixa3">
-                <ion-input label="Dimensão A (cm):" [(ngModel)]="compViga" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Dimensão B (cm):" [(ngModel)]="largViga" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Altura (m):" [(ngModel)]="altViga" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Quantidade (un):" [(ngModel)]="quantViga" type="number"></ion-input>
-              </div>
-              <p class="p">Laje</p>
-              <div class="caixa3">
-                <ion-input label="Área (m²):" [(ngModel)]="areaLaje" type="number"></ion-input>
-              </div>
-              <div class="caixa3">
-                <ion-input label="Espessura (cm):" [(ngModel)]="espLaje" type="number"></ion-input>
-              </div>
-            </div>
-          <br />
-          <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="estMetalicaSelecionada" (ionChange)="toggleInputs('estmetalica', $event)">Metálica</ion-checkbox>
-            <div *ngIf="estMetalicaSelecionada">
-              <div class="caixa3">
-                <ion-input label="Tempo estipulado pela empresa (dias):" [(ngModel)]="diasMetalica" type="number"></ion-input>
-              </div>
-            </div>
+          <ion-item *ngFor="let item of category.items">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="item.selected"
+                    (ionChange)="onItemChange(item)"> {{ item.name }}
+                  </ion-checkbox>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="item.selected">
+                <ion-col *ngFor="let key of objectKeys(item)">
+                  <ion-input class="caixa3" label={{key}} type="number" [disabled]="!item.selected" [(ngModel)]="item.values[0][key]"  >
+                  </ion-input>
+                </ion-col>
+
+              </ion-row>
+
+            </ion-grid>
+          </ion-item>
         </ion-list>
+
       </ion-accordion>
 
     </ion-accordion-group>
 
     <button
       class="botao-finalizar"
-      (click)="testar()">
+      (click)="saveToFirestore()">
       FINALIZAR
     </button>
 
