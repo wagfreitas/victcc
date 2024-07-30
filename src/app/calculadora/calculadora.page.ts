@@ -38,4 +38,8 @@ export class CalculadoraPage {
     this.router.navigate(["tinta"]);
   }
 
+  telha() {
+    this.router.navigate(["telha"]);
+  }
+
 }
