@@ -29,6 +29,11 @@ const routes: Routes = [
             (m) => m.Projetos1PageModule
           ),
       },
+      {
+        path: 'eventos',
+        loadChildren: () => import('../add-event/add-event.module').then(m => m.AddEventPageModule)
+      },
+
     ],
   },
   {

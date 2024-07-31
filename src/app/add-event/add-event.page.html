@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()">
+        <ion-icon name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Nova Agenda </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label position="stacked">Tipo de Trabalho</ion-label>
+      <ion-select [(ngModel)]="categoria" placeholder="Selecione o Tipo">
+        <ion-select-option value="Concretagem">Conserto de Veículo</ion-select-option>
+        <ion-select-option value="Serviço de Hidráulica">Serviço de Hidráulica</ion-select-option>
+        <ion-select-option value="Serviço de Eletricidade">Serviço de Eletricidade</ion-select-option>
+        <ion-select-option value="Pintura">Serviço de Jardinagem</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Projeto</ion-label>
+      <ion-select [(ngModel)]="cliente" placeholder="Selecione o Cliente.">
+        <ion-select-option value="Maria de Lourdes">Maria de Lourdes</ion-select-option>
+        <ion-select-option value="José Francisco">José Francisco</ion-select-option>
+        <ion-select-option value="Antonio Maria">Antonio Maria</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Cep do Atendimento</ion-label>
+
+      <div class="input-button-container">
+        <ion-input type="text" [(ngModel)]="cep" placeholder="Digite um CEP Válido ."></ion-input>
+        <button (click)="getCep()">Confirma</button>
+      </div>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Endereço</ion-label>
+      <ion-input type="text" [(ngModel)]="logradouro" placeholder="Endereço."></ion-input>
+    </ion-item>
+
+    <div class="loc-container">
+      <ion-item lines="none">
+        <ion-label position="stacked">Bairro</ion-label>
+        <ion-input type="text" [(ngModel)]="bairro" placeholder="Entre com o complemento ."></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="stacked">Número</ion-label>
+        <ion-input type="number" [(ngModel)]="numero" placeholder="Entre com o numero ."></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Complemento</ion-label>
+      <ion-input type="text" [(ngModel)]="complemento" placeholder="Entre com o complemento ."></ion-input>
+    </ion-item>
+
+    <div class="loc-container">
+      <ion-item lines="none">
+        <ion-label position="stacked">Data Inicio</ion-label>
+        <ion-input type="date" [(ngModel)]="dataInicio" placeholder="Início do  Atendimento ."></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Data Fim</ion-label>
+        <ion-input type="date" [(ngModel)]="dataFim" placeholder="Fim do  Atendimento ."></ion-input>
+      </ion-item>
+    </div>
+
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button type="submit" class="content_button" (click)="onSave()" expand="block">
+      Salvar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
