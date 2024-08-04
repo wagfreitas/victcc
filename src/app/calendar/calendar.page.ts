@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarMode } from 'ionic2-calendar';
+import { CalendarComponent } from 'ionic2-calendar';
 
 @Component({
   selector: 'app-calendar',
@@ -9,16 +10,27 @@ import { CalendarMode } from 'ionic2-calendar';
 export class CalendarPage {
 
   eventSource: any[] = [];
+  viewTitle: string =''
 
   calendar = {
-    mode: 'week' as CalendarMode,
+    mode: 'month' as CalendarMode,
     currentDate: new Date(),
     step: 30,
     startTime: '00:00',
     endTime: '23:59',
   };
 
+  @ViewChild(CalendarComponent) myCal!: CalendarComponent;
+
   constructor() { }
+
+  next() {
+    this.myCal.slideNext();
+  }
+
+  back() {
+    this.myCal.slidePrev();
+  }
 
   onCurrentDateChanged(event: Date) {
     var today = new Date();
@@ -38,8 +50,8 @@ export class CalendarPage {
     console.log(event);
   }
 
-  onViewTitleChanged(title: any) {
-    console.log(title);
+  onViewTitleChanged(title: string) {
+    this.viewTitle = title;
   }
 
   reloadSource(ev: {startTime: Date, endTime: Date}) {
@@ -47,7 +59,7 @@ export class CalendarPage {
   }
 
   onTimeSelected(ev: {selectedTime: Date, events: any[]}) {
-    console.log(ev);
+    console.log(ev.selectedTime);
   }
 
 

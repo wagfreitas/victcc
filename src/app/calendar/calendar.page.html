@@ -5,6 +5,16 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="head">
+    <ion-button fill="clear" (click)="back()">
+      <ion-icon name="chevron-back-outline" slot="icon-only" color="dark"></ion-icon>
+    </ion-button>
+    <p>{{ viewTitle }}</p>
+    <ion-button fill="clear" (click)="next()">
+      <ion-icon name="chevron-forward-outline" slot="icon-only" color="dark"></ion-icon>
+    </ion-button>
+  </div>
+
 
   <calendar [eventSource]="eventSource"
   calendarMode="month"
