@@ -1,0 +1,7 @@
+{
+  "name": "tccVic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
