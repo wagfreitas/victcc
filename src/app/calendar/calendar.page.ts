@@ -37,6 +37,7 @@ export class CalendarPage {
   constructor(
     private router: Router,
     private agendaService: AgendaService) {
+
       this.agendaService.getAgenda().subscribe((ret) => {
         console.log(ret)
     this.createEvents(ret)

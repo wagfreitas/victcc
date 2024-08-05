@@ -67,6 +67,7 @@ export class AddEventPage  {
     fetch(url)
       .then((response) => response.json())
       .then((dados) => {
+        console.log(dados);
         this.logradouro = dados.logradouro;
         this.complemento = dados.complemento;
         this.bairro = dados.bairro;
