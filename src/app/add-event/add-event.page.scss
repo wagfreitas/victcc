@@ -1,0 +1,57 @@
+ion-padding {
+  margin: 0 10px;
+}
+
+ion-item {
+  --padding-start: 0;
+  margin: 15px 0;
+  ion-label {
+    color: gray;
+    margin-bottom: 6px;
+  }
+  ion-input {
+    border: 2px solid transparent;
+    --padding-start: 10px;
+    border-radius: 0.5rem;
+    margin-bottom: 10px;
+    background-color: #E5E5E5;
+    transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+  }
+  ion-input:hover, ion-input:focus{
+    outline: none;
+    border-color: #05060f;
+  }
+  ion-select {
+    border: 2px solid transparent;
+    --padding-start: 10px;
+    border-radius: 0.5rem;
+    margin-bottom: 10px;
+    background-color: #E5E5E5;
+    transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+
+  }
+  ion-select:hover, ion-select:focus{
+    outline: none;
+    border-color: #05060f;
+  }
+  h6 {
+    margin: 5px 0px;
+  }
+  .input-button-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    button{
+      background: black;
+      height: 37px;
+      padding: 0 20px;
+      border-radius: 30px;
+      margin-bottom: 10px;
+      font-family: "regular";
+    }
+  }
+}
+
+.loc-container {
+  display: flex;
+}
