@@ -25,4 +25,8 @@ export class ProjetoService {
       }))
     );
   }
+
+  public getProjetoById(id: string): Observable<any> {
+    return this.db.collection('projetos').doc(id).valueChanges();
+  }
 }

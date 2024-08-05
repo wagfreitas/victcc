@@ -7,10 +7,6 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'calendar',
-    loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule)
-  },
-  {
     path: '',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
@@ -29,7 +25,8 @@ const routes: Routes = [
   {
     path: 'projetos',
     loadChildren: () => import('./projetos/projetos.module').then( m => m.ProjetosPageModule)
-  }
+  },
+
 ];
 @NgModule({
   imports: [

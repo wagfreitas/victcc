@@ -1,0 +1,95 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+    <p class="titulo">{{titulo}}</p>
+  </div>
+
+  <div class="info">
+    <div *ngIf="abaselecionada === 'home'">
+      <div class="cinza">
+        Status
+          <ion-grid class="caixa" style="padding: 0px; margin-top: 20px;">
+            <ion-row>
+
+                <div class="progress-outer">
+                  <div class="progress-inner" [style.width.%]="status">
+                    {{ status }}%
+                  </div>
+                </div>
+
+            </ion-row>
+          </ion-grid>
+      </div>
+      <div class="cinza" style="margin-top: 20px; height: 360px;">
+        Tarefas
+        <ion-segment [scrollable]="true" value=2 style="margin-top: 20px; height: 60px">
+          <ion-segment-button value=1>
+            1
+          </ion-segment-button>
+          <ion-segment-button value=2>
+            2
+          </ion-segment-button>
+          <ion-segment-button value=3>
+            3
+          </ion-segment-button>
+          <ion-segment-button value=4>
+            4
+          </ion-segment-button>
+          <ion-segment-button value=5>
+            5
+          </ion-segment-button>
+          <ion-segment-button value=6>
+            6
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+    </div>
+
+    <div *ngIf="abaselecionada === 'checklist'">
+      <div class="cinza" style="height: 520px;">
+        Checklist
+        <ion-select class="caixa">
+          <ion-select-option>Atrasadas</ion-select-option>
+          <ion-select-option>Hoje</ion-select-option>
+          <ion-select-option>Semana</ion-select-option>
+
+        </ion-select>
+      </div>
+    </div>
+
+    <div *ngIf="abaselecionada === 'calendario'">
+      <div class="cinza" style="height: 520px;">
+
+
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <ion-segment value="home" (ionChange)=menu($event) class="menu">
+      <ion-segment-button value="checklist">
+        <ion-icon name="checkmark-circle-outline" size="large" aria-hidden="true"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="compras">
+        <ion-icon name="bag" size="large" aria-hidden="true"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="home">
+        <ion-icon name="home" size="large" aria-hidden="true"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="diario">
+        <ion-icon name="book" size="large" aria-hidden="true"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="calendario" size="large" aria-hidden="true">
+        <ion-icon name="calendar"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+
+
+</ion-content>
+

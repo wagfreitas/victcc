@@ -10,7 +10,7 @@
     <div class="projetos" >
       <ion-grid>
         <ion-row >
-          <ion-col  *ngFor="let projeto of projetos" class="caixa" (click)="abrir()">
+          <ion-col  *ngFor="let projeto of projetos" class="caixa" (click)="abrir(projeto.id)">
             {{projeto.nomeProjeto}}
           </ion-col>
         </ion-row>

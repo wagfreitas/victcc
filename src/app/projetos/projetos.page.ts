@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
+import { identifierName } from '@angular/compiler';
 
 @Component({
   selector: 'app-projetos',
@@ -8,14 +9,15 @@ import { ProjetoService } from '../_services/projeto.service';
   styleUrls: ['./projetos.page.scss'],
 })
 export class ProjetosPage {
-public projetos: {nomeProjeto: string}[] = [];
+public projetos: {nomeProjeto: string, id:string}[] = [];
   constructor(
     private router: Router,
     private projetoService: ProjetoService
   ) {
 this.projetoService.getProjetos().subscribe((res: any[]) => {
+
   res.forEach(element => {
-    let resul = { nomeProjeto: element.nomeProjeto }
+    let resul = { nomeProjeto: element.nomeProjeto, id: element.id}
     console.log(res)
      this.projetos.push(resul)
 
@@ -32,8 +34,8 @@ this.projetoService.getProjetos().subscribe((res: any[]) => {
     this.router.navigate(["inicial"]);
   }
 
-  abrir() {
-    this.router.navigate(["tabnav"]);
+  abrir(id:string) {
+    this.router.navigate(["tabs/projExec", id]);
   }
 
 
