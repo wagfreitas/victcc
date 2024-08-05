@@ -1,0 +1,76 @@
+<ion-content class="ion-padding">
+  <ion-list>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Nome do Projeto</ion-label>
+      <ion-input type="text" [(ngModel)]="nomeProjeto" placeholder="digite o nome do projeto ."></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Cliente</ion-label>
+      <ion-input type="text" [(ngModel)]="cliente" placeholder="digite o nome do cliente ."></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Cep da Obra</ion-label>
+
+      <div class="input-button-container">
+        <ion-input type="text" [(ngModel)]="cep" placeholder="Digite um CEP Válido ."></ion-input>
+        <button class="content_button" (click)="getCep()">Confirma</button>
+      </div>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Endereço</ion-label>
+      <ion-input type="text" [(ngModel)]="logradouro" placeholder="Endereço."></ion-input>
+    </ion-item>
+
+    <div class="loc-container">
+      <ion-item lines="none">
+        <ion-label position="stacked">Bairro</ion-label>
+        <ion-input type="text" [(ngModel)]="bairro" placeholder="Entre com o bairro ."></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="stacked">Número</ion-label>
+        <ion-input type="number" [(ngModel)]="numero" placeholder="Entre com o numero ."></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Complemento</ion-label>
+      <ion-input type="text" [(ngModel)]="complemento" placeholder="Entre com o complemento ."></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Complemento</ion-label>
+      <ion-input type="text" [(ngModel)]="nomeProjeto" placeholder="Entre com o complemento ."></ion-input>
+    </ion-item>
+
+    <div class="loc-container">
+      <ion-item lines="none">
+        <ion-label position="stacked">Data Inicio</ion-label>
+        <ion-input type="date" [(ngModel)]="dataInicio" placeholder="Início do  Atendimento ."></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Data Fim</ion-label>
+        <ion-input type="date" [(ngModel)]="dataFim" placeholder="Fim do  Atendimento ."></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Status</ion-label>
+        <ion-input type="number" [(ngModel)]="status" placeholder="Status do Projeto ."></ion-input>
+      </ion-item>
+    </div>
+
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button type="submit" class="content_button" (click)="onSave()" expand="block">
+      Salvar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,20 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+    <p class="titulo">PROJETOS EM EXECUÇÃO</p>
+    <img class="menina" src="../../assets/images/img.projetos.png" />
+    <div class="projetos" >
+      <ion-grid>
+        <ion-row >
+          <ion-col  *ngFor="let projeto of projetos" class="caixa" (click)="abrir()">
+            {{projeto.nomeProjeto}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>~
+    </div>
+  </div>
+</ion-content>
