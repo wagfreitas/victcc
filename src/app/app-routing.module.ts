@@ -25,7 +25,11 @@ const routes: Routes = [
   {
     path: 'projetos',
     loadChildren: () => import('./projetos/projetos.module').then( m => m.ProjetosPageModule)
+  },  {
+    path: 'blocos',
+    loadChildren: () => import('./blocos/blocos.module').then( m => m.BlocosPageModule)
   },
+
 
 ];
 @NgModule({
