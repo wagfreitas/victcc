@@ -12,7 +12,7 @@ const routes: Routes = [
         loadChildren: () => import('../calendar/calendar.module').then(m => m.CalendarPageModule)
       },
       {
-        path: 'projExec/:id',
+        path: 'projExec',
         loadChildren: () => import('../projetos-1/projetos-1.module').then(m => m.Projetos1PageModule)
       },
       {

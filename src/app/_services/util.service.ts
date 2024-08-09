@@ -135,5 +135,14 @@ export class UtilService {
     return dataFinal;
   }
 
+  convertData2(data: string): string {
+    var dataArray = data.split('/');
+    const ano = dataArray[2];
+    const mes = dataArray[0];
+    const dia = dataArray[1];
+    const dataFinal = mes + '/' + dia + '/' + ano;
+    return dataFinal;
+  }
+
 
 }

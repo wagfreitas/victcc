@@ -19,10 +19,12 @@ export class Projetos1Page implements OnInit {
     private projService: ProjetoService) { }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(params => {
+    this.projService.getIdProject().subscribe((res: any) => {
+      console.log(res)
+      this.id = res;
+      console.log(this.id)
+    });
 
-      this.id = params['id']
-    })
     this.projService.getProjetoById(this.id).subscribe((res: any) => {
       this.titulo = res.nomeProjeto
       this.status = res.status

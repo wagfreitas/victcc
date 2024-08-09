@@ -125,10 +125,10 @@ export class NovoProjetoPage implements OnInit{
     });
 
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
+      if (dataReturned.data !== undefined) {
         this.dadosProjeto.push(dataReturned.data);
 
-       this.nomeProjeto = this.dadosProjeto[0].nomeProjeto
+       this.nomeProjeto = this.dadosProjeto[0].nomeProjeto || "";
 
       }
     });
@@ -179,7 +179,7 @@ export class NovoProjetoPage implements OnInit{
     let data = {projeto: this.generateJson()};
     let dadosProjeto = {
       nomeProjeto: this.dadosProjeto[0].nomeProjeto,
-      nomeCliente: this.dadosProjeto[0].cliente,
+      nomeCliente: this.dadosProjeto[0].nomeCliente,
       logradouro: this.dadosProjeto[0].logradouro,
       numero: this.dadosProjeto[0].numero,
       complemento: this.dadosProjeto[0].complemento,

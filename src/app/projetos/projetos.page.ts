@@ -1,7 +1,9 @@
+import { Category } from './../_interfaces/category';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
 import { identifierName } from '@angular/compiler';
+import { Projeto } from '../_interfaces/projeto';
 
 @Component({
   selector: 'app-projetos',
@@ -9,33 +11,41 @@ import { identifierName } from '@angular/compiler';
   styleUrls: ['./projetos.page.scss'],
 })
 export class ProjetosPage {
-public projetos: {nomeProjeto: string, id:string}[] = [];
+  public projetos:Projeto[] = [];
   constructor(
     private router: Router,
     private projetoService: ProjetoService
   ) {
-this.projetoService.getProjetos().subscribe((res: any[]) => {
+    this.projetoService.getProjetos().subscribe((res: any[]) => {
+      res.forEach(element => {
+        let resul = {
+          nomeProjeto: element.nomeProjeto,
+          id: element.id,
+          status: element.status,
+          nomeCliente: element.nomeCliente,
+          logradouro: element.logradouro,
+          numero: element.numero,
+          complemento: element.complemento,
+          cep: element.cep,
+          dataInicio: element.dataInicio,
+          dataFim: element.dataFim,
+          tipoServico: element.tipoServico,
+          Category: element.Category,
+        }
+        this.projetos.push(resul)
+      });
 
-  res.forEach(element => {
-    let resul = { nomeProjeto: element.nomeProjeto, id: element.id}
-    console.log(res)
-     this.projetos.push(resul)
-
-  });
-  console.log(this.projetos)
-})
-}
-
-  testar() {
-    console.log("Cliquei no botão");
+    })
   }
+
 
   voltar() {
     this.router.navigate(["inicial"]);
   }
 
-  abrir(id:string) {
-    this.router.navigate(["tabs/projExec", id]);
+  abrir(id: Projeto) {
+    this.projetoService.setIdProject(id);
+    this.router.navigate(["tabs/calendar"]);
   }
 
 

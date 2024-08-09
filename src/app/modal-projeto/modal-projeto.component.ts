@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { Projeto } from '../_interfaces/projeto';
 import { UtilService } from '../_services/util.service';
 import { AgendaService } from '../_services/agenda.service';
@@ -22,11 +23,13 @@ export class ModalProjetoComponent  {
   categoria: string = '';
   status: string = '';
   nomeProjeto: string = '';
+  nomeCliente: string = '';
 
   constructor(
    private  utilService: UtilService,
    private agendaService: AgendaService,
-   private modalController: ModalController
+   private modalController: ModalController,
+   private router: Router
   ) { }
 
 
@@ -42,17 +45,24 @@ export class ModalProjetoComponent  {
       numero: this.numero,
       cep: this.cep,
       complemento: this.complemento,
-      cliente: this.cliente,
+      nomeCliente: this.nomeCliente,
       dataFim: dataFimConv,
       dataInicio: dataIniConv,
       status: this.status,
       tipoServico: this.tipoServico,
+
 
     };
 
     await this.modalController.dismiss(agenda);
 
 
+  }
+
+
+  onCancel() {
+    this.modalController.dismiss();
+    this.router.navigate(['inicial']);
   }
 
 

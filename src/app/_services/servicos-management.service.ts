@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Agenda } from './../shared/model/agenda';
+import { Agenda } from '../_interfaces/agenda';
 
 
 @Injectable({

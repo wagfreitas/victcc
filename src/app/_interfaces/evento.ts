@@ -4,7 +4,7 @@
   endTime: Date;
   categoria: string;
   allDay: boolean;
-  cliente?: string; // Use "?" para propriedades opcionais
+  cliente?: string;
   endereco?: string;
 }
 

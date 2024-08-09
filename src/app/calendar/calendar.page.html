@@ -1,10 +1,18 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>calendar</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
+  <div class="cinza">
+    Status do Projeto: {{projectName}}
+      <ion-grid class="caixa" style="padding: 0px; margin-top: 20px;">
+        <ion-row>
+            <div class="progress-outer">
+              <div class="progress-inner" [style.width.%]="50">
+                {{ 50 }}
+              </div>
+            </div>
+
+        </ion-row>
+      </ion-grid>
+  </div>
+
   <div class="head">
     <ion-button fill="clear" (click)="back()">
       <ion-icon name="chevron-back-outline" slot="icon-only" color="dark"></ion-icon>
@@ -31,6 +39,7 @@
   [step]="calendar.step"
   [monthviewDisplayEventTemplate]="template"
   [showEventDetail]="false"
+
   >
 
 </calendar>
@@ -57,6 +66,12 @@
   <div class="address_div" *ngFor="let item of bookings">
     <ion-label class="name_lbl">{{item.title}}</ion-label>
 
+
+    <div class="address_flex" style="align-items: flex-start;">
+      <ion-icon name="book-outiine" style="margin-top: 3px;"></ion-icon>
+      <ion-label class="complete_addr">{{item.endereco}}</ion-label>
+    </div>
+
     <div class="address_flex" style="align-items: flex-start;">
       <ion-icon name="location" style="margin-top: 3px;"></ion-icon>
       <ion-label class="complete_addr">{{item.endereco}}</ion-label>
@@ -69,7 +84,7 @@
 
     <div class="address_flex">
       <ion-icon name="calendar"></ion-icon>
-      <ion-label>{{item.startTime | date: 'dd/MM/yyyy'}} - {{item.endTime | date:
+      <ion-label>{{dtInicio | date: 'dd/MM/yyyy'}} - {{dtFim | date:
         'dd/MM/yyyy'}}</ion-label>
     </div>
 
