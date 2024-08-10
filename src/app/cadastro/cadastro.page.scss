@@ -1,0 +1,95 @@
+
+
+.fundo {
+  border-radius: 35px;
+  background: #ff4d4d;
+  height: 100%;
+  width: 100%;
+}
+
+.parte-branca {
+  background-color: #ffffff;
+  border-radius: 35px;
+  height: 180PX;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  position: fixed;
+  top: 90px;
+  left: 50%;
+}
+
+.seta {
+  display: flex;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+
+.texto1 {
+  position: fixed;
+  left: 40px;
+  top: 200px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: #000000;
+}
+
+.texto2 {
+  position: fixed;
+  left: 40px;
+  top: 245px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 40px;
+  color: #ffffff;
+}
+
+.botao-finalizar {
+  position: fixed;
+  width: 320px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 760px;
+  border-radius: 20px;
+  background-color: #000000;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #ffffff;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+}
+
+.caixa {
+  background-color:white;
+  border-radius: 20px;
+  font-size: 16px;
+  height: 80px;
+  width: 320px;
+  transform: translate(-50%, 0%);
+  left: 50%;
+  top: 120px;
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+
+.button {
+  border-radius: 20px;
+}
+
+
+
+
+

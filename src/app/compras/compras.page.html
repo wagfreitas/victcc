@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true">
+
+  <button class="botao-seta"
+    (click)="voltar()">
+    <img class="seta" src="../../assets/images/seta.png" />
+  </button>
+  <img class="logo" src="../../assets/images/Logo.png" />
+  <p class="titulo">Nome Projeto</p>
+
+  <p class="titulo2">Compras</p>
+
+  <div class="cinza">
+    <ion-segment value="faltante">
+      <ion-segment-button style="font-size: 20px; height: 40px;" value="faltante">
+        <ion-label>Faltante</ion-label>
+      </ion-segment-button>
+      <ion-segment-button style="font-size: 20px; height: 40px;" value="comprado">
+        <ion-label>Comprado</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <button class="adicionar">+</button>
+
+</ion-content>

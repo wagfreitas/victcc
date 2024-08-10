@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
     path: 'entrar',
     loadChildren: () => import('./entrar/entrar.module').then( m => m.EntrarPageModule)
   },
@@ -25,10 +29,31 @@ const routes: Routes = [
   {
     path: 'projetos',
     loadChildren: () => import('./projetos/projetos.module').then( m => m.ProjetosPageModule)
-  },  {
+  },
+  {
     path: 'blocos',
     loadChildren: () => import('./blocos/blocos.module').then( m => m.BlocosPageModule)
   },
+  {
+    path: 'cadastrar',
+    loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
+  },  {
+    path: 'checklist',
+    loadChildren: () => import('./checklist/checklist.module').then( m => m.ChecklistPageModule)
+  },
+  {
+    path: 'compras',
+    loadChildren: () => import('./compras/compras.module').then( m => m.ComprasPageModule)
+  },
+  {
+    path: 'resumo',
+    loadChildren: () => import('./resumo/resumo.module').then( m => m.ResumoPageModule)
+  },
+  {
+    path: 'diario',
+    loadChildren: () => import('./diario/diario.module').then( m => m.DiarioPageModule)
+  },
+
 
 
 ];

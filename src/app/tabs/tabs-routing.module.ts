@@ -8,31 +8,35 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'checklist',
+        loadChildren: () => import('../checklist/checklist.module').then(m => m.ChecklistPageModule)
+      },
+      {
+        path: 'compras',
+        loadChildren: () => import('../compras/compras.module').then(m => m.ComprasPageModule)
+      },
+      {
+        path: 'resumo',
+        loadChildren: () => import('../resumo/resumo.module').then(m => m.ResumoPageModule)
+      },
+      {
+        path: 'diario',
+        loadChildren: () => import('../diario/diario.module').then(m => m.DiarioPageModule)
+      },
+      {
         path: 'calendar',
         loadChildren: () => import('../calendar/calendar.module').then(m => m.CalendarPageModule)
       },
       {
-        path: 'projExec',
-        loadChildren: () => import('../projetos-1/projetos-1.module').then(m => m.Projetos1PageModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-      },
-      {
-        path: 'newEvent',
-        loadChildren: () => import('../add-event/add-event.module').then(m => m.AddEventPageModule)
-      },
-      {
         path: '',
-        redirectTo: '/tabs/calendar',
+        redirectTo: '/tabs/resumo',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/calendar',
+    redirectTo: '/tabs/resumo',
     pathMatch: 'full'
   }
 ];
