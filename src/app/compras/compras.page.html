@@ -10,15 +10,25 @@
   <p class="titulo2">Compras</p>
 
   <div class="cinza">
-    <ion-segment value="faltante">
+    <ion-segment value="faltante" (ionChange)=menu($event)>
       <ion-segment-button style="font-size: 20px; height: 40px;" value="faltante">
         <ion-label>Faltante</ion-label>
       </ion-segment-button>
       <ion-segment-button style="font-size: 20px; height: 40px;" value="comprado">
         <ion-label>Comprado</ion-label>
       </ion-segment-button>
+
     </ion-segment>
+    <div *ngIf="abaselecionada === 'faltante'">
+      <p class="etapa">Fundação</p>
+      <ion-checkbox labelPlacement="end" justify="start" class="passo">Brita</ion-checkbox>
+      <ion-checkbox labelPlacement="end" justify="start" class="passo">Impermeabilizante</ion-checkbox>
+      <ion-checkbox labelPlacement="end" justify="start" class="passo">Armadura de aço</ion-checkbox>
+      <ion-checkbox labelPlacement="end" justify="start" class="passo">Concreto</ion-checkbox>
+    </div>
+
   </div>
+
 
   <button class="adicionar">+</button>
 

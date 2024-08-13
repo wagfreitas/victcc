@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resumo',
   templateUrl: './resumo.page.html',
   styleUrls: ['./resumo.page.scss'],
 })
-export class ResumoPage implements OnInit {
+export class ResumoPage {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
+  testar() {
+    console.log("Cliquei no botão");
   }
+
+  voltar() {
+    this.router.navigate(["projetos"]);
+
+}
 
 }

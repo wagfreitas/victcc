@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ComprasPage {
 
+  abaselecionada = 'faltante';
   constructor(private router: Router) { }
 
   testar() {
@@ -18,4 +19,9 @@ export class ComprasPage {
     this.router.navigate(["projetos"]);
   }
 
+  menu(event: any) {
+    this.abaselecionada = event.detail.value
+  }
+
 }
+

@@ -56,7 +56,8 @@
   font-size: 24px;
   font-weight: bold;
   color: #000;
-  margin: 0px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .processo {
@@ -70,8 +71,11 @@
 .passo {
   font-size: 20px;
   color: #000;
-  margin: 0px;
+  margin: 6px;
   width: 100%;
+  flex: 1;
+  --checkbox-background-checked: #ff4c4c;
+  --border-width: 0px;
 }
 
 .adicionar {

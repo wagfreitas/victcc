@@ -165,6 +165,13 @@ export class CalendarPage {
     this.router.navigate(['./tabs/newEvent'])
   }
 
+  testar() {
+    console.log("Cliquei no botão");
+  }
 
+  voltar() {
+    this.router.navigate(["projetos"]);
+
+}
 
 }
