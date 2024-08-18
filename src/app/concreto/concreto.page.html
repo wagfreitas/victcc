@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+
+    <div class="parte-amarela" >
+      <p class="titulo">CONCRETO</p>
+      <ion-row>
+        <ion-col class="caixa" size="7" style="margin-right: 6px;">
+          <ion-input label="Volume: " [(ngModel)]="volume" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" style="text-align: right; padding-left: 20px; padding-right: 20px; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unidade">
+            <ion-select-option>m³</ion-select-option>
+            <ion-select-option>L</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-select class="caixa" label="Resistência" [(ngModel)]="resistencia" style="padding-left: 20px; padding-right: 20px;">
+        <ion-select-option>42 MPa</ion-select-option>
+        <ion-select-option>35 MPa</ion-select-option>
+        <ion-select-option>30 MPa</ion-select-option>
+        <ion-select-option default >25 MPa</ion-select-option>
+        <ion-select-option>23 MPa</ion-select-option>
+        <ion-select-option>21 MPa</ion-select-option>
+        <ion-select-option>20 MPa</ion-select-option>
+        <ion-select-option>18 MPa</ion-select-option>
+        <ion-select-option>15 MPa</ion-select-option>
+        <ion-select-option>12 MPa</ion-select-option>
+        <ion-select-option>10 MPa</ion-select-option>
+        <ion-select-option>8 MPa</ion-select-option>
+      </ion-select>
+      <ion-button class="caixa" (click)="calcular()" style="background-color: black; color: white; padding-left: 0px;">
+        CALCULAR
+      </ion-button>
+      <div class="caixa" style="color:#FFC71E;">{{cimento}}</div>
+      <div class="caixa" style="color:#FFC71E;">{{areia}}</div>
+      <div class="caixa" style="color:#FFC71E;">{{brita}}</div>
+      <div class="caixa" style="color:#FFC71E;">{{agua}}</div>
+      <ion-button class="duvida" id="duvida">?</ion-button>
+      <ion-alert trigger="duvida"
+      header="Traços de Concreto"
+      sub-header="Especificações de diferentes traços"
+      message="
+      - Obras de responsabilidades: 40 MPa - Obras ordinárias: 25 MPa - Pavimentos: 30 MPa                        - Fundação: 20 MPa ">
+      </ion-alert>
+
+    </div>
+
+  </div>
+</ion-content>
+

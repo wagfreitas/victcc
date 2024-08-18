@@ -1,0 +1,106 @@
+.seta {
+  display: flex;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+.logo {
+  display: flex;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  top: 60px;
+  left: 50%;
+}
+
+.titulo {
+  position: relative;
+  width: calc(100% - 60px);
+  transform: translate(-50%, 0%);
+  left: 50%;
+  top: 50px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.titulo2 {
+  position: relative;
+  left: 30px;
+  top: 50px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  z-index: 2;
+}
+
+.titulo3 {
+  position: relative;
+  margin: 0px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  top: 6px;
+}
+
+.cinza {
+  background-color: gainsboro;
+  position: relative;
+  width: calc(100% - 60px);
+  left: 30px;
+  top: 40px;
+  border-radius: 20px;
+  padding: 20px;
+  height: calc(100% - 330px);
+}
+
+.etapa {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.processo {
+  font-size: 24px;
+  color: #000;
+  margin: 0px;
+  padding-top: 12px;
+  padding-bottom: 6px;
+}
+
+.passo {
+  font-size: 20px;
+  color: #000;
+  margin: 6px;
+  width: 100%;
+  flex: 1;
+  --checkbox-background-checked: #ff4c4c;
+  --border-width: 0px;
+}
+
+.progress-outer {
+  width: 100%;
+  height: 40px;
+  background-color: #f4f4f4;
+  border-radius: 20px;
+}
+
+.progress-inner {
+  height: 100%;
+  background-color: #ff4c4c;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+}
+
+

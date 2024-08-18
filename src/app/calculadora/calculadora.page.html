@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <div class="fundo">
+
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+
+    <p class="titulo">CALCULADORA</p>
+
+    <div class="parte-amarela" >
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="caixa" (click)="concreto()">
+            <img class="imagem" src="../../assets/images/Betoneira.png" style="height: 60px;">
+            CONCRETO
+          </ion-col>
+          <ion-col class="caixa" (click)="blocos()">
+            <img class="imagem" src="../../assets/images/Tijolo.png">
+            BLOCOS
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="caixa" (click)="tinta()">
+            <img class="imagem" src="../../assets/images/Tinta.png">
+            TINTA
+          </ion-col>
+          <ion-col class="caixa" (click)="telha()">
+            <img class="imagem" src="../../assets/images/telha.png">
+            TELHA
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="caixa">
+            <img class="imagem" src="../../assets/images/pa.png" style="height: 50px;">
+            CHAPISCO <br> E REBOCO
+          </ion-col>
+          <ion-col class="caixa">
+            <img class="imagem" src="../../assets/images/gesso.png">
+            GESSO
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="caixa">
+            <img class="imagem" src="../../assets/images/revest.png" >
+            <br> REVESTIMENTOS
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </div>
+</ion-content>
+

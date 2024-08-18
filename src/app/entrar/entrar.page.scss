@@ -62,7 +62,7 @@
   color: #000;
   border-radius: 20px;
   border-color: #fff;
-  font-size: 24px;
+  font-size: 18px;
   position: relative;
   height: 80px;
   width: calc(100% - 80px);
@@ -99,6 +99,6 @@
 }
 
 
-ion-input {
-  padding: 20px
+ion-input.caixa {
+  --padding: 20px
 }
