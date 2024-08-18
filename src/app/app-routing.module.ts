@@ -37,7 +37,8 @@ const routes: Routes = [
   {
     path: 'cadastrar',
     loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
-  },  {
+  },
+  {
     path: 'checklist',
     loadChildren: () => import('./checklist/checklist.module').then( m => m.ChecklistPageModule)
   },
@@ -52,6 +53,34 @@ const routes: Routes = [
   {
     path: 'diario',
     loadChildren: () => import('./diario/diario.module').then( m => m.DiarioPageModule)
+  },
+  {
+    path: 'calculadora',
+    loadChildren: () => import('./calculadora/calculadora.module').then( m => m.CalculadoraPageModule)
+  },
+  {
+    path: 'concreto',
+    loadChildren: () => import('./concreto/concreto.module').then( m => m.ConcretoPageModule)
+  },
+  {
+    path: 'tinta',
+    loadChildren: () => import('./tinta/tinta.module').then( m => m.TintaPageModule)
+  },
+  {
+    path: 'telha',
+    loadChildren: () => import('./telha/telha.module').then( m => m.TelhaPageModule)
+  },
+  {
+    path: 'chapisco',
+    loadChildren: () => import('./chapisco/chapisco.module').then( m => m.ChapiscoPageModule)
+  },
+  {
+    path: 'gesso',
+    loadChildren: () => import('./gesso/gesso.module').then( m => m.GessoPageModule)
+  },
+  {
+    path: 'revestimento',
+    loadChildren: () => import('./revestimento/revestimento.module').then( m => m.RevestimentoPageModule)
   },
 
 

@@ -13,18 +13,22 @@
     <div class="formulario">
       <p class="texto">Entrar</p>
       <form [formGroup]="form" ngsubmit="onSubmit()">
-          <ion-input class="caixa"
-            placeholder="    E-mail"
-            formControlName="email"
-            type="email"
-            required>
-          </ion-input>
-          <ion-input class="caixa"
-            placeholder="    Senha"
-            formControlName="senha"
-            type="password"
-            required>
-          </ion-input>
+        <div class="caixa">
+          <ion-input
+          placeholder="E-mail"
+          formControlName="email"
+          type="email"
+          required>
+        </ion-input>
+        </div>
+        <div class="caixa">
+          <ion-input
+          placeholder="Senha"
+          formControlName="senha"
+          type="password"
+          required>
+        </ion-input>
+        </div>
       </form>
       <button class="senhaEsquecida" (click)="testar()">
         Esqueceu sua senha?
