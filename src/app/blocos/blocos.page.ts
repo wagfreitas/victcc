@@ -30,18 +30,6 @@ export class BlocosPage {
 
   voltar() {
     this.router.navigate(["calculadora"]);
-    this.resultado = "Quantidade:";
-    this.altbloco = 0;
-    this.unialtbloco = "cm";
-    this.largbloco = 0;
-    this.unilargbloco = "cm";
-    this.altparede = 0;
-    this.unialtparede = "m";
-    this.largparede = 0;
-    this.unilargparede = "m";
-    this.x = 0;
-    this.y = 0;
-    this.quantidade = "";
 
   }
 

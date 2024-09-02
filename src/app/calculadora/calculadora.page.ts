@@ -42,4 +42,16 @@ export class CalculadoraPage {
     this.router.navigate(["telha"]);
   }
 
+  chapisco() {
+    this.router.navigate(["chapisco"]);
+  }
+
+  gesso() {
+    this.router.navigate(["gesso"]);
+  }
+
+  revestimentos() {
+    this.router.navigate(["revestimentos"]);
+  }
+
 }

@@ -57,7 +57,7 @@ export class ConcretoPage {
     if (this.resistencia === "8 MPa") {this.ac = 0.8}
 
     this.Cc = this.Ca/this.ac
-    this.Var = 1 - (this.Cc/3100 + this.Cb/2630 + this.Ca/1000)
+    this.Var = 1 - (this.Cc/2400 + this.Cb/2630 + this.Ca/1000)
     this.Car = this.Var * 2530
 
     this.cimento = "Cimento: " + String(Math.ceil(this.volume * this.Cc)) + " kg (" + String(Math.ceil(this.volume * this.Cc / 50)) + " sacos)";
