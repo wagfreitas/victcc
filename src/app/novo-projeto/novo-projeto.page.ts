@@ -14,7 +14,7 @@ import { UtilService } from '../_services/util.service';
   templateUrl: './novo-projeto.page.html',
   styleUrls: ['./novo-projeto.page.scss'],
 })
-export class NovoProjetoPage implements OnInit{
+export class NovoProjetoPage implements OnInit {
   modelData: any;
   dadosProjeto: Projeto[] = [];
   novoProjeto: string = 'Novo Projeto'
@@ -24,15 +24,15 @@ export class NovoProjetoPage implements OnInit{
     {
       name: 'Preparacão do terreno',
       items: [
-        { name: 'Remocao da Vegetacao', values: [{ 'Quantidade': 0}], selected: false },
-        { name: 'Nivelamento', values: [{ 'Volume': 0}], selected: false },
+        { name: 'Remocao da Vegetacao', values: [{ 'Quantidade': 0 }], selected: false },
+        { name: 'Nivelamento', values: [{ 'Volume': 0 }], selected: false },
       ],
     },
     {
       name: 'Fundacão',
       items: [
-        { name: 'Bloco de Concreto', values: [{ 'Volume': 0, 'Quantidade': 0}], selected: false },
-        { name: 'Radier', values: [{ 'Área': 0, 'Altura': 0}], selected: false },
+        { name: 'Bloco de Concreto', values: [{ 'Volume': 0, 'Quantidade': 0 }], selected: false },
+        { name: 'Radier', values: [{ 'Área': 0, 'Altura': 0 }], selected: false },
       ],
     },
     {
@@ -40,11 +40,11 @@ export class NovoProjetoPage implements OnInit{
       items: [
         {
           name: 'Pilar',
-         values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0}], selected: false
+          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0 }], selected: false
         },
         {
           name: 'Viga',
-          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0}], selected: false
+          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0 }], selected: false
         },
       ],
     },
@@ -97,12 +97,12 @@ export class NovoProjetoPage implements OnInit{
     private router: Router,
     private projService: ProjetoService,
     private modalController: ModalController,
-  private utilService: UtilService) {
+    private utilService: UtilService) {
     this.getSelectedItems();
   }
 
   ngOnInit(): void {
-   this.openModal()
+    this.openModal()
 
   }
 
@@ -110,11 +110,6 @@ export class NovoProjetoPage implements OnInit{
   objectKeys(item: any) {
     return Object.keys(item.values[0]);
   }
-
-  testar() {
-    console.log("Cliquei no botão");
-  }
-
 
   async openModal() {
     const modal = await this.modalController.create({
@@ -128,7 +123,7 @@ export class NovoProjetoPage implements OnInit{
       if (dataReturned.data !== undefined) {
         this.dadosProjeto.push(dataReturned.data);
 
-       this.nomeProjeto = this.dadosProjeto[0].nomeProjeto || "";
+        this.nomeProjeto = this.dadosProjeto[0].nomeProjeto || "";
 
       }
     });
@@ -176,7 +171,7 @@ export class NovoProjetoPage implements OnInit{
 
 
   saveToFirestore() {
-    let data = {projeto: this.generateJson()};
+    let data = { projeto: this.generateJson() };
     let dadosProjeto = {
       nomeProjeto: this.dadosProjeto[0].nomeProjeto,
       nomeCliente: this.dadosProjeto[0].nomeCliente,
