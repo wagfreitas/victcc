@@ -1,51 +1,50 @@
 <ion-content [fullscreen]="true" style="--background: #3D8FEF;">
-    <button class="botao-seta"
-      (click)="voltar()">
-      <img class="seta" src="../../assets/images/seta.png" />
-    </button>
+  <button class="botao-seta" (click)="voltar()">
+    <img class="seta" src="../../assets/images/seta.png" />
+  </button>
 
 
-    <ion-input class="titulo" ionFocus="openModal()" placeholder="NOVO PROJETO" [(ngModel)]="nomeProjeto" type="string" disabled></ion-input>
+  <ion-input class="titulo" ionFocus="openModal()" placeholder="NOVO PROJETO" [(ngModel)]="nomeProjeto" type="string"
+    disabled></ion-input>
 
-    <ion-accordion-group class="caixa" expand="inset">
+  <ion-accordion-group class="caixa" expand="inset">
 
-      <ion-accordion *ngFor="let category of categories" [value]="category.name">
-        <ion-item slot="header" color="light" class="caixa1">
-          <ion-label>{{ category.name }}</ion-label>
-        </ion-item>
+    <ion-accordion *ngFor="let category of categories" [value]="category.name">
+      <ion-item slot="header" color="light" class="caixa1">
+        <ion-label>{{ category.name }}</ion-label>
+      </ion-item>
 
-        <ion-list slot="content">
+      <ion-list slot="content">
 
-          <ion-item *ngFor="let item of category.items">
-            <ion-grid>
-              <ion-row>
+        <ion-item *ngFor="let item of category.items">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="item.selected"
+                  (ionChange)="onItemChange(item)"> {{ item.name }}
+                </ion-checkbox>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="item.selected">
+              <ion-row *ngFor="let key of objectKeys(item)">
                 <ion-col>
-                  <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="item.selected"
-                    (ionChange)="onItemChange(item)"> {{ item.name }}
-                  </ion-checkbox>
-                </ion-col>
-              </ion-row>
-
-              <ion-row *ngIf="item.selected">
-                <ion-col *ngFor="let key of objectKeys(item)">
-                  <ion-input class="caixa3" label={{key}} type="number" [disabled]="!item.selected" [(ngModel)]="item.values[0][key]"  >
+                  <ion-input class="caixa3" label={{key}} type="number" [(ngModel)]="item.values[0][key]">
                   </ion-input>
                 </ion-col>
-
               </ion-row>
+            </ion-row>
 
-            </ion-grid>
-          </ion-item>
-        </ion-list>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
 
-      </ion-accordion>
+    </ion-accordion>
 
-    </ion-accordion-group>
+  </ion-accordion-group>
 
-    <button
-      class="botao-finalizar"
-      (click)="saveToFirestore()">
-      FINALIZAR
-    </button>
+  <button class="botao-finalizar" (click)="saveToFirestore()">
+    FINALIZAR
+  </button>
 
 </ion-content>
