@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import { Category } from '../_interfaces/category';
+import { Category } from '../_interfaces/etapa';
 
 @Injectable({
   providedIn: 'root'

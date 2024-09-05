@@ -1,4 +1,4 @@
-import { Category } from './../_interfaces/category';
+import { Category } from '../_interfaces/etapa';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
@@ -46,7 +46,7 @@ export class ProjetosPage {
   abrir(id: Projeto) {
     this.projetoService.setIdProject(id);
     this.router.navigate(["tabs/resumo"]);
-    
+
   }
 
 

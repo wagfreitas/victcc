@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
 import { ModalController } from '@ionic/angular';
 import { ModalProjetoComponent } from '../modal-projeto/modal-projeto.component';
-import { Category } from '../_interfaces/category';
+import { Etapa } from '../_interfaces/projeto';
 import { Projeto } from '../_interfaces/projeto';
 import { UtilService } from '../_services/util.service';
 
@@ -19,79 +19,12 @@ export class NovoProjetoPage implements OnInit {
   dadosProjeto: Projeto[] = [];
   novoProjeto: string = 'Novo Projeto'
 
-  categories: Category[] = [
-
-    {
-      name: 'Preparacão do terreno',
-      items: [
-        { name: 'Remocao da Vegetacao', values: [{ 'Quantidade': 0 }], selected: false },
-        { name: 'Nivelamento', values: [{ 'Volume': 0 }], selected: false },
-      ],
-    },
-    {
-      name: 'Fundacão',
-      items: [
-        { name: 'Bloco de Concreto', values: [{ 'Volume': 0, 'Quantidade': 0 }], selected: false },
-        { name: 'Radier', values: [{ 'Área': 0, 'Altura': 0 }], selected: false },
-      ],
-    },
-    {
-      name: 'Estruturas',
-      items: [
-        {
-          name: 'Pilar',
-          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0 }], selected: false
-        },
-        {
-          name: 'Viga',
-          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0 }], selected: false
-        },
-      ],
-    },
-  ];
+  categories: Etapa[] = []
 
 
 
-  nomeProjeto = ""
+  nomeProjeto: string = "";
 
-  remocaoSelecionada: boolean = false;
-  nivelSelecionado: boolean = false;
-  marcacaoSelecionada: boolean = false;
-  blocoSelecionado: boolean = false;
-  radierSelecionado: boolean = false;
-  sapataSelecionada: boolean = false;
-  estConcretoSelecionada: boolean = false;
-  estMetalicaSelecionada: boolean = false;
-
-
-  quantidadeRemocao = 0;
-  volumeNivel = 0;
-  areaMarcacao = 0;
-
-  volumeBloco = 0;
-  quantidadeBloco = 0;
-
-  areaRadier = 0;
-  alturaRadier = 0;
-
-  tipoSapata = "Isolada";
-  volumeSapata = 0;
-  quantidadeSapata = 0;
-
-  compPilar = 0;
-  largPilar = 0;
-  altPilar = 0;
-  quantPilar = 0;
-
-  compViga = 0;
-  largViga = 0;
-  altViga = 0;
-  quantViga = 0;
-
-  areaLaje = 0;
-  espLaje = 0;
-
-  diasMetalica = 0;
 
   constructor(
     private router: Router,
@@ -171,7 +104,7 @@ export class NovoProjetoPage implements OnInit {
 
 
   saveToFirestore() {
-    let data = { projeto: this.generateJson() };
+    let data = { etapas: this.generateJson() };
     let dadosProjeto = {
       nomeProjeto: this.dadosProjeto[0].nomeProjeto,
       nomeCliente: this.dadosProjeto[0].nomeCliente,
@@ -181,9 +114,10 @@ export class NovoProjetoPage implements OnInit {
       cep: this.dadosProjeto[0].cep,
       dataInicio: this.dadosProjeto[0].dataInicio,
       dataFim: this.dadosProjeto[0].dataFim,
-      tipoServico: data,
-      status: this.dadosProjeto[0].status
+      status: this.dadosProjeto[0].status,
+      data
     }
+
     this.projService.createProject(dadosProjeto).then(() => {
       this.utilService.success_msg("Projeto criado com sucesso!");
       this.router.navigate(["projetos"]);

@@ -1,22 +1,17 @@
-import { Category } from './category';
-
+import { Etapa } from "./etapa"
 
 export interface Projeto {
-  nomeProjeto?: string;
-  id?: string;
-  nomeCliente?: string;
-  logradouro?: string;
-  numero?: string;
-  complemento?: string;
-  cep?: string;
-  dataInicio?: string;
-  dataFim?: string;
-  tipoServico?: Servicos[];
-  status?: string;
-  Category?: Category[];
+  idUser: string
+  nomeProjeto: string,
+  nomeCliente: string,
+  cep: string,
+  logradouro: string,
+  numero: string,
+  complemento: string,
+  dataInicio: string,
+  dataFim: string,
+  status: string,
+  etapa: Etapa[]
 }
 
-interface Servicos{
-  name: string;
-  responsavel: string;
-}
+
