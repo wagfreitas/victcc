@@ -50,8 +50,8 @@ export class CalculadoraPage {
     this.router.navigate(["gesso"]);
   }
 
-  revestimentos() {
-    this.router.navigate(["revestimentos"]);
+  revestimento() {
+    this.router.navigate(["revestimento"]);
   }
 
 }

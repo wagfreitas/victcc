@@ -41,8 +41,6 @@ export class ChapiscoPage {
 
     this.volume = aream * espessuram;
 
-    console.log(this.volume);
-
     if (this.traco === "Chapisco") {this.C = 1, this.Ar = 3, this.Ag = 1}
     if (this.traco === "Reboco") {this.C = 1, this.Ar = 6, this.Ag = 1}
 

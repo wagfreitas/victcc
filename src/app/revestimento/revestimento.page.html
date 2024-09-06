@@ -1,13 +1,71 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>revestimento</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">revestimento</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="fundo">
+
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+
+    <div class="parte-amarela" >
+      <p class="titulo">REVESTIMENTOS</p>
+      <p class="p">Peças:</p>
+      <ion-row>
+        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
+          <ion-input label="Largura:" [(ngModel)]="largpeca" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unilargpeca">
+            <ion-select-option>m</ion-select-option>
+            <ion-select-option default >cm</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
+          <ion-input label="Comprimento:" [(ngModel)]="comppeca" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unicomppeca">
+            <ion-select-option>m</ion-select-option>
+            <ion-select-option default >cm</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <p class="p">Área de cobertura:</p>
+      <ion-row>
+        <ion-col class="caixa" size="8" style="margin-right: 6px;">
+          <ion-input label="Largura:" [(ngModel)]="largura" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="2.5" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unilarg">
+            <ion-select-option>cm</ion-select-option>
+            <ion-select-option default >m</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="caixa" size="8" style="margin-right: 6px;">
+          <ion-input label="Altura:" [(ngModel)]="altura" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="2.5" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unialt">
+            <ion-select-option>cm</ion-select-option>
+            <ion-select-option default >m</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-button class="caixa2" (click)="calcular()">
+        CALCULAR
+      </ion-button>
+      <div class="caixa" style="color:#FFC71E;">{{resultado}}</div>
+      <ion-button class="duvida" id="duvida">?</ion-button>
+      <ion-alert trigger="duvida"
+      header="Ajuda"
+      message="Não esqueça de colocar a altura e largura de acordo com a posição usada da telha">
+      </ion-alert>
+
+    </div>
+
+  </div>
 </ion-content>
