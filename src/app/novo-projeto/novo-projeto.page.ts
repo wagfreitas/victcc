@@ -1,3 +1,4 @@
+import { map } from 'rxjs';
 import { Component, model, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
@@ -5,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { ModalProjetoComponent } from '../modal-projeto/modal-projeto.component';
 import { Category } from '../_interfaces/category';
 import { Projeto } from '../_interfaces/projeto';
+import { EtapasService } from '../_services/etapas.service';
 import { UtilService } from '../_services/util.service';
 
 
@@ -49,6 +51,143 @@ export class NovoProjetoPage implements OnInit {
       ],
     },
   ];
+
+  etapas: any[] = [
+    {
+      "descricao": "Preparação",
+      "Processo": [
+        {
+          "atividade": [
+            {
+              "duracao": 1,
+              "ordem": 1,
+              "descricao": "Remoção de árvore",
+              "medidas": [
+                {
+                  "Quantidade": "0"
+                }
+              ],
+              "material": [
+                {
+                  "descricao": "Motoserra",
+                  "grau": 0
+                },
+                {
+                  "grau": 0,
+                  "descricao": "Cordas"
+                },
+                {
+                  "grau": 0,
+                  "descricao": "Guincho"
+                }
+              ],
+              "regra": "A"
+            },
+            {
+              "medida": [
+                {
+                  "Quantidade": "0"
+                }
+              ],
+              "descricao": "Remoção de Grama",
+              "material": [
+                {
+                  "descricao": "Enxadas",
+                  "grau": 0
+                },
+                {
+                  "descricao": "Pás",
+                  "grau": 0
+                },
+                {
+                  "grau": 0,
+                  "descricao": "Carrinho de Mão"
+                },
+                {
+                  "descricao": "Cortador de grama",
+                  "grau": 0
+                }
+              ],
+              "ordem": 1,
+              "duracao": 1,
+              "regra": "B"
+            }
+          ],
+          "descricao": "Demolição"
+        },
+        {
+          "atividade": [
+            {
+              "duracao": "3",
+              "ordem": "2",
+              "descricao": "Escavação",
+              "regra": "E",
+              "medida": [
+                {
+                  "Volume": "0"
+                }
+              ]
+            },
+            {
+              "ordem": 2,
+              "duracao": 3,
+              "descricao": "Aterro",
+              "medida": [
+                {
+                  "Volume": 0
+                }
+              ]
+            },
+            {
+              "descricao": "Empresa tercerizada",
+              "regra": "C",
+              "ordem": 2,
+              "duracao": 1
+            }
+          ],
+          "descricao": "Nivelamento"
+        }
+      ]
+    },
+    {
+      "Processo": [
+        {
+          "descricao": "Radier",
+          "atividade": [
+            {
+              "regra": "G",
+              "ordem": 3,
+              "duracao": 3
+            }
+          ]
+        },
+        {
+          "descricao": "Sapata",
+          "atividade": [
+            {
+              "duracao": 4,
+              "regra": "H",
+              "ordem": 4,
+              "descricao": "Sapata"
+            }
+          ]
+        },
+        {
+          "descricao": "Estacas",
+          "atividade": [
+            {
+              "duracao": 4,
+              "descricao": "Estacas",
+              "regra": "H",
+              "ordem": 3
+            }
+          ]
+        }
+      ],
+      "descricao": "Fundação"
+    }
+  ];
+
 
 
 
@@ -97,13 +236,34 @@ export class NovoProjetoPage implements OnInit {
     private router: Router,
     private projService: ProjetoService,
     private modalController: ModalController,
-    private utilService: UtilService) {
+    private utilService: UtilService,
+    private etapasService: EtapasService) {
     this.getSelectedItems();
   }
 
   ngOnInit(): void {
+    this.etapasService.getEtapas().subscribe((data) => {
+      this.modelData = data;
+      console.log(this.modelData);
+
+      this.modelData.forEach((element: any) => {
+        console.log(element);
+        element.etapa.forEach((etapa: any) => {
+          console.log(etapa)
+        });
+
+      }
+
+      );
+    });
     this.openModal()
 
+
+
+  }
+
+  getMedidaLabel(medida: any): string {
+    return Object.keys(medida)[0];
   }
 
 

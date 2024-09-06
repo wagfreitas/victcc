@@ -9,32 +9,41 @@
 
   <ion-accordion-group class="caixa" expand="inset">
 
-    <ion-accordion *ngFor="let category of categories" [value]="category.name">
+    <ion-accordion *ngFor="let etapa of etapas" [value]="etapa.descricao">
       <ion-item slot="header" color="light" class="caixa1">
-        <ion-label>{{ category.name }}</ion-label>
+        <ion-label> {{ etapa.descricao }}</ion-label>
       </ion-item>
 
       <ion-list slot="content">
-
-        <ion-item *ngFor="let item of category.items">
+        <ion-item *ngFor="let processo of etapa.Processo">
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="item.selected"
-                  (ionChange)="onItemChange(item)"> {{ item.name }}
+                <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="processo.selected">
+                  {{processo.descricao }}
                 </ion-checkbox>
               </ion-col>
             </ion-row>
+            <ion-row *ngIf="processo.selected">
 
-            <ion-row *ngIf="item.selected">
-              <ion-row *ngFor="let key of objectKeys(item)">
-                <ion-col>
-                  <ion-input class="caixa3" label={{key}} type="number" [(ngModel)]="item.values[0][key]">
-                  </ion-input>
+              <ion-row *ngFor="let atividade of processo.atividade">
+                <ion-col size="12">
+                  <ion-input class="caixa3" label={{atividade.descricao}} type="number"
+                    [(ngModel)]="atividade.selected"></ion-input>
+                </ion-col>
+                <ion-col size="12">
+
+
+                  <div *ngFor="let medida of atividade.medidas">
+                    <ion-item>
+                      <ion-label>{{ getMedidaLabel(medida) }}</ion-label>
+                      <ion-input type="text" [(ngModel)]="medida.Quantidade"></ion-input>
+                    </ion-item>
+                  </div>
+
                 </ion-col>
               </ion-row>
             </ion-row>
-
           </ion-grid>
         </ion-item>
       </ion-list>
