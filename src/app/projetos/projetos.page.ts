@@ -1,4 +1,4 @@
-import { Category } from './../_interfaces/category';
+import { Category } from '../_interfaces/etapa';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
@@ -11,7 +11,7 @@ import { Projeto } from '../_interfaces/projeto';
   styleUrls: ['./projetos.page.scss'],
 })
 export class ProjetosPage {
-  public projetos:Projeto[] = [];
+  public projetos: Projeto[] = [];
   constructor(
     private router: Router,
     private projetoService: ProjetoService
@@ -45,7 +45,8 @@ export class ProjetosPage {
 
   abrir(id: Projeto) {
     this.projetoService.setIdProject(id);
-    this.router.navigate(["tabs/calendar"]);
+    this.router.navigate(["tabs/resumo"]);
+
   }
 
 

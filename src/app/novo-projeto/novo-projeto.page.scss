@@ -76,8 +76,8 @@ body {
   vertical-align: middle;
   background-color: #cfe6ff;
   border-radius: 1px;
-  width: calc(100% - 60px);
-  margin-top: 10px;
+  width: calc(100%);
+  //margin-top: 10px;
   margin-left: 40px;
   padding-left: 20px;
   padding-right: 20px;
@@ -95,9 +95,6 @@ body {
   color: white;
 }
 
-ion-input {
-  --background: transparent !important;
-}
 
 
 .p {

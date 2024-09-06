@@ -72,10 +72,13 @@ export class CalendarPage {
 
   next() {
     this.myCal.slideNext();
+    this.bookings = [];
+
   }
 
   back() {
     this.myCal.slidePrev();
+    this.bookings = [];
   }
 
   createEvents(agendaList: Agenda[]) {

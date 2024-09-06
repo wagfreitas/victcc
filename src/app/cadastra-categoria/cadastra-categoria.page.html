@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>cadastra-categoria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="categorias">
+      <div *ngFor="let categoria of categorias.controls; let i = index">
+        <div [formGroupName]="i">
+          <ion-item>
+            <ion-label>Nome da Categoria</ion-label>
+            <ion-input formControlName="nomeCategoria"></ion-input>
+          </ion-item>
+
+          <!-- Itens -->
+          <div formArrayName="itens">
+            <div *ngFor="let item of getItens(i).controls; let j = index" [formGroupName]="j">
+              <ion-item>
+                <ion-label>Nome do Item</ion-label>
+                <ion-input formControlName="nomeItem"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Quantidade</ion-label>
+                <ion-input type="number" formControlName="quantidade"></ion-input>
+              </ion-item>
+              <!-- Outros campos do item... -->
+            </div>
+          </div>
+
+          <ion-button (click)="addItem(i)">Adicionar Item</ion-button>
+        </div>
+      </div>
+    </div>
+
+    <ion-button (click)="addCategoria()">Adicionar Categoria</ion-button>
+    <ion-button type="submit">Salvar Projeto</ion-button>
+
+  </form>
+</ion-content>
