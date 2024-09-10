@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataServiceService } from '../_services/data-service.service';
 
 @Component({
   selector: 'app-resumo',
@@ -7,8 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./resumo.page.scss'],
 })
 export class ResumoPage {
-
-  constructor(private router: Router) { }
+  projeto = this.dataService.getData();
+  progresso: number = 0;
+  constructor(
+    private router: Router,
+    private dataService: DataServiceService) {
+    this.progresso = this.projeto.status;
+    console.log(this.projeto.status);
+  }
 
   testar() {
     console.log("Cliquei no botão");
@@ -17,6 +24,6 @@ export class ResumoPage {
   voltar() {
     this.router.navigate(["projetos"]);
 
-}
+  }
 
 }

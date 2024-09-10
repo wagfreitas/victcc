@@ -91,4 +91,19 @@
   font-weight: bold;
 }
 
+ion-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+ion-item {
+  margin-bottom: 10px;
+}
+
+ion-label {
+  margin-right: 5px;
+}
+
 

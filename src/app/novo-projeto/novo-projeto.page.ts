@@ -8,6 +8,9 @@ import { Category } from '../_interfaces/category';
 import { Projeto } from '../_interfaces/projeto';
 import { EtapasService } from '../_services/etapas.service';
 import { UtilService } from '../_services/util.service';
+import { getAuth } from 'firebase/auth';
+
+
 
 
 
@@ -17,6 +20,7 @@ import { UtilService } from '../_services/util.service';
   styleUrls: ['./novo-projeto.page.scss'],
 })
 export class NovoProjetoPage implements OnInit {
+
   modelData: any;
   dadosProjeto: Projeto[] = [];
   novoProjeto: string = 'Novo Projeto'
@@ -64,7 +68,8 @@ export class NovoProjetoPage implements OnInit {
               "descricao": "Remoção de árvore",
               "medidas": [
                 {
-                  "Quantidade": "0"
+                  "descricao": "Quantidade",
+                  "valor": 0
                 }
               ],
               "material": [
@@ -84,9 +89,10 @@ export class NovoProjetoPage implements OnInit {
               "regra": "A"
             },
             {
-              "medida": [
+              "medidas": [
                 {
-                  "Quantidade": "0"
+                  "descricao": "Quantidade",
+                  "valor": "0"
                 }
               ],
               "descricao": "Remoção de Grama",
@@ -122,9 +128,10 @@ export class NovoProjetoPage implements OnInit {
               "ordem": "2",
               "descricao": "Escavação",
               "regra": "E",
-              "medida": [
+              "medidas": [
                 {
-                  "Volume": "0"
+                  "descricao": "Volume",
+                  "valor": "0"
                 }
               ]
             },
@@ -132,9 +139,10 @@ export class NovoProjetoPage implements OnInit {
               "ordem": 2,
               "duracao": 3,
               "descricao": "Aterro",
-              "medida": [
+              "medidas": [
                 {
-                  "Volume": 0
+                  "descricao": "Volume",
+                  "valor": "0"
                 }
               ]
             },
@@ -142,7 +150,13 @@ export class NovoProjetoPage implements OnInit {
               "descricao": "Empresa tercerizada",
               "regra": "C",
               "ordem": 2,
-              "duracao": 1
+              "duracao": 1,
+              "medidas": [
+                {
+                  "descricao": "Volume",
+                  "valor": "0"
+                }
+              ]
             }
           ],
           "descricao": "Nivelamento"
@@ -157,7 +171,18 @@ export class NovoProjetoPage implements OnInit {
             {
               "regra": "G",
               "ordem": 3,
-              "duracao": 3
+              "duracao": 3,
+              "descricao": "Radier",
+              "medidas": [
+                {
+                  "descricao": "Área",
+                  "valor": "0"
+                },
+                {
+                  "descricao": "Altura",
+                  "valor": "0"
+                }
+              ]
             }
           ]
         },
@@ -168,7 +193,21 @@ export class NovoProjetoPage implements OnInit {
               "duracao": 4,
               "regra": "H",
               "ordem": 4,
-              "descricao": "Sapata"
+              "descricao": "Sapata",
+              "medidas": [
+                {
+                  "descricao": "Volume",
+                  "valor": "0"
+                },
+                {
+                  "descricao": "Quantidade",
+                  "valor": "0"
+                },
+                {
+                  "descricao": "Tipo",
+                  "valor": ["Isolada", "Corrida", "Grupo"]
+                }
+              ]
             }
           ]
         },
@@ -179,7 +218,21 @@ export class NovoProjetoPage implements OnInit {
               "duracao": 4,
               "descricao": "Estacas",
               "regra": "H",
-              "ordem": 3
+              "ordem": 3,
+              "medidas": [
+                {
+                  "descricao": "Comprimento",
+                  "valor": "0"
+                },
+                {
+                  "descricao": "Diâmetro",
+                  "valor": "0"
+                },
+                {
+                  "descricao": "Quantidade",
+                  "valor": "0"
+                }
+              ]
             }
           ]
         }
@@ -188,49 +241,7 @@ export class NovoProjetoPage implements OnInit {
     }
   ];
 
-
-
-
   nomeProjeto = ""
-
-  remocaoSelecionada: boolean = false;
-  nivelSelecionado: boolean = false;
-  marcacaoSelecionada: boolean = false;
-  blocoSelecionado: boolean = false;
-  radierSelecionado: boolean = false;
-  sapataSelecionada: boolean = false;
-  estConcretoSelecionada: boolean = false;
-  estMetalicaSelecionada: boolean = false;
-
-
-  quantidadeRemocao = 0;
-  volumeNivel = 0;
-  areaMarcacao = 0;
-
-  volumeBloco = 0;
-  quantidadeBloco = 0;
-
-  areaRadier = 0;
-  alturaRadier = 0;
-
-  tipoSapata = "Isolada";
-  volumeSapata = 0;
-  quantidadeSapata = 0;
-
-  compPilar = 0;
-  largPilar = 0;
-  altPilar = 0;
-  quantPilar = 0;
-
-  compViga = 0;
-  largViga = 0;
-  altViga = 0;
-  quantViga = 0;
-
-  areaLaje = 0;
-  espLaje = 0;
-
-  diasMetalica = 0;
 
   constructor(
     private router: Router,
@@ -243,27 +254,66 @@ export class NovoProjetoPage implements OnInit {
 
   ngOnInit(): void {
     this.etapasService.getEtapas().subscribe((data) => {
-      this.modelData = data;
-      console.log(this.modelData);
-
-      this.modelData.forEach((element: any) => {
-        console.log(element);
-        element.etapa.forEach((etapa: any) => {
-          console.log(etapa)
-        });
-
-      }
-
-      );
+      this.modelData = data
     });
     this.openModal()
+  }
 
-
-
+  removeUndefinedFields(obj: any): any {
+    Object.keys(obj).forEach(key => {
+      if (obj[key] === undefined) {
+        delete obj[key]; // Remove chave com valor undefined
+      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        this.removeUndefinedFields(obj[key]); // Aplica recursivamente
+      }
+    });
+    return obj;
   }
 
   getMedidaLabel(medida: any): string {
-    return Object.keys(medida)[0];
+    return `${medida.descricao}`;
+  }
+
+  toggleProcess(processo: any) {
+    processo.expanded = !processo.expanded;
+  }
+
+  toggleAtividade(atividade: any) {
+    atividade.expanded = !atividade.expanded;
+
+  }
+
+  async confirmar() {
+    // Mapeando as etapas, processos e atividades que foram selecionados e preenchidos
+    const result = this.etapas.map(etapa => ({
+      descricao: etapa.descricao,
+      Processo: etapa.Processo.filter((processo: { expanded: any; }) => processo.expanded).map((processo: { descricao: any; atividade: any[]; }) => ({
+        descricao: processo.descricao,
+        atividade: processo.atividade.filter(atividade => atividade.expanded).map(atividade => ({
+          descricao: atividade.descricao,
+          duracao: atividade.duracao,
+          material: atividade.material,
+          ordem: atividade.ordem,
+          regra: atividade.regra,
+          medidas: atividade.medidas.map((medida: { valor: any; }) => ({
+            ...medida,
+            valor: medida.valor || '0'
+          }))
+        }))
+      }))
+    }));
+
+    // Adicionar o ID do usuário ao registro
+    const projeto = {
+      etapas: result,
+      timestamp: new Date()
+    };
+
+    const cleanedProjeto = this.removeUndefinedFields(projeto);
+
+    // Salvando no Firestore
+    this.saveToFirestore(cleanedProjeto);
+
   }
 
 
@@ -300,38 +350,14 @@ export class NovoProjetoPage implements OnInit {
     console.log(selectedItems);
   }
 
-  onItemChange(item: any) {
-
-  }
 
   voltar() {
     this.router.navigate(["inicial"]);
   }
 
-  toggleInputs(opcao: any, event: any) {
-    console.log(event.detail.checked);
-    console.log(opcao);
-  }
-
-  generateJson() {
-    let result = this.categories.map(category => {
-      let items = category.items.filter(item => item.selected).map(item => {
-        let values: { [key: string]: any } = {}; // Adicione a assinatura do índice aqui
-        for (let key in item.values[0]) {
-          if (item.values[0][key]) {
-            values[key] = item.values[0][key];
-          }
-        }
-        return { name: item.name, values: values };
-      });
-      return { name: category.name, items: items };
-    });
-    return result;
-  }
-
-
-  saveToFirestore() {
-    let data = { projeto: this.generateJson() };
+  saveToFirestore(result: any) {
+    let data = { projeto: result };
+    console.log(data)
     let dadosProjeto = {
       nomeProjeto: this.dadosProjeto[0].nomeProjeto,
       nomeCliente: this.dadosProjeto[0].nomeCliente,
@@ -341,9 +367,11 @@ export class NovoProjetoPage implements OnInit {
       cep: this.dadosProjeto[0].cep,
       dataInicio: this.dadosProjeto[0].dataInicio,
       dataFim: this.dadosProjeto[0].dataFim,
+      userId: this.dadosProjeto[0].userId,
       tipoServico: data,
       status: this.dadosProjeto[0].status
     }
+    console.log(dadosProjeto)
     this.projService.createProject(dadosProjeto).then(() => {
       this.utilService.success_msg("Projeto criado com sucesso!");
       this.router.navigate(["projetos"]);
@@ -351,5 +379,6 @@ export class NovoProjetoPage implements OnInit {
       console.error("Erro ao criar projeto: ", error);
     });
   }
+
 
 }

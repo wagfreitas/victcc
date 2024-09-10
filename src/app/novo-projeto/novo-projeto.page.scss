@@ -95,6 +95,27 @@ body {
   color: white;
 }
 
+.etapa-header {
+  font-weight: bold;
+}
+
+.processo-item {
+  margin-left: 10px;
+  /* Ajusta a indentação dos processos */
+}
+
+.atividade-container ion-icon {
+    margin-right: 10px;
+    margin-left: 30px;
+    color: gray;
+    /* Cor cinza para o ícone da atividade */
+  }
+
+.medida-container {
+  margin-left: 50px;
+  /* Ajusta a indentação das medidas */
+}
+
 ion-input {
   --background: transparent !important;
 }

@@ -18,4 +18,4 @@ import { ModalProjetoComponent } from '../modal-projeto/modal-projeto.component'
   ],
   declarations: [NovoProjetoPage, ModalProjetoComponent]
 })
-export class NovoProjetoPageModule {}
+export class NovoProjetoPageModule { }

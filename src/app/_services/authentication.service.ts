@@ -38,8 +38,17 @@ export class AuthenticationService {
     return this.auth.signInWithEmailAndPassword(email, password);
   }
   // Register user with email/password
-  RegisterUser(email: any, password: any) {
-    return this.auth.createUserWithEmailAndPassword(email, password);
+  RegisterUser(email: any, password: any, nomeDoUsuario: string) {
+    return this.auth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
+      const user = userCredential.user;
+      return user?.updateProfile({
+        displayName: nomeDoUsuario
+      })
+    }).then(() => {
+      console.log('User updated');
+    }).catch((error) => {
+      window.alert(error.message);
+    });;
   }
   // Email verification when new user register
   SendVerificationMail() {
@@ -54,12 +63,12 @@ export class AuthenticationService {
     return this.auth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-      window.alert(
-        'Password reset email has been sent, please check your inbox.'
-      );
+        window.alert(
+          'Password reset email has been sent, please check your inbox.'
+        );
       })
       .catch((error: any) => {
-      window.alert(error);
+        window.alert(error);
       });
   }
   // Returns true when user is looged in

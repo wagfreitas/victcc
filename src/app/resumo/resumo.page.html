@@ -1,7 +1,6 @@
 <ion-content [fullscreen]="true">
 
-  <button class="botao-seta"
-    (click)="voltar()">
+  <button class="botao-seta" (click)="voltar()">
     <img class="seta" src="../../assets/images/seta.png" />
   </button>
   <img class="logo" src="../../assets/images/Logo.png" />
@@ -11,16 +10,16 @@
 
   <div class="cinza">
     <p class="titulo3">Progresso</p>
-      <ion-grid style="padding: 0px; margin-top: 20px;">
-          <ion-row>
-              <div class="progress-outer">
-                <div class="progress-inner" [style.width.%]="50">
-                  {{ 50 }}
-                </div>
-              </div>
+    <ion-grid style="padding: 0px; margin-top: 20px;">
+      <ion-row>
+        <div class="progress-outer">
+          <div class="progress-inner" [style.width.%]="progresso">
+            {{ progresso }}
+          </div>
+        </div>
 
-          </ion-row>
-        </ion-grid>
-    </div>
+      </ion-row>
+    </ion-grid>
+  </div>
 
 </ion-content>

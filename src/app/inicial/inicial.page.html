@@ -2,24 +2,20 @@
   <div class="fundo">
 
     <div class="parte-branca">
-      <p class="texto1">Oi, nome!</p>
+      <p class="texto1">Oi, {{nomeUser}}!</p>
       <P class="texto2">O que vamos fazer hoje?</P>
-      <img class="user" src="../../assets/images/Usuario.png"/>
+      <img class="user" src="../../assets/images/Usuario.png" />
 
-      <button class="botao azul"
-        (click)="novoprojeto()">
+      <button class="botao azul" (click)="novoprojeto()">
         NOVO <br> PROJETO
       </button>
-      <button class="botao vermelho"
-        (click)="projetos()">
+      <button class="botao vermelho" (click)="projetos()">
         PROJETOS EM <br> EXECUÇÃO
       </button>
-      <button class="botao verde"
-        (click)="comunidade()">
+      <button class="botao verde" (click)="comunidade()">
         COMUNIDADE
       </button>
-      <button class="botao amarelo"
-        (click)="calculadora()">
+      <button class="botao amarelo" (click)="calculadora()">
         CALCULADORA
       </button>
     </div>

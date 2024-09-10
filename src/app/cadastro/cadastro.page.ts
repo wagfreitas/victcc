@@ -30,21 +30,25 @@ export class CadastroPage implements OnInit {
 
     const email = this.form.get('email');
     const password = this.form.get('senha');
+    const n1 = this.form.get('nome');
+    const n2 = this.form.get('sobrenome');
+    const nomedoUsuario = n1?.value + " " + n2?.value;
+
     this.authService
-    .RegisterUser(email?.value, password?.value)
-    .then((res) => {
-      window.alert("Cadastro efetuado com sucesso");
-      this.router.navigate(["entrar"])
+      .RegisterUser(email?.value, password?.value, nomedoUsuario)
+      .then((res) => {
+        window.alert("Cadastro efetuado com sucesso");
+        this.router.navigate(["entrar"])
 
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
 
-      if (error.code === "auth/email-already-in-use") {
-        window.alert("Email já cadastrado");
-        this.form.reset();
-      }
+        if (error.code === "auth/email-already-in-use") {
+          window.alert("Email já cadastrado");
+          this.form.reset();
+        }
 
-    });
+      });
   }
 
   testar() {

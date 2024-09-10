@@ -1,35 +1,65 @@
 <ion-content [fullscreen]="true">
 
-  <button class="botao-seta"
-    (click)="voltar()">
+  <button class="botao-seta" (click)="voltar()">
     <img class="seta" src="../../assets/images/seta.png" />
   </button>
   <img class="logo" src="../../assets/images/Logo.png" />
   <p class="titulo">Nome Projeto</p>
 
-  <p class="titulo2">Compras</p>
-
-  <div class="cinza">
-    <ion-segment value="faltante" (ionChange)=menu($event)>
-      <ion-segment-button style="font-size: 20px; height: 40px;" value="faltante">
+  <ion-content>
+    <ion-segment [(ngModel)]="segment">
+      <ion-segment-button value="faltante">
         <ion-label>Faltante</ion-label>
       </ion-segment-button>
-      <ion-segment-button style="font-size: 20px; height: 40px;" value="comprado">
+      <ion-segment-button value="comprado">
         <ion-label>Comprado</ion-label>
       </ion-segment-button>
-
     </ion-segment>
-    <div *ngIf="abaselecionada === 'faltante'">
-      <p class="etapa">Fundação</p>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Brita</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Impermeabilizante</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Armadura de aço</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Concreto</ion-checkbox>
-    </div>
 
-  </div>
+    <ng-container *ngIf="segment === 'faltante'">
+      <ion-card *ngFor="let etapa of projetos">
+        <ion-card-header>
+          <ion-card-title>{{ etapa.descricao }}--</ion-card-title>
+        </ion-card-header>
 
+        <ion-content scroll="true">
+          <ion-segment [(ngModel)]="segment">
+            <ion-segment-button value="faltante">
+              <ion-label>Faltante</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="comprado">
+              <ion-label>Comprado</ion-label>
+            </ion-segment-button>
+          </ion-segment>
 
-  <button class="adicionar">+</button>
+          <ng-container *ngIf="segment === 'faltante'">
+            <ion-card *ngFor="let etapa of projetos">
+              <ion-card-header>
+                <ion-card-title>{{ etapa.descricao }}**</ion-card-title>
+              </ion-card-header>
 
-</ion-content>
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="6" *ngFor="let processo of etapa.Processo">
+                      <ion-label>{{ processo.descricao }}</ion-label>
+                      <ion-list>
+                        <ion-item *ngFor="let atividade of processo.atividade">
+                          <ion-grid>
+                            <ion-row>
+                              <ion-col size="4" *ngFor="let material of atividade.material">
+                                <ion-label>{{ material.descricao }}</ion-label>
+                                <ion-checkbox (ionChange)="onCheckMaterial(atividade, material)"
+                                  [checked]="material.grau === 1" slot="start"></ion-checkbox>
+                              </ion-col>
+                            </ion-row>
+                          </ion-grid>
+                        </ion-item>
+                      </ion-list>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ng-container>
+        </ion-content>

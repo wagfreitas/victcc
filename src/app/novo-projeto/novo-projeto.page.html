@@ -7,53 +7,48 @@
   <ion-input class="titulo" ionFocus="openModal()" placeholder="NOVO PROJETO" [(ngModel)]="nomeProjeto" type="string"
     disabled></ion-input>
 
-  <ion-accordion-group class="caixa" expand="inset">
 
-    <ion-accordion *ngFor="let etapa of etapas" [value]="etapa.descricao">
+  <ion-accordion-group class="caixa" expand="inset">
+    <ion-accordion *ngFor="let etapa of etapas">
+      <!-- Header da etapa -->
       <ion-item slot="header" color="light" class="caixa1">
-        <ion-label> {{ etapa.descricao }}</ion-label>
+        <ion-label> {{ etapa.descricao }} </ion-label>
       </ion-item>
 
-      <ion-list slot="content">
-        <ion-item *ngFor="let processo of etapa.Processo">
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <ion-checkbox class="caixa2" justify="start" labelPlacement="end" [(ngModel)]="processo.selected">
-                  {{processo.descricao }}
-                </ion-checkbox>
-              </ion-col>
-            </ion-row>
-            <ion-row *ngIf="processo.selected">
+      <!-- Conteúdo da etapa -->
+      <div class="ion-padding" slot="content">
+        <ion-list *ngFor="let processo of etapa.Processo">
+          <ion-item (click)="toggleProcess(processo)">
+            <ion-icon [name]="processo.expanded ? 'remove-circle' : 'add-circle'" slot="start"></ion-icon>
+            <ion-label>{{ processo.descricao }}</ion-label>
+          </ion-item>
 
-              <ion-row *ngFor="let atividade of processo.atividade">
-                <ion-col size="12">
-                  <ion-input class="caixa3" label={{atividade.descricao}} type="number"
-                    [(ngModel)]="atividade.selected"></ion-input>
-                </ion-col>
-                <ion-col size="12">
+          <!-- Mostrar atividades se o processo estiver selecionado -->
+          <div *ngIf="processo.expanded" class=" atividade-container">
+            <ion-list *ngFor="let atividade of processo.atividade" class="atividade-item">
+              <ion-item (click)="toggleAtividade(atividade)">
+                <ion-icon [name]="atividade.expanded ? 'remove-circle' : 'add-circle'" slot="start"></ion-icon>
+                <ion-label>{{ atividade.descricao }}</ion-label>
+              </ion-item>
 
-
-                  <div *ngFor="let medida of atividade.medidas">
-                    <ion-item>
-                      <ion-label>{{ getMedidaLabel(medida) }}</ion-label>
-                      <ion-input type="text" [(ngModel)]="medida.Quantidade"></ion-input>
-                    </ion-item>
-                  </div>
-
-                </ion-col>
-              </ion-row>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-list>
-
+              <!-- Mostrar medidas se a atividade estiver selecionada -->
+              <div *ngIf="atividade.expanded">
+                <div *ngFor="let medida of atividade.medidas">
+                  <ion-item class="medida-container">
+                    <ion-label>{{ getMedidaLabel(medida) }}: </ion-label>
+                    <ion-input type="text" [(ngModel)]="medida.valor"></ion-input>
+                  </ion-item>
+                </div>
+              </div>
+            </ion-list>
+          </div>
+        </ion-list>
+      </div>
     </ion-accordion>
-
   </ion-accordion-group>
 
-  <button class="botao-finalizar" (click)="saveToFirestore()">
-    FINALIZAR
-  </button>
 
+  <ion-footer>
+    <ion-button expand="full" class="botao-finalizar" (click)="confirmar()">Confirmar</ion-button>
+  </ion-footer>
 </ion-content>
