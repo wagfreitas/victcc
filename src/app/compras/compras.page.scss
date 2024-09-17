@@ -52,21 +52,6 @@
   height: calc(100% - 330px);
 }
 
-.etapa {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.processo {
-  font-size: 24px;
-  color: #000;
-  margin: 0px;
-  padding-top: 12px;
-  padding-bottom: 6px;
-}
 
 .passo {
   font-size: 20px;
@@ -98,12 +83,55 @@ ion-col {
   text-align: center;
 }
 
-ion-item {
+
+
+ion-label {
+  margin-right: 10px;
+}
+
+.etapa {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
-ion-label {
-  margin-right: 5px;
+.processo {
+  font-size: 24px;
+  color: #000;
+  margin: 0px;
+  padding-top: 12px;
+  padding-bottom: 6px;
 }
 
+.atividade-list {
+  padding-left: 15px;
+  font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+    display: block;
+  /* Indentação para atividades */
+}
 
+.material-list {
+  padding-left: 30px;
+  /* Indentação para materiais */
+}
+
+ion-item {
+  display: block;
+  /* Forçar todos os itens a serem exibidos como bloco, evitando que fiquem lado a lado */
+  margin-bottom: 5px;
+  /* Espaçamento entre os itens */
+}
+
+ion-checkbox {
+  margin-right: 10px;
+  /* Espaçamento entre checkbox e texto */
+}
+
+ion-label {
+  margin-left: 10px;
+  /* Espaçamento entre o checkbox e o texto */
+}

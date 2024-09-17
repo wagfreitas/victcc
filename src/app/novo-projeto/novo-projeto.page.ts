@@ -259,16 +259,7 @@ export class NovoProjetoPage implements OnInit {
     this.openModal()
   }
 
-  removeUndefinedFields(obj: any): any {
-    Object.keys(obj).forEach(key => {
-      if (obj[key] === undefined) {
-        delete obj[key]; // Remove chave com valor undefined
-      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-        this.removeUndefinedFields(obj[key]); // Aplica recursivamente
-      }
-    });
-    return obj;
-  }
+
 
   getMedidaLabel(medida: any): string {
     return `${medida.descricao}`;
@@ -309,7 +300,7 @@ export class NovoProjetoPage implements OnInit {
       timestamp: new Date()
     };
 
-    const cleanedProjeto = this.removeUndefinedFields(projeto);
+    const cleanedProjeto = this.projService.removeUndefinedFields(projeto);
 
     // Salvando no Firestore
     this.saveToFirestore(cleanedProjeto);
@@ -347,7 +338,6 @@ export class NovoProjetoPage implements OnInit {
       category: category.name,
       items: category.items,
     }));
-    console.log(selectedItems);
   }
 
 
@@ -372,11 +362,21 @@ export class NovoProjetoPage implements OnInit {
       status: this.dadosProjeto[0].status
     }
     console.log(dadosProjeto)
-    this.projService.createProject(dadosProjeto).then(() => {
-      this.utilService.success_msg("Projeto criado com sucesso!");
-      this.router.navigate(["projetos"]);
+    this.projService.createProject(dadosProjeto).then((docRef) => {
+      const projId = docRef.id;
+      this.atualizaProjeto(projId, docRef);
+
     }).catch((error) => {
       console.error("Erro ao criar projeto: ", error);
+    });
+  }
+
+  atualizaProjeto(projId: string, docRef: any) {
+    docRef.update({ id: projId }).then(() => {
+      this.utilService.success_msg("Projeto criado com sucesso!");
+      this.router.navigate(["projetos"]);
+    }).catch((error: any) => {
+      console.error("Erro ao atualizar projeto: ", error);
     });
   }
 

@@ -47,8 +47,9 @@ export class ProjetosPage implements OnInit {
     this.router.navigate(["inicial"]);
   }
 
-  abrir(id: Projeto) {
-    this.dataService.setData(id);
+  abrir(proj: Projeto) {
+    console.log(proj)
+    this.dataService.setData(proj);
     this.router.navigate(["tabs/resumo"]);
 
   }

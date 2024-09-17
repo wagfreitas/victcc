@@ -23,6 +23,17 @@ export class ProjetoService {
     return this.db.collection('projetos').add(data);
   }
 
+  removeUndefinedFields(obj: any): any {
+    Object.keys(obj).forEach(key => {
+      if (obj[key] === undefined) {
+        delete obj[key]; // Remove chave com valor undefined
+      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        this.removeUndefinedFields(obj[key]); // Aplica recursivamente
+      }
+    });
+    return obj;
+  }
+
   getUserProjects() {
     return this.afAuth.authState.pipe(
       switchMap(user => {
@@ -34,6 +45,10 @@ export class ProjetoService {
         }
       })
     );
+  }
+
+  updateProject(id: string, data: any) {
+    this.db.collection('projetos').doc(id).update(data);
   }
 
 

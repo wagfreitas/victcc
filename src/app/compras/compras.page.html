@@ -6,60 +6,100 @@
   <img class="logo" src="../../assets/images/Logo.png" />
   <p class="titulo">Nome Projeto</p>
 
-  <ion-content>
+  <ion-content class="cinza">
     <ion-segment [(ngModel)]="segment">
-      <ion-segment-button value="faltante">
+      <ion-segment-button style="font-size: 20px; height: 40px;" value="faltante">
         <ion-label>Faltante</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="comprado">
+      <ion-segment-button style="font-size: 20px; height: 40px;" value="comprado">
         <ion-label>Comprado</ion-label>
       </ion-segment-button>
     </ion-segment>
 
     <ng-container *ngIf="segment === 'faltante'">
-      <ion-card *ngFor="let etapa of projetos">
+      <ion-card *ngFor="let etapa of etapas">
         <ion-card-header>
-          <ion-card-title>{{ etapa.descricao }}--</ion-card-title>
+          <label class="etapa">{{etapa.descricao}}</label>
         </ion-card-header>
 
-        <ion-content scroll="true">
-          <ion-segment [(ngModel)]="segment">
-            <ion-segment-button value="faltante">
-              <ion-label>Faltante</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="comprado">
-              <ion-label>Comprado</ion-label>
-            </ion-segment-button>
-          </ion-segment>
+        <ion-card-content>
+          <!-- Processo -->
+          <div *ngFor="let processo of etapa.Processo" class="processo">
+            <div class="processo">
+              <strong>{{ processo.descricao }}</strong>
+            </div>
 
-          <ng-container *ngIf="segment === 'faltante'">
-            <ion-card *ngFor="let etapa of projetos">
-              <ion-card-header>
-                <ion-card-title>{{ etapa.descricao }}**</ion-card-title>
-              </ion-card-header>
+            <!-- Atividades -->
+            <ng-container *ngFor="let atividade of processo.atividade">
+              <ng-container *ngIf="atividade.material && atividade.material.length > 0">
+                <div class="atividade">
+                  <div class="atividade-header">
+                    <p>{{ atividade.descricao }}</p>
+                  </div>
 
-              <ion-card-content>
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="6" *ngFor="let processo of etapa.Processo">
-                      <ion-label>{{ processo.descricao }}</ion-label>
-                      <ion-list>
-                        <ion-item *ngFor="let atividade of processo.atividade">
-                          <ion-grid>
-                            <ion-row>
-                              <ion-col size="4" *ngFor="let material of atividade.material">
-                                <ion-label>{{ material.descricao }}</ion-label>
-                                <ion-checkbox (ionChange)="onCheckMaterial(atividade, material)"
-                                  [checked]="material.grau === 1" slot="start"></ion-checkbox>
-                              </ion-col>
-                            </ion-row>
-                          </ion-grid>
+                  <!-- Materiais com grau 0 -->
+                  <div class="material-list">
+                    <div *ngFor="let material of atividade.material">
+                      <div *ngIf="material.grau === 0" class="material-item">
+                        <ion-item lines="none">
+                          <ion-checkbox slot="start" (ionChange)="onCheckMaterial(atividade, material)">
+                          </ion-checkbox>
+                          <ion-label>{{ material.descricao }}</ion-label>
                         </ion-item>
-                      </ion-list>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ng-container>
-        </ion-content>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+
+    <ng-container *ngIf="segment === 'comprado'">
+      <ion-card *ngFor="let etapa of etapas">
+        <ion-card-header>
+          <label class="etapa">{{etapa.descricao}}</label>
+        </ion-card-header>
+
+        <ion-card-content>
+          <!-- Processo -->
+          <div *ngFor="let processo of etapa.Processo" class="processo">
+            <div class="processo">
+              <strong>{{ processo.descricao }}</strong>
+            </div>
+
+            <!-- Atividades -->
+            <ng-container *ngFor="let atividade of processo.atividade">
+              <ng-container *ngIf="atividade.material && atividade.material.length > 0">
+                <div class="atividade">
+                  <div class="atividade-header">
+                    <p>{{ atividade.descricao }}</p>
+                  </div>
+
+                  <!-- Materiais com grau 0 -->
+                  <div class="material-list">
+                    <div *ngFor="let material of atividade.material">
+                      <div *ngIf="material.grau === 1" class="material-item">
+                        <ion-item lines="none">
+                          <ion-checkbox slot="start" (ionChange)="onCheckMaterial(atividade, material)">
+                          </ion-checkbox>
+                          <ion-label>{{ material.descricao }}</ion-label>
+                        </ion-item>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+    <button class="botao" (click)="saveProjetoToFirestore()">Confirmar Compras</button>
+  </ion-content>
+
+</ion-content>
