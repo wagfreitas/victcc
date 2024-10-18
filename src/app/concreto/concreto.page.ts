@@ -15,7 +15,8 @@ export class ConcretoPage {
   cimento = "Cimento:";
   areia = "Areia:";
   brita = "Brita:";
-  agua = "Água:"
+  agua = "Água:";
+  traco = "TRAÇO"
 
   Ca = 195;
   ac = 0;
@@ -23,6 +24,12 @@ export class ConcretoPage {
   Cb = 1072.5;
   Var = 0;
   Car = 0;
+  vc = 0;
+  tc = 0;
+  var = 0;
+  tar = 0;
+  vb = 0;
+  tb = 0;
 
   constructor(private router: Router) { }
 
@@ -59,11 +66,18 @@ export class ConcretoPage {
     this.Cc = this.Ca/this.ac
     this.Var = 1 - (this.Cc/2400 + this.Cb/2630 + this.Ca/1000)
     this.Car = this.Var * 2530
+    this.vc = this.volume * this.Cc / 3100
+    this.tc = this.vc / this.vc
+    this.var = this.volume * this.Car / 2530
+    this.tar = this.var / this.vc
+    this.vb = this.volume * this.Cb / 2630
+    this.tb = this.vb / this.vc
 
     this.cimento = "Cimento: " + String(Math.ceil(this.volume * this.Cc)) + " kg (" + String(Math.ceil(this.volume * this.Cc / 50)) + " sacos)";
     this.areia = "Areia: " + String(Math.ceil(this.volume * this.Car)) + " kg";
     this.brita = "Brita: " + String(Math.ceil(this.volume * this.Cb)) + " kg";
-    this.agua = "Água: " + String(Math.ceil(this.volume * this.Ca)) + " L"
-
+    this.agua = "Água: " + String(Math.ceil(this.volume * this.Ca)) + " L";
+    this.traco = "TRAÇO = " + String(Math.ceil(this.tc)) + ":" + String(Math.ceil(this.tar)) + ":" + String(Math.ceil(this.tb));
+    console.log(this.vc, this.var, this.vb)
     }
 }

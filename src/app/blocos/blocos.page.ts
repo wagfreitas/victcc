@@ -10,16 +10,13 @@ import { Router } from '@angular/router';
 export class BlocosPage {
 
   resultado = "Quantidade:";
-  altbloco = 0;
-  unialtbloco = "cm";
-  largbloco = 0;
-  unilargbloco = "cm";
   altparede = 0;
   unialtparede = "m";
   largparede = 0;
   unilargparede = "m";
-  x = 0;
-  y = 0;
+  area = 0;
+  tipo = "Bloco cerâmico 14 cm";
+  coeficiente = 13;
   quantidade = "";
 
   constructor(private router: Router) { }
@@ -30,34 +27,35 @@ export class BlocosPage {
 
   voltar() {
     this.router.navigate(["calculadora"]);
-
   }
 
   calcular() {
 
-    let altBlocoCm = this.convertToCm(this.altbloco, this.unialtbloco);
-    let largBlocoCm = this.convertToCm(this.largbloco, this.unilargbloco);
-    let altParedeCm = this.convertToCm(this.altparede, this.unialtparede);
-    let largParedeCm = this.convertToCm(this.largparede, this.unilargparede);
+    let altParedeM = this.convertToM(this.altparede, this.unialtparede);
+    let largParedeM = this.convertToM(this.largparede, this.unilargparede);
 
-    this.x = Math.ceil(largParedeCm / largBlocoCm);
-    this.y = Math.ceil(altParedeCm / altBlocoCm);
+    this.area = altParedeM * largParedeM;
 
-    this.quantidade = String(Math.round((this.x * this.y) * 1.1));
-    this.resultado = "Quantidade: " + this.quantidade + " blocos";
+    if (this.tipo === "Tijolo maciço") {this.coeficiente = 154}
+    if (this.tipo === "Tijolo aparente") {this.coeficiente = 154}
+    if (this.tipo === "Tijolo laminado") {this.coeficiente = 135}
+    if (this.tipo === "Bloco cerâmico 9 cm") {this.coeficiente = 13}
+    if (this.tipo === "Bloco cerâmico 14cm") {this.coeficiente = 13}
+    if (this.tipo === "Bloco cerâmico 19cm") {this.coeficiente = 13}
+    if (this.tipo === "Bloco de concreto 9cm") {this.coeficiente = 13}
+    if (this.tipo === "Bloco de concreto 14cm") {this.coeficiente = 13}
+    if (this.tipo === "Bloco de concreto 19cm") {this.coeficiente = 13}
 
-    console.log(this.x);
-    console.log(this.y);
+    this.quantidade = String(Math.ceil((this.area * this.coeficiente) * 1.1));
+    this.resultado = "Quantidade: " + this.quantidade + " unidades";
   }
 
-  convertToCm(value: number, unit: string): number {
+  convertToM(value: number, unit: string): number {
     switch (unit) {
       case 'm':
-        return value * 100;
-      case 'dm':
-        return value * 10;
+        return value * 1;
       case 'cm':
-        return value;
+        return value / 100;
       default:
         return value;
     }

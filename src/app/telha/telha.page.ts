@@ -10,16 +10,13 @@ import { Router } from '@angular/router';
 export class TelhaPage {
 
   resultado = "Quantidade:";
-  largtelha = 0;
-  unilargtelha = "cm";
-  comptelha = 0;
-  unicomptelha = "cm";
-  largcobertura = 0;
-  unilargcobertura = "m";
-  compcobertura = 0;
-  unicompcobertura = "m";
-  x = 0;
-  y = 0;
+  largura = 0;
+  unilarg = "m";
+  comprimento = 0;
+  unicomp = "m";
+  area = 0;
+  tipo = " ";
+  coeficiente = 0;
   quantidade = "";
 
   constructor(private router: Router) { }
@@ -30,34 +27,42 @@ export class TelhaPage {
 
   voltar() {
     this.router.navigate(["calculadora"]);
-
+    this.resultado = "Quantidade:";
+    this.largura = 0;
+    this.unilarg = "m";
+    this.comprimento = 0;
+    this.unicomp = "m";
+    this.area = 0;
+    this.tipo = " ";
+    this.coeficiente = 0;
+    this.quantidade = "";
   }
 
   calcular() {
 
-    let largTelhaCm = this.convertToCm(this.largtelha, this.unilargtelha);
-    let compTelhaCm = this.convertToCm(this.comptelha, this.unicomptelha);
-    let largCoberturaCm = this.convertToCm(this.largcobertura, this.unilargcobertura);
-    let compCoberturaCm = this.convertToCm(this.compcobertura, this.unicompcobertura);
+    let larguraM = this.convertToM(this.largura, this.unilarg);
+    let comprimentoM = this.convertToM(this.comprimento, this.unicomp);
 
-    this.x = Math.ceil(largCoberturaCm / largTelhaCm);
-    this.y = Math.ceil(compCoberturaCm / compTelhaCm);
+    this.area = larguraM * comprimentoM;
 
-    this.quantidade = String(Math.round((this.x * this.y) * 1.1));
-    this.resultado = "Quantidade: " + this.quantidade + " blocos";
+    if (this.tipo === "Telha de barro") { this.coeficiente = 16 }
+    if (this.tipo === "Telha em CRFS") { this.coeficiente = 0.86 }
+    if (this.tipo === "Telha em fibra vegetal") { this.coeficiente = 0.84 }
+    if (this.tipo === "Telha ondulada translúcida") { this.coeficiente = 0.43 }
+    if (this.tipo === "Telha em poliéster reforçado") { this.coeficiente = 0.86 }
+    if (this.tipo === "Telha de vidro") { this.coeficiente = 1.05 }
+    if (this.tipo === "Telha tipo sanduíche") { this.coeficiente = 1.05 }
 
-    console.log(this.x);
-    console.log(this.y);
+    this.quantidade = String(Math.ceil(this.area * this.coeficiente));
+    this.resultado = "Quantidade: " + this.quantidade + " peças";
   }
 
-  convertToCm(value: number, unit: string): number {
+  convertToM(value: number, unit: string): number {
     switch (unit) {
       case 'm':
-        return value * 100;
-      case 'dm':
-        return value * 10;
-      case 'cm':
         return value;
+      case 'cm':
+        return value / 100;
       default:
         return value;
     }

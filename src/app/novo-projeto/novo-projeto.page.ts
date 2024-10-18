@@ -28,44 +28,111 @@ export class NovoProjetoPage implements OnInit {
   categories: Category[] = [
 
     {
-      name: 'Preparacão do terreno',
+      name: 'Serviços Preliminares',
       items: [
-        { name: 'Remocao da Vegetacao', values: [{ 'Quantidade': 0 }], selected: false },
-        { name: 'Nivelamento', values: [{ 'Volume': 0 }], selected: false },
+        { name: 'Demolição', values: [{ 'Duração (dias)': 0 }], selected: false },
+        { name: 'Limpeza', values: [{ 'Duração (dias)': 0 }], selected: false },
+        { name: 'Marcação', values: [{ 'Duração (dias)': 0 }], selected: false },
+        { name: 'Movimentoação de terra', values: [{ 'Duração (dias)': 0 }], selected: false },
+        { name: 'Mobilização do terreno', values: [{ 'Duração (dias)': 0 }], selected: false },
+
       ],
     },
     {
-      name: 'Fundacão',
+      name: 'Fundação',
       items: [
-        { name: 'Bloco de Concreto', values: [{ 'Volume': 0, 'Quantidade': 0 }], selected: false },
-        { name: 'Radier', values: [{ 'Área': 0, 'Altura': 0 }], selected: false },
+        { name: 'Bloco de concreto', values: [{ 'Volume': 0, 'Quantidade': 0 }], selected: false },
+        { name: 'Viga baldrame', values: [{ 'Altura': 0, 'Largura': 0, 'Comprimento total': 0 }], selected: false },
+        { name: 'Radier', values: [{ 'Área': 0, 'Espessura': 0 }], selected: false },
+        { name: 'Sapata', values: [{ 'Volume': 0, 'Quantidade': 0 }], selected: false },
       ],
     },
     {
       name: 'Estruturas',
       items: [
-        {
-          name: 'Pilar',
-          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0 }], selected: false
-        },
-        {
-          name: 'Viga',
-          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0 }], selected: false
-        },
+        { name: 'Pilares', values: [{ 'Área do perfil': 0, 'Altura': 0, 'Quantidade': 0}], selected: false },
+        { name: 'Vigas', values: [{ 'Altura': 0, 'Largura': 0, 'Comprimento total': 0}], selected: false },
+        { name: 'Laje', values: [{ 'Área': 0, 'Espessura': 0 }], selected: false },
+        { name: 'Alvenaria estrutural', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Contrapiso', values: [{ 'Área': 0, 'Espessura': 0 }], selected: false },
       ],
     },
+    {
+      name: 'Vedação',
+      items: [
+        { name: 'Bloco de concreto', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Bloco cerâmico', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Drywall', values: [{ 'Área total': 0 }], selected: false },
+      ],
+    },
+    {
+      name: 'Revestimentos',
+      items: [
+        { name: 'Argamassado', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Cerâmico', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Madeira', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Pedra', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Gesso', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Vinílico', values: [{ 'Área total': 0 }], selected: false },
+      ],
+    },
+    {
+      name: 'Esquadrias',
+      items: [
+        { name: 'Portas', values: [{ 'Quantidade': 0 }], selected: false },
+        { name: 'Janelas', values: [{ 'Quantidade': 0 }], selected: false },
+      ],
+    },
+    {
+      name: 'Sistema hidráulico',
+      items: [
+        { name: 'Água potável', values: [{ 'Duração (dias)': 0 }], selected: false },
+        { name: 'Esgoto', values: [{ 'Duração (dias)': 0 }], selected: false },
+        { name: 'Água pluvial', values: [{ 'Duração (dias)': 0 }], selected: false },
+      ],
+    },
+    {
+      name: 'Sistema elétrico',
+      items: [
+        { name: 'Rede elétrica', values: [{ 'Duração (dias)': 0 }], selected: false },
+      ],
+    },
+    {
+      name: 'Sistema de gás',
+      items: [
+        { name: 'Rede de gás', values: [{ 'Duração (dias)': 0 }], selected: false },
+      ],
+    },
+    {
+      name: 'Cobertura',
+      items: [
+        { name: 'Plana', values: [{ 'Duração (dias)': 0 }], selected: false },
+        { name: 'Inclinada', values: [{ 'Duração (dias)': 0 }], selected: false },
+      ],
+    },
+    {
+      name: 'Acabamentos',
+      items: [
+        { name: 'Pintura', values: [{ 'Área total': 0 }], selected: false },
+        { name: 'Acabamentos elétricos', values: [{ 'Quantidade': 0 }], selected: false },
+        { name: 'Acadabemtos hidráulicos', values: [{ 'Quantidade': 0 }], selected: false },
+        { name: 'Bancadas de pedra', values: [{ 'Quantidade': 0 }], selected: false },
+        { name: 'Ferragens', values: [{ 'Quantidade': 0 }], selected: false },
+      ],
+    },
+
   ];
 
   etapas: any[] = [
     {
-      "descricao": "Preparação",
+      "descricao": "Serviços preliminares",
       "Processo": [
         {
           "atividade": [
             {
+              "descricao": "Demoliçaõ",
               "duracao": 1,
               "ordem": 1,
-              "descricao": "Remoção de árvore",
               "medidas": [
                 {
                   "descricao": "Quantidade",

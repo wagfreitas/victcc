@@ -85,7 +85,11 @@ const routes: Routes = [
   {
     path: 'cadastracat',
     loadChildren: () => import('./cadastra-categoria/cadastra-categoria.module').then(m => m.CadastraCategoriaPageModule)
+  },  {
+    path: 'argamassa',
+    loadChildren: () => import('./argamassa/argamassa.module').then( m => m.ArgamassaPageModule)
   },
+
 
 
 
