@@ -1,18 +1,13 @@
-import { map } from 'rxjs';
-import { Component, model, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
 import { ModalController } from '@ionic/angular';
 import { ModalProjetoComponent } from '../modal-projeto/modal-projeto.component';
-import { Category } from '../_interfaces/category';
 import { Projeto } from '../_interfaces/projeto';
+import { CategoriesService } from '../_services/categories.service';
 import { EtapasService } from '../_services/etapas.service';
 import { UtilService } from '../_services/util.service';
-import { getAuth } from 'firebase/auth';
-
-
-
-
+import { Estrutura, Etapa, Material, Medida, Passo, Sistema } from '../_interfaces/estrutura';
 
 @Component({
   selector: 'app-novo-projeto',
@@ -22,224 +17,16 @@ import { getAuth } from 'firebase/auth';
 export class NovoProjetoPage implements OnInit {
 
   modelData: any;
+  coeficienteInput: boolean = false;
+  duracaoInput: boolean = false;
   dadosProjeto: Projeto[] = [];
   novoProjeto: string = 'Novo Projeto'
-
-  categories: Category[] = [
-
-    {
-      name: 'Preparacão do terreno',
-      items: [
-        { name: 'Remocao da Vegetacao', values: [{ 'Quantidade': 0 }], selected: false },
-        { name: 'Nivelamento', values: [{ 'Volume': 0 }], selected: false },
-      ],
-    },
-    {
-      name: 'Fundacão',
-      items: [
-        { name: 'Bloco de Concreto', values: [{ 'Volume': 0, 'Quantidade': 0 }], selected: false },
-        { name: 'Radier', values: [{ 'Área': 0, 'Altura': 0 }], selected: false },
-      ],
-    },
-    {
-      name: 'Estruturas',
-      items: [
-        {
-          name: 'Pilar',
-          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0 }], selected: false
-        },
-        {
-          name: 'Viga',
-          values: [{ dimensaoA: 0, dimensaoB: 0, altura: 0, quantity: 0 }], selected: false
-        },
-      ],
-    },
-  ];
-
-  etapas: any[] = [
-    {
-      "descricao": "Preparação",
-      "Processo": [
-        {
-          "atividade": [
-            {
-              "duracao": 1,
-              "ordem": 1,
-              "descricao": "Remoção de árvore",
-              "medidas": [
-                {
-                  "descricao": "Quantidade",
-                  "valor": 0
-                }
-              ],
-              "material": [
-                {
-                  "descricao": "Motoserra",
-                  "grau": 0
-                },
-                {
-                  "grau": 0,
-                  "descricao": "Cordas"
-                },
-                {
-                  "grau": 0,
-                  "descricao": "Guincho"
-                }
-              ],
-              "regra": "A"
-            },
-            {
-              "medidas": [
-                {
-                  "descricao": "Quantidade",
-                  "valor": "0"
-                }
-              ],
-              "descricao": "Remoção de Grama",
-              "material": [
-                {
-                  "descricao": "Enxadas",
-                  "grau": 0
-                },
-                {
-                  "descricao": "Pás",
-                  "grau": 0
-                },
-                {
-                  "grau": 0,
-                  "descricao": "Carrinho de Mão"
-                },
-                {
-                  "descricao": "Cortador de grama",
-                  "grau": 0
-                }
-              ],
-              "ordem": 1,
-              "duracao": 1,
-              "regra": "B"
-            }
-          ],
-          "descricao": "Demolição"
-        },
-        {
-          "atividade": [
-            {
-              "duracao": "3",
-              "ordem": "2",
-              "descricao": "Escavação",
-              "regra": "E",
-              "medidas": [
-                {
-                  "descricao": "Volume",
-                  "valor": "0"
-                }
-              ]
-            },
-            {
-              "ordem": 2,
-              "duracao": 3,
-              "descricao": "Aterro",
-              "medidas": [
-                {
-                  "descricao": "Volume",
-                  "valor": "0"
-                }
-              ]
-            },
-            {
-              "descricao": "Empresa tercerizada",
-              "regra": "C",
-              "ordem": 2,
-              "duracao": 1,
-              "medidas": [
-                {
-                  "descricao": "Volume",
-                  "valor": "0"
-                }
-              ]
-            }
-          ],
-          "descricao": "Nivelamento"
-        }
-      ]
-    },
-    {
-      "Processo": [
-        {
-          "descricao": "Radier",
-          "atividade": [
-            {
-              "regra": "G",
-              "ordem": 3,
-              "duracao": 3,
-              "descricao": "Radier",
-              "medidas": [
-                {
-                  "descricao": "Área",
-                  "valor": "0"
-                },
-                {
-                  "descricao": "Altura",
-                  "valor": "0"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "descricao": "Sapata",
-          "atividade": [
-            {
-              "duracao": 4,
-              "regra": "H",
-              "ordem": 4,
-              "descricao": "Sapata",
-              "medidas": [
-                {
-                  "descricao": "Volume",
-                  "valor": "0"
-                },
-                {
-                  "descricao": "Quantidade",
-                  "valor": "0"
-                },
-                {
-                  "descricao": "Tipo",
-                  "valor": ["Isolada", "Corrida", "Grupo"]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "descricao": "Estacas",
-          "atividade": [
-            {
-              "duracao": 4,
-              "descricao": "Estacas",
-              "regra": "H",
-              "ordem": 3,
-              "medidas": [
-                {
-                  "descricao": "Comprimento",
-                  "valor": "0"
-                },
-                {
-                  "descricao": "Diâmetro",
-                  "valor": "0"
-                },
-                {
-                  "descricao": "Quantidade",
-                  "valor": "0"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "descricao": "Fundação"
-    }
-  ];
+  estruturas: Estrutura[] = [];
+  sistemas: Sistema[] = [];
+  etapas: Etapa[] = [];
+  materiais: Material[] = [];
+  medidas: Medida[] = [];
+  passos: Passo[] = [];
 
   nomeProjeto = ""
 
@@ -248,25 +35,35 @@ export class NovoProjetoPage implements OnInit {
     private projService: ProjetoService,
     private modalController: ModalController,
     private utilService: UtilService,
-    private etapasService: EtapasService) {
-    this.getSelectedItems();
+    private etapasService: EtapasService,
+    private categorieService: CategoriesService) {
+    // this.getSelectedItems();
   }
 
   ngOnInit(): void {
-    this.etapasService.getEtapas().subscribe((data) => {
-      this.modelData = data
-    });
+    this.categorieService.getCategories().subscribe((data) => {
+      data.forEach((doc) => {
+        const estrutura = {
+          descricaoSistema: doc.sistemas[0].descricaoSistema,
+          percentualSistema: doc.sistemas[0].percentualSistema,
+          ordemSistema: doc.sistemas[0].ordemSistema,
+          etapas: doc.sistemas[0].etapas,
+        }
+        this.sistemas.push(estrutura);
+
+      });
+      console.log(this.sistemas)
+    })
+
     this.openModal()
   }
-
-
 
   getMedidaLabel(medida: any): string {
     return `${medida.descricao}`;
   }
 
-  toggleProcess(processo: any) {
-    processo.expanded = !processo.expanded;
+  toggleProcess(etapa: any) {
+    etapa.expanded = !etapa.expanded;
   }
 
   toggleAtividade(atividade: any) {
@@ -275,26 +72,34 @@ export class NovoProjetoPage implements OnInit {
   }
 
   async confirmar() {
-    // Mapeando as etapas, processos e atividades que foram selecionados e preenchidos
-    const result = this.etapas.map(etapa => ({
-      descricao: etapa.descricao,
-      Processo: etapa.Processo.filter((processo: { expanded: any; }) => processo.expanded).map((processo: { descricao: any; atividade: any[]; }) => ({
-        descricao: processo.descricao,
-        atividade: processo.atividade.filter(atividade => atividade.expanded).map(atividade => ({
-          descricao: atividade.descricao,
-          duracao: atividade.duracao,
-          material: atividade.material,
-          ordem: atividade.ordem,
-          regra: atividade.regra,
-          medidas: atividade.medidas.map((medida: { valor: any; }) => ({
-            ...medida,
-            valor: medida.valor || '0'
-          }))
+    // Mapeando as etapas, processos e atividades que foram selecionados e ;
+    const result = this.sistemas.map(sistema => ({
+      descricao: sistema.descricaoSistema,
+      ordemSistema: sistema.ordemSistema,
+      etapas: sistema.etapas.filter((etapa: { expanded: boolean; }) => etapa.expanded).map((etapa: Etapa) => ({
+        descricao: etapa.descricaoEtapa,
+        coeficiente: etapa.coeficiente,
+        duracao: etapa.duracao,
+        ordem: etapa.ordemEtapa,
+        material: etapa.materiais.map(material => ({
+          descricao: material.descricaoMaterial,
+          comprado: material.comprado,
+          grau: material.grau,
+        })),
+        passos: etapa.passos.map(passo => ({
+          descricao: passo.descricaoPasso,
+          ordemPasso: passo.ordemPasso,
+          percentual: passo.percentual || '0'
+        })),
+        medidas: etapa.medidas.map((medida: { valor: any; }) => ({
+          ...medida,
+          valor: medida.valor || '0'
         }))
       }))
-    }));
+    }))
 
-    // Adicionar o ID do usuário ao registro
+
+    //Adicionar o ID do usuário ao registro
     const projeto = {
       etapas: result,
       timestamp: new Date()
@@ -333,12 +138,12 @@ export class NovoProjetoPage implements OnInit {
     return await modal.present();
   }
 
-  getSelectedItems() {
-    const selectedItems = this.categories?.map(category => ({
-      category: category.name,
-      items: category.items,
-    }));
-  }
+  // getSelectedItems() {
+  //   const selectedItems = this.categories?.map(category => ({
+  //     category: category.name,
+  //     items: category.items,
+  //   }));
+  // }
 
 
   voltar() {
@@ -362,13 +167,13 @@ export class NovoProjetoPage implements OnInit {
       status: this.dadosProjeto[0].status
     }
     console.log(dadosProjeto)
-    this.projService.createProject(dadosProjeto).then((docRef) => {
-      const projId = docRef.id;
-      this.atualizaProjeto(projId, docRef);
+    // this.projService.createProject(dadosProjeto).then((docRef) => {
+    //   const projId = docRef.id;
+    //   this.atualizaProjeto(projId, docRef);
 
-    }).catch((error) => {
-      console.error("Erro ao criar projeto: ", error);
-    });
+    // }).catch((error) => {
+    //   console.error("Erro ao criar projeto: ", error);
+    // });
   }
 
   atualizaProjeto(projId: string, docRef: any) {

@@ -87,6 +87,11 @@ const routes: Routes = [
     loadChildren: () => import('./cadastra-categoria/cadastra-categoria.module').then(m => m.CadastraCategoriaPageModule)
   },
 
+  {
+    path: 'cadastracat',
+    loadChildren: () => import('./cadastra-categoria/cadastra-categoria.module').then(m => m.CadastraCategoriaPageModule)
+  }
+
 
 
 

@@ -1,41 +1,165 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>cadastra-categoria</ion-title>
+    <ion-title>Cadastro de Categorias</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-    <div formArrayName="categorias">
-      <div *ngFor="let categoria of categorias.controls; let i = index">
-        <div [formGroupName]="i">
-          <ion-item>
-            <ion-label>Nome da Categoria</ion-label>
-            <ion-input formControlName="nomeCategoria"></ion-input>
-          </ion-item>
+  <form [formGroup]="sistemaForm" (ngSubmit)="submitForm()">
 
-          <!-- Itens -->
-          <div formArrayName="itens">
-            <div *ngFor="let item of getItens(i).controls; let j = index" [formGroupName]="j">
-              <ion-item>
-                <ion-label>Nome do Item</ion-label>
-                <ion-input formControlName="nomeItem"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Quantidade</ion-label>
-                <ion-input type="number" formControlName="quantidade"></ion-input>
-              </ion-item>
-              <!-- Outros campos do item... -->
-            </div>
+
+    <!-- Título e botão para adicionar sistema -->
+    <div class="section-header">
+      <ion-label>Sistema Construtivo</ion-label>
+      <ion-icon name="add-circle" *ngIf="sistMostra" color="primary" (click)="addSistema()" class="icon-add"></ion-icon>
+    </div>
+    <div *ngIf="showFormArrays">
+      <!-- FormArray de Sistemas -->
+      <div formArrayName="sistemas">
+        <div *ngFor="let sistema of sistemas().controls; let sistemaIndex = index" [formGroupName]="sistemaIndex"
+          class="sistema-section">
+
+          <div class="section-header">
+            <ion-label>Sistema {{ sistemaIndex + 1 }}</ion-label>
+            <ion-icon name="trash" color="danger" (click)="removeSistema(sistemaIndex)" class="icon-remove"></ion-icon>
           </div>
 
-          <ion-button (click)="addItem(i)">Adicionar Item</ion-button>
+          <ion-item lines="full">
+            <ion-label position="stacked">Descrição do Sistema</ion-label>
+            <ion-input formControlName="descricaoSistema"></ion-input>
+          </ion-item>
+
+          <ion-item lines="full">
+            <ion-label position="stacked">Percentual do Total</ion-label>
+            <ion-input formControlName="percentualSistema"></ion-input>
+          </ion-item>
+
+          <ion-item lines="full">
+            <ion-label position="stacked">Ordem do Sistema</ion-label>
+            <ion-input formControlName="ordemSistema"></ion-input>
+          </ion-item>
+
+          <!-- FormArray de Etapas -->
+          <div formArrayName="etapas" class="etapa-section">
+            <div class="section-header">
+              <ion-label>Etapas</ion-label>
+              <ion-icon name="add-circle" color="primary" (click)="addEtapa(sistemaIndex)" class="icon-add"></ion-icon>
+            </div>
+
+            <div *ngFor="let etapa of etapas(sistemaIndex).controls; let etapaIndex = index"
+              [formGroupName]="etapaIndex" class="etapa-subsection">
+              <div class="section-header">
+                <ion-label>Etapa {{ etapaIndex + 1 }}</ion-label>
+                <ion-icon name="trash" color="danger" (click)="removeEtapa(sistemaIndex, etapaIndex)"
+                  class="icon-remove"></ion-icon>
+              </div>
+
+              <ion-item lines="full">
+                <ion-label position="stacked">Descrição da Etapa</ion-label>
+                <ion-input formControlName="descricaoEtapa"></ion-input>
+              </ion-item>
+
+              <ion-item lines="full">
+                <ion-label position="stacked">Ordem</ion-label>
+                <ion-input formControlName="ordemEtapa"></ion-input>
+              </ion-item>
+              <ion-item lines="full">
+                <ion-label position="stacked">Coeficiente</ion-label>
+                <ion-input formControlName="coeficiente"></ion-input>
+              </ion-item>
+              <ion-item lines="full">
+                <ion-label position="stacked">Input Coeficiente</ion-label>
+                <ion-input formControlName="coeficienteInput"></ion-input>
+              </ion-item>
+              <ion-item lines="full">
+                <ion-label position="stacked">Input Duracao</ion-label>
+                <ion-input formControlName="duracaoInput"></ion-input>
+              </ion-item>
+
+              <ion-item lines="full">
+                <ion-label position="stacked">Percentual da Etapa</ion-label>
+                <ion-input formControlName="percentualEtapa"></ion-input>
+              </ion-item>
+
+
+              <!-- Medidas -->
+              <div formArrayName="medidas" class="medidas-section">
+                <div class="section-header">
+                  <ion-label>Medidas</ion-label>
+                  <ion-icon name="add-circle" color="primary" (click)="addMedida(sistemaIndex, etapaIndex)"
+                    class="icon-add"></ion-icon>
+                </div>
+                <div *ngFor="let medida of medidas(sistemaIndex, etapaIndex).controls; let medidaIndex = index"
+                  [formGroupName]="medidaIndex">
+                  <ion-item lines="full">
+                    <ion-label position="stacked">Descrição da Medida</ion-label>
+                    <ion-input formControlName="descricaoMedida"></ion-input>
+                  </ion-item>
+                  <ion-item lines="full">
+                    <ion-label position="stacked">Valor</ion-label>
+                    <ion-input formControlName="valor"></ion-input>
+                    <ion-icon name="trash" color="danger" (click)="removeMedida(sistemaIndex, etapaIndex, medidaIndex)"
+                      class="icon-remove"></ion-icon>
+                  </ion-item>
+                </div>
+              </div>
+
+              <!-- Materiais -->
+              <div formArrayName="materiais" class="materiais-section">
+                <div class="section-header">
+                  <ion-label>Materiais</ion-label>
+                  <ion-icon name="add-circle" color="primary" (click)="addMaterial(sistemaIndex, etapaIndex)"
+                    class="icon-add"></ion-icon>
+                </div>
+                <div *ngFor="let material of materiais(sistemaIndex, etapaIndex).controls; let materialIndex = index"
+                  [formGroupName]="materialIndex">
+                  <ion-item lines="full">
+                    <ion-label position="stacked">Descrição do
+                      Material</ion-label>
+                    <ion-input formControlName="descricaoMaterial"></ion-input>
+                  </ion-item>
+                  <ion-item lines="full">
+                    <ion-label position="stacked">Grau</ion-label>
+                    <ion-input formControlName="grau"></ion-input>
+                    <ion-icon name="trash" color="danger"
+                      (click)="removeMaterial(sistemaIndex, etapaIndex, materialIndex)" class="icon-remove"></ion-icon>
+                  </ion-item>
+                </div>
+              </div>
+
+              <!-- Passos -->
+              <div formArrayName="passos" class="materiais-section">
+                <div class="section-header">
+                  <ion-label>Passo a Passo</ion-label>
+                  <ion-icon name="add-circle" color="primary" (click)="addPasso(sistemaIndex, etapaIndex)"
+                    class="icon-add"></ion-icon>
+                </div>
+                <div *ngFor="let passo of passos(sistemaIndex, etapaIndex).controls; let passoIndex = index"
+                  [formGroupName]="passoIndex">
+                  <ion-item lines="full">
+                    <ion-label position="stacked">Descrição dos
+                      Passos</ion-label>
+                    <ion-input formControlName="descricaoPasso"></ion-input>
+                  </ion-item>
+                  <ion-item lines="full">
+                    <ion-label position="stacked">Ordem</ion-label>
+                    <ion-input formControlName="ordemPasso"></ion-input>
+
+                  </ion-item>
+                  <ion-item lines="full">
+                    <ion-label position="stacked">Percentual Passo</ion-label>
+                    <ion-input formControlName="percentualPasso"></ion-input>
+                    <ion-icon name="trash" color="danger" (click)="removePasso(sistemaIndex, etapaIndex, passoIndex)"
+                      class="icon-remove"></ion-icon>
+                  </ion-item>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <ion-button (click)="addCategoria()">Adicionar Categoria</ion-button>
-    <ion-button type="submit">Salvar Projeto</ion-button>
-
+    <ion-button expand="block" type="submit" color="primary">Salvar</ion-button>
   </form>
 </ion-content>
