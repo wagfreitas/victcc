@@ -8,62 +8,49 @@
     <img class="logo" src="../../assets/images/Logo.png" />
 
     <div class="parte-amarela" >
+
       <p class="titulo">TELHAS</p>
-      <p class="p">Peças:</p>
-      <ion-row>
-        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
-          <ion-input label="Largura:" [(ngModel)]="largtelha" [clearOnEdit]="true" type="number"></ion-input>
-        </ion-col>
-        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
-          <ion-select label="" [(ngModel)]="unilargtelha">
-            <ion-select-option>m</ion-select-option>
-            <ion-select-option default >cm</ion-select-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
-          <ion-input label="Comprimento:" [(ngModel)]="comptelha" [clearOnEdit]="true" type="number"></ion-input>
-        </ion-col>
-        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
-          <ion-select label="" [(ngModel)]="unicomptelha">
-            <ion-select-option>m</ion-select-option>
-            <ion-select-option default >cm</ion-select-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
-      <p class="p">Área de cobertura:</p>
+
       <ion-row>
         <ion-col class="caixa" size="8" style="margin-right: 6px;">
-          <ion-input label="Largura:" [(ngModel)]="largcobertura" [clearOnEdit]="true" type="number"></ion-input>
+          <ion-input label="Largura:" [(ngModel)]="largura" [clearOnEdit]="true" type="number"></ion-input>
         </ion-col>
         <ion-col class="caixa" size="2.5" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
-          <ion-select label="" [(ngModel)]="unilargcobertura">
+          <ion-select label="" [(ngModel)]="unilarg">
             <ion-select-option>cm</ion-select-option>
             <ion-select-option default >m</ion-select-option>
           </ion-select>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col class="caixa" size="8" style="margin-right: 6px;">
-          <ion-input label="Comprimento:" [(ngModel)]="compcobertura" [clearOnEdit]="true" type="number"></ion-input>
+          <ion-input label="Comprimento:" [(ngModel)]="comprimento" [clearOnEdit]="true" type="number"></ion-input>
         </ion-col>
         <ion-col class="caixa" size="2.5" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
-          <ion-select label="" [(ngModel)]="unicompcobertura">
+          <ion-select label="" [(ngModel)]="unicomp">
             <ion-select-option>cm</ion-select-option>
             <ion-select-option default >m</ion-select-option>
           </ion-select>
         </ion-col>
       </ion-row>
+
+      <ion-select class="caixa" placeholder="Tipo" [(ngModel)]="tipo" style="padding-left: 20px; padding-right: 20px;">
+        <ion-select-option default >Telha de barro</ion-select-option>
+        <ion-select-option>Telha em CRFS</ion-select-option>
+        <ion-select-option>Telha em fibra vegetal</ion-select-option>
+        <ion-select-option>Telha ondulada translúcida</ion-select-option>
+        <ion-select-option>Telha em poliéster reforçado</ion-select-option>
+        <ion-select-option>Telha de vidro</ion-select-option>
+        <ion-select-option>Telha tipo sanduíche</ion-select-option>
+      </ion-select>
+
+
       <ion-button class="caixa" (click)="calcular()" style="background-color: black; color: white; padding-left: 0px;">
         CALCULAR
       </ion-button>
+
       <div class="caixa" style="color:#FFC71E;">{{resultado}}</div>
-      <ion-button class="duvida" id="duvida">?</ion-button>
-      <ion-alert trigger="duvida"
-      header="Ajuda"
-      message="Não esqueça de colocar a altura e largura de acordo com a posição usada da telha">
-      </ion-alert>
 
     </div>
 

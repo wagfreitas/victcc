@@ -46,12 +46,12 @@ export class CalculadoraPage {
     this.router.navigate(["chapisco"]);
   }
 
-  gesso() {
-    this.router.navigate(["gesso"]);
+  argamassa() {
+    this.router.navigate(["argamassa"]);
   }
 
   revestimentos() {
-    this.router.navigate(["revestimentos"]);
+    this.router.navigate(["revestimento"]);
   }
 
 }

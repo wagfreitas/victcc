@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GessoPageRoutingModule } from './gesso-routing.module';
+import { ArgamassaPageRoutingModule } from './argamassa-routing.module';
 
-import { GessoPage } from './gesso.page';
+import { ArgamassaPage } from './argamassa.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GessoPageRoutingModule
+    ArgamassaPageRoutingModule
   ],
-  declarations: [GessoPage]
+  declarations: [ArgamassaPage]
 })
-export class GessoPageModule {}
+export class ArgamassaPageModule {}

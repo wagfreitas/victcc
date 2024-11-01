@@ -13,11 +13,13 @@ export class TintaPage {
   larg = 0;
   unialt = "m";
   unilarg = "m";
-  tipo = "Acrílica";
-  passadas = 2;
-  rendi = 0;
+  area = 0;
+  tipo = " ";
+  coeficiente = 0;
   quantidade = "Quantidade:";
   resultado = 0;
+  qlatas = "Em latas:";
+  tipolata = " ";
 
   constructor(private router: Router) { }
 
@@ -31,6 +33,13 @@ export class TintaPage {
     this.larg = 0;
     this.unialt = "m";
     this.unilarg = "m";
+    this.area = 0;
+    this.tipo = " ";
+    this.coeficiente = 0;
+    this.quantidade = "Quantidade:";
+    this.resultado = 0;
+    this.qlatas = "Em latas:";
+    this.tipolata = "1L";
   }
 
   calcular() {
@@ -38,13 +47,24 @@ export class TintaPage {
     if (this.unialt === "cm"){this.alt = this.alt / 100}
     if (this.unilarg === "cm"){this.larg = this.larg / 100}
 
-    if (this.tipo === "Acrílica") {this.rendi = 100/3.6}
+    this.area = this.alt * this.larg;
 
-    console.log(this.alt * this.larg, this.passadas, this.rendi)
+    if (this.tipo === "Tinta látex") {this.coeficiente = 0.25}
+    if (this.tipo === "Verniz acrílico (base água)") {this.coeficiente = 0.125}
+    if (this.tipo === "Verniz acrílico (base solvente)") {this.coeficiente = 0.225}
+    if (this.tipo === "Tinta esmalte (base água)") {this.coeficiente = 0.25}
+    if (this.tipo === "Tinta acrílica") {this.coeficiente = 0.25}
+    if (this.tipo === "Epóxi") {this.coeficiente = 0.5}
+    if (this.tipo === "Textura acrílica") {this.coeficiente = 0.72}
 
-    this.resultado = Math.ceil(((this.alt * this.larg)*this.passadas) / this.rendi)
+    this.resultado = this.area * this.coeficiente;
 
-    this.quantidade = "Quantidade: " + String(this.resultado) + " L (" + String(Math.ceil(this.resultado / 3.6)) + " latas)";
+    if (this.resultado <= 1) {this.tipolata = "1L"}
+    if (this.resultado > 1) {this.tipolata = "3.6L"}
+    if (this.resultado > 3.6) {this.tipolata = "18L"}
+
+    this.quantidade = "Quantidade: " + String(this.resultado) + "L";
+    this.qlatas = "Em latas: " + String(Math.ceil(this.resultado / parseFloat(this.tipolata))) + " de " + this.tipolata;
 
     }
 }
