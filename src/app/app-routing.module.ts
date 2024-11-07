@@ -76,7 +76,7 @@ const routes: Routes = [
   },
   {
     path: 'gesso',
-    loadChildren: () => import('./gesso/gesso.module').then(m => m.GessoPageModule)
+    loadChildren: () => import('./argamassa/argamassa.module').then(m => m.ArgamassaPageModule)
   },
   {
     path: 'revestimento',
@@ -85,7 +85,8 @@ const routes: Routes = [
   {
     path: 'cadastracat',
     loadChildren: () => import('./cadastra-categoria/cadastra-categoria.module').then(m => m.CadastraCategoriaPageModule)
-  },  {
+  },
+  {
     path: 'argamassa',
     loadChildren: () => import('./argamassa/argamassa.module').then( m => m.ArgamassaPageModule)
   },

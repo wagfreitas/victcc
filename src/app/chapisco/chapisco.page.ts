@@ -9,20 +9,21 @@ import { Router } from '@angular/router';
 })
 export class ChapiscoPage {
 
+  alt = 0;
+  larg = 0;
+  unialt = "m";
+  unilarg = "m";
   area = 0;
-  espessura = 0;
-  volume = 0;
-  uniarea = "m²";
-  uniesp = "cm";
-  traco = "Chapisco"
-  cimento = "Cimento:";
-  areia = "Areia:";
-  agua = "Água:"
-
-  C = 0;
-  Ar = 0;
-  Ag = 0;
-  total = 0;
+  tipo = " ";
+  Careia = 0;
+  Ccimento = 0;
+  Ccal = 0;
+  areia = 0;
+  cimento = 0;
+  cal = 0;
+  Qareia = "Areia:";
+  Qcimento = "Cimento:";
+  Qcal = "Cal:";
 
   constructor(private router: Router) { }
 
@@ -32,51 +33,49 @@ export class ChapiscoPage {
 
   voltar() {
     this.router.navigate(["calculadora"]);
+    this.alt = 0;
+    this.larg = 0;
+    this.unialt = "m";
+    this.unilarg = "m";
+    this.area = 0;
+    this.tipo = " ";
+    this.Careia = 0;
+    this.Ccimento = 0;
+    this.Ccal = 0;
+    this.areia = 0;
+    this.cimento = 0;
+    this.cal = 0;
+    this.Qareia = "Areia:";
+    this.Qcimento = "Cimento:";
+    this.Qcal = "Cal:";
   }
 
   calcular() {
 
-    let aream = this.convertToM2(this.area, this.uniarea);
-    let espessuram = this.convertToM(this.espessura, this.uniesp);
+    if (this.unialt === "cm"){this.alt = this.alt / 100}
+    if (this.unilarg === "cm"){this.larg = this.larg / 100}
 
-    this.volume = aream * espessuram;
+    this.area = this.alt * this.larg;
 
-    console.log(this.volume);
+    if (this.tipo === "Chapisco") {this.Careia = 13.156}
+    if (this.tipo === "Chapisco") {this.Ccimento = 2.265}
+    if (this.tipo === "Chapisco") {this.Ccal = 0}
+    if (this.tipo === "Emboço") {this.Careia = 64.515}
+    if (this.tipo === "Emboço") {this.Ccimento = 2.28}
+    if (this.tipo === "Emboço") {this.Ccal = 4.54}
+    if (this.tipo === "Reboco") {this.Careia = 10.879}
+    if (this.tipo === "Reboco") {this.Ccimento = 0}
+    if (this.tipo === "Reboco") {this.Ccal = 1.5116}
 
-    if (this.traco === "Chapisco") {this.C = 1, this.Ar = 3, this.Ag = 1}
-    if (this.traco === "Reboco") {this.C = 1, this.Ar = 6, this.Ag = 1}
+    this.areia = Math.ceil(this.area * this.Careia);
+    this.cimento = Math.ceil(this.area * this.Ccimento);
+    this.cal = Math.ceil(this.area * this.Ccal);
 
-    this.total = this.C + this.Ar + this.Ag
+    this.Qareia = "Areia: " + String(this.areia) + "kg";
+    this.Qcimento = "Cimento: " + String(this.cimento) + "kg";
+    this.Qcal = "Cal: " + String(this.cal) + "kg";
 
-    this.C = this.C / this.total;
-    this.Ar = this.Ar / this.total;
-    this.Ag = this.Ag / this.total;
+    console.log(this.Careia, this.Ccimento, this.Ccal);
 
-    this.cimento = "Cimento: " + String((this.volume * this.C)) + " kg (" + String(Math.ceil(this.volume * this.C / 50)) + " sacos)";
-    this.areia = "Areia: " + String((this.volume * this.Ar)) + " kg";
-    this.agua = "Água: " + String((this.volume * this.Ag)) + " L"
-
-    }
-
-    convertToM(value: number, unit: string): number {
-      switch (unit) {
-        case 'cm':
-          return value / 100;
-        case 'm':
-          return value;
-        default:
-          return value;
-      }
-    }
-
-    convertToM2(value: number, unit: string): number {
-      switch (unit) {
-        case 'cm2':
-          return value / 10000;
-        case 'm2':
-          return value;
-        default:
-          return value;
-      }
     }
 }

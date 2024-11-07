@@ -8,46 +8,46 @@
     <img class="logo" src="../../assets/images/Logo.png" />
 
     <div class="parte-amarela" >
-      <p class="titulo">CHAPISCO E REBOCO</p>
+
+      <p class="titulo">CHAPISCO <br> E REBOCO </p>
+
       <ion-row>
-        <ion-col class="caixa" size="7" style="margin-right: 6px;">
-          <ion-input label="Área: " [(ngModel)]="area" [clearOnEdit]="true" type="number"></ion-input>
+        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
+          <ion-input label="Altura:" [(ngModel)]="alt" [clearOnEdit]="true" type="number"></ion-input>
         </ion-col>
-        <ion-col class="caixa" style="text-align: right; padding-left: 10px; padding-right: 20px; margin-left: 6px;">
-          <ion-select label="" [(ngModel)]="uniarea">
-            <ion-select-option>cm²</ion-select-option>
-            <ion-select-option>m²</ion-select-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="caixa" size="7" style="margin-right: 6px;">
-          <ion-input label="Espessura: " [(ngModel)]="espessura" [clearOnEdit]="true" type="number"></ion-input>
-        </ion-col>
-        <ion-col class="caixa" style="text-align: right; padding-left: 10px; padding-right: 20px; margin-left: 6px;">
-          <ion-select label="" [(ngModel)]="uniesp">
+        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unialt">
+            <ion-select-option default >m</ion-select-option>
             <ion-select-option>cm</ion-select-option>
-            <ion-select-option>m</ion-select-option>
           </ion-select>
         </ion-col>
       </ion-row>
-      <ion-select class="caixa" label="Tipo" [(ngModel)]="traco" style="padding-left: 20px; padding-right: 20px;">
-        <ion-select-option>Chapisco</ion-select-option>
+
+      <ion-row>
+        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
+          <ion-input label="Largura:" [(ngModel)]="larg" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unilarg">
+            <ion-select-option default >m</ion-select-option>
+            <ion-select-option>cm</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-select class="caixa" placeholder="Tipo" [(ngModel)]="tipo" style="padding-left: 20px; padding-right: 20px;">
+        <ion-select-option default >Chapisco</ion-select-option>
+        <ion-select-option>Emboço</ion-select-option>
         <ion-select-option>Reboco</ion-select-option>
       </ion-select>
+
       <ion-button class="caixa" (click)="calcular()" style="background-color: black; color: white; padding-left: 0px;">
         CALCULAR
       </ion-button>
-      <div class="caixa" style="color:#FFC71E;">{{cimento}}</div>
-      <div class="caixa" style="color:#FFC71E;">{{areia}}</div>
-      <div class="caixa" style="color:#FFC71E;">{{agua}}</div>
-      <ion-button class="duvida" id="duvida">?</ion-button>
-      <ion-alert trigger="duvida"
-      header="Traços de Concreto"
-      sub-header="Especificações de diferentes traços"
-      message="
-      - Obras de responsabilidades: 40 MPa - Obras ordinárias: 25 MPa - Pavimentos: 30 MPa                        - Fundação: 20 MPa ">
-      </ion-alert>
+
+      <div class="caixa" style="color:#FFC71E;">{{Qareia}}</div>
+      <div class="caixa" style="color:#FFC71E;">{{Qcimento}}</div>
+      <div class="caixa" style="color:#FFC71E;">{{Qcal}}</div>
 
     </div>
 
