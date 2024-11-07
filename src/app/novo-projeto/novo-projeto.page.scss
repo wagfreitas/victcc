@@ -112,13 +112,23 @@ body {
   }
 
 .medida-container {
-  margin-left: 50px;
+  margin-left: 45px;
   /* Ajusta a indentação das medidas */
 }
 
-ion-input {
+ion-label {
   --background: transparent !important;
+  padding: 20px;
 }
+
+ ion-input {
+   border: 2px solid transparent;
+   --padding-start: 10px;
+   border-radius: 0.5rem;
+   margin-bottom: 10px;
+   background-color: #E5E5E5;
+   transition: border-color .3s cubic-bezier(.25, .01, .25, 1) 0s, color .3s cubic-bezier(.25, .01, .25, 1) 0s, background .2s cubic-bezier(.25, .01, .25, 1) 0s;
+ }
 
 
 .p {

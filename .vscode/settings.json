@@ -23,5 +23,6 @@
     "**/.idea": true,
     "**/.metadata": true,
     ".mule": true
-  }
+  },
+  "cSpell.enabled": false
 }

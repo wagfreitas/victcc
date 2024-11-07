@@ -9,39 +9,45 @@
 
 
   <ion-accordion-group class="caixa" expand="inset">
-    <ion-accordion *ngFor="let etapa of etapas">
+    <ion-accordion *ngFor="let sistema of sistemas">
       <!-- Header da etapa -->
       <ion-item slot="header" color="light" class="caixa1">
-        <ion-label> {{ etapa.descricao }} </ion-label>
+        <ion-label>{{sistema.descricaoSistema}} </ion-label>
       </ion-item>
 
       <!-- Conteúdo da etapa -->
       <div class="ion-padding" slot="content">
-        <ion-list *ngFor="let processo of etapa.Processo">
-          <ion-item (click)="toggleProcess(processo)">
-            <ion-icon [name]="processo.expanded ? 'remove-circle' : 'add-circle'" slot="start"></ion-icon>
-            <ion-label>{{ processo.descricao }}</ion-label>
+        <ion-list *ngFor="let etapa of sistema.etapas">
+          <ion-item (click)="toggleProcess(etapa)">
+            <ion-icon [name]="etapa.expanded ? 'remove-circle' : 'add-circle'" slot="start"></ion-icon>
+            <ion-label>{{ etapa.descricaoEtapa }}</ion-label>
           </ion-item>
+          <div *ngIf="etapa.expanded">
+            <ion-item class="medida-container">
+              <ion-label *ngIf="etapa.coeficienteInput === 'S'">Coeficiente:
+                <ion-input type="text" [(ngModel)]="etapa.coeficiente"></ion-input>
+              </ion-label>
 
-          <!-- Mostrar atividades se o processo estiver selecionado -->
-          <div *ngIf="processo.expanded" class=" atividade-container">
-            <ion-list *ngFor="let atividade of processo.atividade" class="atividade-item">
-              <ion-item (click)="toggleAtividade(atividade)">
-                <ion-icon [name]="atividade.expanded ? 'remove-circle' : 'add-circle'" slot="start"></ion-icon>
-                <ion-label>{{ atividade.descricao }}</ion-label>
-              </ion-item>
-
-              <!-- Mostrar medidas se a atividade estiver selecionada -->
-              <div *ngIf="atividade.expanded">
-                <div *ngFor="let medida of atividade.medidas">
-                  <ion-item class="medida-container">
-                    <ion-label>{{ getMedidaLabel(medida) }}: </ion-label>
-                    <ion-input type="text" [(ngModel)]="medida.valor"></ion-input>
-                  </ion-item>
-                </div>
-              </div>
-            </ion-list>
+              <ion-label *ngIf="etapa.duracaoInput === 'S'">Duração:
+                <ion-input type="text" [(ngModel)]="etapa.duracao"></ion-input>
+              </ion-label>
+            </ion-item>
           </div>
+
+          <div *ngIf="etapa.expanded">
+            <ion-item-divider class="medida-container">
+              <ion-label>Medidas</ion-label>
+            </ion-item-divider>
+
+            <div *ngFor="let medida of etapa.medidas">
+              <ion-item class="medida-container">
+                <ion-label>{{ medida.descricaoMedida }}: </ion-label>
+                <ion-input type="text" [(ngModel)]="medida.valor"></ion-input>
+              </ion-item>
+            </div>
+          </div>
+
+
         </ion-list>
       </div>
     </ion-accordion>

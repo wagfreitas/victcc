@@ -1,0 +1,43 @@
+/* Espaçamento entre as seções principais */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 10px 0;
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.sistema-section,
+.etapa-section,
+.medidas-section,
+.materiais-section {
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+}
+
+/* Subdivisões de etapas para uma melhor organização */
+.etapa-subsection {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+/* Espaçamento nos ícones de adição e remoção */
+.icon-add,
+.icon-remove {
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Alinha os ícones no final dos itens */
+.icon-remove {
+  margin-left: auto;
+}

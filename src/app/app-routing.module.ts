@@ -88,9 +88,16 @@ const routes: Routes = [
   },
   {
     path: 'argamassa',
-    loadChildren: () => import('./argamassa/argamassa.module').then( m => m.ArgamassaPageModule)
+    loadChildren: () => import('./argamassa/argamassa.module').then(m => m.ArgamassaPageModule)
   },
 
+<<<<<<< HEAD
+=======
+  {
+    path: 'cadastracat',
+    loadChildren: () => import('./cadastra-categoria/cadastra-categoria.module').then(m => m.CadastraCategoriaPageModule)
+  }
+>>>>>>> 96a876b366280574769bb742d1540cda05601517
 
 
 
