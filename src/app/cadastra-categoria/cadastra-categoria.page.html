@@ -1,13 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Cadastro de Categorias</ion-title>
+    <ion-title>Cadastro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Selecionar Categoria</ion-label>
+    <ion-select (ionChange)="onCategorySelected($event)">
+      <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">
+        {{ categoria.sistemas[0].descricaoSistema }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
   <form [formGroup]="sistemaForm" (ngSubmit)="submitForm()">
-
-
     <!-- Título e botão para adicionar sistema -->
     <div class="section-header">
       <ion-label>Sistema Construtivo</ion-label>

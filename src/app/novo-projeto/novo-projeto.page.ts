@@ -166,14 +166,14 @@ export class NovoProjetoPage implements OnInit {
       tipoServico: data,
       status: this.dadosProjeto[0].status
     }
-    console.log(dadosProjeto)
-    // this.projService.createProject(dadosProjeto).then((docRef) => {
-    //   const projId = docRef.id;
-    //   this.atualizaProjeto(projId, docRef);
 
-    // }).catch((error) => {
-    //   console.error("Erro ao criar projeto: ", error);
-    // });
+    this.projService.createProject(dadosProjeto).then((docRef) => {
+      const projId = docRef.id;
+      this.atualizaProjeto(projId, docRef);
+
+    }).catch((error) => {
+      console.error("Erro ao criar projeto: ", error);
+    });
   }
 
   atualizaProjeto(projId: string, docRef: any) {

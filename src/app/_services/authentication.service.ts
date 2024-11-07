@@ -28,7 +28,7 @@ export class AuthenticationService {
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user') || '{}');
       } else {
-        localStorage.setItem('user', null || '{}');
+        localStorage.setItem('user', '{}');
         JSON.parse(localStorage.getItem('user') || '{}');
       }
     });

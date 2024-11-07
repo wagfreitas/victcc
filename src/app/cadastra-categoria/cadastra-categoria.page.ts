@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { CategoriesService } from '../_services/categories.service';
+import { Estrutura, Sistema } from '../_interfaces/estrutura';
 
 
 @Component({
@@ -11,15 +12,95 @@ import { CategoriesService } from '../_services/categories.service';
 export class CadastraCategoriaPage implements OnInit {
   sistemaForm!: FormGroup;
   sistMostra: boolean = true;
+  categorias: Estrutura[] = [];
+  selectCategoria: { idSistema: string, descricaoSistema: string }[] = [];
   showFormArrays: boolean = true;
+  isEdit: boolean = false;
+  idSelected: string = '';
 
   constructor(
     private fb: FormBuilder,
-    private categoriesService: CategoriesService) { }
-
-  ngOnInit() {
+    private categoriesService: CategoriesService) {
     this.sistemaForm = this.fb.group({
       sistemas: this.fb.array([])  // FormArray para sistemas
+    });
+  }
+
+  ngOnInit() {
+    this.categoriesService.getCategories().subscribe((data) => {
+      this.categorias = data
+      this.selectCategoria = this.categorias.map((cat) => {
+        console.log(cat.sistemas)
+        return { idSistema: cat.idSistema, descricaoSistema: cat.sistemas[0].descricaoSistema }
+      }
+      )
+    })
+  }
+
+  onCategorySelected(event: any) {
+    const categoria = event.detail.value;
+    this.idSelected = categoria.id;
+
+    if (categoria) {
+      this.isEdit = true;
+      this.sistemaForm.reset();
+      const categoriaData = this.categorias.find((cat) => cat.idSistema === categoria.id);
+      this.loadCategoriaData(categoria);
+    }
+  }
+
+  loadCategoriaData(categoria: any) {
+    const sistemasArray = this.sistemaForm.get('sistemas') as FormArray;
+    sistemasArray.clear();
+
+    categoria.sistemas.forEach((sistema: any) => {
+      const sistemaForm = this.fb.group({
+        descricaoSistema: [sistema.descricaoSistema],
+        percentualSistema: [sistema.percentualSistema],
+        ordemSistema: [sistema.ordemSistema],
+        etapas: this.fb.array([])
+      });
+
+      sistema.etapas.forEach((etapa: any) => {
+        const etapaForm = this.fb.group({
+          descricaoEtapa: [etapa.descricaoEtapa],
+          ordemEtapa: [etapa.ordemEtapa],
+          coeficiente: [etapa.coeficiente],
+          coeficienteInput: [etapa.coeficienteInput],
+          duracaoInput: [etapa.duracaoInput],
+          percentualEtapa: [etapa.percentualEtapa],
+          medidas: this.fb.array([]),
+          materiais: this.fb.array([]),
+          passos: this.fb.array([])
+        });
+
+        // Preenchendo medidas, materiais e passos
+        etapa.medidas.forEach((medida: any) => {
+          (etapaForm.get('medidas') as FormArray).push(this.fb.group({
+            descricaoMedida: [medida.descricaoMedida],
+            valor: [medida.valor]
+          }));
+        });
+
+        etapa.materiais.forEach((material: any) => {
+          (etapaForm.get('materiais') as FormArray).push(this.fb.group({
+            descricaoMaterial: [material.descricaoMaterial],
+            grau: [material.grau]
+          }));
+        });
+
+        etapa.passos.forEach((passo: any) => {
+          (etapaForm.get('passos') as FormArray).push(this.fb.group({
+            descricaoPasso: [passo.descricaoPasso],
+            ordemPasso: [passo.ordemPasso],
+            percentualPasso: [passo.percentualPasso]
+          }));
+        });
+
+        (sistemaForm.get('etapas') as FormArray).push(etapaForm);
+      });
+
+      sistemasArray.push(sistemaForm);
     });
   }
 
@@ -145,15 +226,27 @@ export class CadastraCategoriaPage implements OnInit {
   submitForm() {
     let data = this.sistemaForm.value
     console.log(data.sistemas)
-    this.categoriesService.createCategory(data).then((docRef) => {
-      if (docRef) {
+
+    if (this.isEdit) {
+      console.log("Atualizando projeto")
+      this.categoriesService.updateCategory(this.idSelected, data).then((docRef) => {
         this.sistemaForm.reset();
         this.sistMostra = true;
         this.hideAllFormArrays();
-      }
-    }).catch((error) => {
-      console.error("Erro ao criar projeto: ", error);
-    });
+      }).catch((error) => {
+        console.error("Erro ao atualizar projeto: ", error);
+      })
+    } else {
+      this.categoriesService.createCategory(data).then((docRef) => {
+        if (docRef) {
+          this.sistemaForm.reset();
+          this.sistMostra = true;
+          this.hideAllFormArrays();
+        }
+      }).catch((error) => {
+        console.error("Erro ao criar projeto: ", error);
+      });
+    }
   }
 
   hideAllFormArrays() {

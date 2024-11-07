@@ -22,17 +22,23 @@
             <ion-icon [name]="etapa.expanded ? 'remove-circle' : 'add-circle'" slot="start"></ion-icon>
             <ion-label>{{ etapa.descricaoEtapa }}</ion-label>
           </ion-item>
+          <div *ngIf="etapa.expanded">
+            <ion-item class="medida-container">
+              <ion-label *ngIf="etapa.coeficienteInput === 'S'">Coeficiente:
+                <ion-input type="text" [(ngModel)]="etapa.coeficiente"></ion-input>
+              </ion-label>
 
-          <ion-item class="medida-container" *ngIf="etapa.coeficienteInput === 'S'">
-            <ion-label>{{ etapa.coeficiente }}: </ion-label>
-            <ion-input type="text" [(ngModel)]="etapa.coeficiente"></ion-input>
-          </ion-item>
-          <ion-item class="medida-container" *ngIf="etapa.duracaoInput === 'S'">
-            <ion-label>{{ etapa.duracao }}: </ion-label>
-            <ion-input type="text" [(ngModel)]="etapa.duracao"></ion-input>
-          </ion-item>
+              <ion-label *ngIf="etapa.duracaoInput === 'S'">Duração:
+                <ion-input type="text" [(ngModel)]="etapa.duracao"></ion-input>
+              </ion-label>
+            </ion-item>
+          </div>
 
           <div *ngIf="etapa.expanded">
+            <ion-item-divider class="medida-container">
+              <ion-label>Medidas</ion-label>
+            </ion-item-divider>
+
             <div *ngFor="let medida of etapa.medidas">
               <ion-item class="medida-container">
                 <ion-label>{{ medida.descricaoMedida }}: </ion-label>

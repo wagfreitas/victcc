@@ -56,7 +56,7 @@ export class ProjetoService {
   async getUserLogged() {
     const user = await this.afAuth.currentUser;
     if (user) {
-      console.log(user.displayName)
+      console.log(user)
       return user
     } else {
       return null

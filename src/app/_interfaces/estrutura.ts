@@ -1,7 +1,7 @@
 import { PreloadAllModules } from '@angular/router';
 export interface Estrutura {
   idSistema: string,
-  sistema: Sistema[]
+  sistemas: Sistema[]
 }
 
 export interface Sistema {

@@ -28,6 +28,7 @@ export class CategoriesService {
   }
 
   public updateCategory(id: string, data: any) {
+    console.log(id, data)
     return this.db.collection('categorias').doc(id).update(data);
   }
 
