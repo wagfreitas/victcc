@@ -1,13 +1,57 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>argamassa</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">argamassa</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="fundo">
+
+    <button class="botao-seta"
+      (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+
+    <div class="parte-amarela" >
+
+      <p class="titulo">ARGAMASSA <br> E REJUNTE </p>
+
+      <ion-row>
+        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
+          <ion-input label="Largura:" [(ngModel)]="alt" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unialt">
+            <ion-select-option default >m</ion-select-option>
+            <ion-select-option>cm</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="caixa" size="7.5" style="margin-right: 6px;">
+          <ion-input label="Comprimento:" [(ngModel)]="larg" [clearOnEdit]="true" type="number"></ion-input>
+        </ion-col>
+        <ion-col class="caixa" size="3" style="padding: 0px; padding-right: 10px; align-content: center; margin-left: 6px;">
+          <ion-select label="" [(ngModel)]="unilarg">
+            <ion-select-option default >m</ion-select-option>
+            <ion-select-option>cm</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-select class="caixa" placeholder="Tipo" [(ngModel)]="tipo" style="padding-left: 20px; padding-right: 20px;">
+        <ion-select-option default >Placa cerâmica <br> (Junta de 3 a 5 mm)</ion-select-option>
+        <ion-select-option>Placa cerâmica <br> (Junta de 5 a 10 mm)"</ion-select-option>
+        <ion-select-option>Porcelanato</ion-select-option>
+        <ion-select-option>Ladrilho hidráulico <br> (Espessura de 2.5 cm)"</ion-select-option>
+        <ion-select-option>Ladrilho hidráulico <br> (Espessura de 1.8 cm)"</ion-select-option>
+      </ion-select>
+
+      <ion-button class="caixa" (click)="calcular()" style="background-color: black; color: white; padding-left: 0px;">
+        CALCULAR
+      </ion-button>
+
+      <div class="caixa" style="color:#FFC71E;">{{quantiarg}}</div>
+      <div class="caixa" style="color:#FFC71E;">{{quantirej}}</div>
+
+    </div>
+
+  </div>
 </ion-content>
+
