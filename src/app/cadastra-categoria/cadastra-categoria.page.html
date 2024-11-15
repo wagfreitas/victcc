@@ -102,6 +102,10 @@
                     <ion-input formControlName="descricaoMedida"></ion-input>
                   </ion-item>
                   <ion-item lines="full">
+                    <ion-label position="stacked">Unidade</ion-label>
+                    <ion-input formControlName="unidade"></ion-input>
+                  </ion-item>
+                  <ion-item lines="full">
                     <ion-label position="stacked">Valor</ion-label>
                     <ion-input formControlName="valor"></ion-input>
                     <ion-icon name="trash" color="danger" (click)="removeMedida(sistemaIndex, etapaIndex, medidaIndex)"
@@ -125,8 +129,8 @@
                     <ion-input formControlName="descricaoMaterial"></ion-input>
                   </ion-item>
                   <ion-item lines="full">
-                    <ion-label position="stacked">Grau</ion-label>
-                    <ion-input formControlName="grau"></ion-input>
+                    <ion-label position="stacked">Coeficiente</ion-label>
+                    <ion-input formControlName="coeficiente"></ion-input>
                     <ion-icon name="trash" color="danger"
                       (click)="removeMaterial(sistemaIndex, etapaIndex, materialIndex)" class="icon-remove"></ion-icon>
                   </ion-item>

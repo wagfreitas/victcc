@@ -1,4 +1,3 @@
-import { Category } from './../_interfaces/category';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjetoService } from '../_services/projeto.service';
@@ -22,6 +21,7 @@ export class ProjetosPage implements OnInit {
 
   async ngOnInit() {
     this.projects$.subscribe((projetos: any[]) => {
+      console.log(projetos)
       projetos.forEach(projeto => {
         let resul = {
           nomeProjeto: projeto.nomeProjeto,
@@ -33,10 +33,7 @@ export class ProjetosPage implements OnInit {
           complemento: projeto.complemento,
           cep: projeto.cep,
           dataInicio: projeto.dataInicio,
-          dataFim: projeto.dataFim,
-          tipoServico: projeto.tipoServico,
-
-          Category: projeto.Category,
+          sistemas: projeto.sistemas,
         }
         this.projetos.push(resul)
       })

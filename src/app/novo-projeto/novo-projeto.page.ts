@@ -52,7 +52,7 @@ export class NovoProjetoPage implements OnInit {
         this.sistemas.push(estrutura);
 
       });
-      console.log(this.sistemas)
+
     })
 
     this.openModal()
@@ -68,50 +68,39 @@ export class NovoProjetoPage implements OnInit {
 
   toggleAtividade(atividade: any) {
     atividade.expanded = !atividade.expanded;
-
   }
 
-  async confirmar() {
-    // Mapeando as etapas, processos e atividades que foram selecionados e ;
-    const result = this.sistemas.map(sistema => ({
-      descricao: sistema.descricaoSistema,
-      ordemSistema: sistema.ordemSistema,
-      etapas: sistema.etapas.filter((etapa: { expanded: boolean; }) => etapa.expanded).map((etapa: Etapa) => ({
-        descricao: etapa.descricaoEtapa,
-        coeficiente: etapa.coeficiente,
-        duracao: etapa.duracao,
-        ordem: etapa.ordemEtapa,
-        material: etapa.materiais.map(material => ({
-          descricao: material.descricaoMaterial,
-          comprado: material.comprado,
-          grau: material.grau,
-        })),
-        passos: etapa.passos.map(passo => ({
-          descricao: passo.descricaoPasso,
-          ordemPasso: passo.ordemPasso,
-          percentual: passo.percentual || '0'
-        })),
-        medidas: etapa.medidas.map((medida: { valor: any; }) => ({
-          ...medida,
-          valor: medida.valor || '0'
-        }))
-      }))
-    }))
+  gravarDadosFiltrados() {
+    const dadosParaGravar = this.sistemas.map(sistema => {
+      return {
+        descricaoSistema: sistema.descricaoSistema,
+        ordemSistema: sistema.ordemSistema,
+        etapas: sistema.etapas.map(etapa => {
+          return {
+            descricaoEtapa: etapa.descricaoEtapa,
+            coeficiente: etapa.coeficiente,
+            duracao: etapa.duracao,
+            ordem: etapa.ordemEtapa,
+            materiais: etapa.materiais.map(material => ({
+              descricaoMaterial: material.descricaoMaterial,
+              comprado: material.comprado,
+              coeficiente: material.coeficiente,
+            })),
+            passos: etapa.passos.map(passo => ({
+              descricaoPasso: passo.descricaoPasso,
+              ordemPasso: passo.ordemPasso,
+              percentual: passo.percentual || '0'
+            })),
+            medidas: etapa.medidas.filter(medida => parseInt(medida.valor) > 0)
+          };
+        }).filter(etapa => etapa.medidas.length > 0)
+      };
+    }).filter(sistema => sistema.etapas.length > 0);
 
-
-    //Adicionar o ID do usuário ao registro
-    const projeto = {
-      etapas: result,
-      timestamp: new Date()
-    };
-
-    const cleanedProjeto = this.projService.removeUndefinedFields(projeto);
-
+    const cleanedProjeto = this.projService.removeUndefinedFields(dadosParaGravar);
     // Salvando no Firestore
     this.saveToFirestore(cleanedProjeto);
-
   }
-
 
   objectKeys(item: any) {
     return Object.keys(item.values[0]);
@@ -138,18 +127,6 @@ export class NovoProjetoPage implements OnInit {
     return await modal.present();
   }
 
-  // getSelectedItems() {
-  //   const selectedItems = this.categories?.map(category => ({
-  //     category: category.name,
-  //     items: category.items,
-  //   }));
-  // }
-
-
-  voltar() {
-    this.router.navigate(["inicial"]);
-  }
-
   saveToFirestore(result: any) {
     let data = { projeto: result };
     console.log(data)
@@ -163,9 +140,11 @@ export class NovoProjetoPage implements OnInit {
       dataInicio: this.dadosProjeto[0].dataInicio,
       dataFim: this.dadosProjeto[0].dataFim,
       userId: this.dadosProjeto[0].userId,
-      tipoServico: data,
-      status: this.dadosProjeto[0].status
+      status: this.dadosProjeto[0].status,
+      sistemas: data.projeto
     }
+
+    console.log(dadosProjeto)
 
     this.projService.createProject(dadosProjeto).then((docRef) => {
       const projId = docRef.id;
@@ -183,6 +162,10 @@ export class NovoProjetoPage implements OnInit {
     }).catch((error: any) => {
       console.error("Erro ao atualizar projeto: ", error);
     });
+  }
+
+  voltar() {
+    this.router.navigate(["inicial"]);
   }
 
 

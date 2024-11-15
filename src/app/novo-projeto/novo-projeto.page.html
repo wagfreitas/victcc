@@ -23,7 +23,7 @@
             <ion-label>{{ etapa.descricaoEtapa }}</ion-label>
           </ion-item>
           <div *ngIf="etapa.expanded">
-            <ion-item class="medida-container">
+            <ion-item class="medida-container" *ngIf="etapa.coeficienteInput === 'S' || etapa.duracaoInput=== 'S'">
               <ion-label *ngIf="etapa.coeficienteInput === 'S'">Coeficiente:
                 <ion-input type="text" [(ngModel)]="etapa.coeficiente"></ion-input>
               </ion-label>
@@ -34,7 +34,7 @@
             </ion-item>
           </div>
 
-          <div *ngIf="etapa.expanded">
+          <div *ngIf="etapa.expanded && etapa.medidas.length > 0">
             <ion-item-divider class="medida-container">
               <ion-label>Medidas</ion-label>
             </ion-item-divider>
@@ -55,6 +55,6 @@
 
 
   <ion-footer>
-    <ion-button expand="full" class="botao-finalizar" (click)="confirmar()">Confirmar</ion-button>
+    <ion-button expand="full" class="botao-finalizar" (click)="gravarDadosFiltrados()">Confirmar</ion-button>
   </ion-footer>
 </ion-content>

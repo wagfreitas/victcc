@@ -1,4 +1,3 @@
-import { PreloadAllModules } from '@angular/router';
 export interface Estrutura {
   idSistema: string,
   sistemas: Sistema[]
@@ -27,12 +26,13 @@ export interface Etapa {
 
 export interface Medida {
   descricaoMedida: string,
-  valor: string
+  valor: string,
+  unidade: string
 }
 
 export interface Material {
   descricaoMaterial: string,
-  grau: number,
+  coeficiente: number,
   comprado: boolean
 }
 
