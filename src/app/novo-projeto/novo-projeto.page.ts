@@ -169,12 +169,9 @@ export class NovoProjetoPage implements OnInit {
     });
   }
 
-<<<<<<< HEAD
-=======
   voltar() {
     this.router.navigate(["inicial"]);
   }
 
 
->>>>>>> 1a5cb74c60440e8dfd493e7c5b66daca7421bf5a
 }
