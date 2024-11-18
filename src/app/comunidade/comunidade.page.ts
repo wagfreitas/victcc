@@ -1,15 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-comunidade',
   templateUrl: './comunidade.page.html',
   styleUrls: ['./comunidade.page.scss'],
 })
-export class ComunidadePage implements OnInit {
+export class ComunidadePage {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
+  voltar() {
+    this.router.navigate(["inicial"]);
+  }
+
+  prestadores() {
+    this.router.navigate(["prestador"]);
+  }
+
+  buscar() {
+    this.router.navigate(["busca"]);
   }
 
 }

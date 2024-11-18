@@ -1,13 +1,23 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>comunidade</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" style="background-color: #41f08f;">
+  <div class="verde">
+  <div class="branco">
+    <button class="botao-seta" (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+    <h1 class="titulo">Comunidade</h1>
+    <p class="texto">O que você está prourando?</p>
+    <img class="imagem" src="../../assets/images/comunidade.png">
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">comunidade</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <button class="botao" style="background-color: white; font-weight: bold;" (click)="buscar()">
+    Buscar profissionais
+  </button>
+
+  <button class="botao" style="background-color: black; color: white;" (click)="prestadores()">
+    Cadastrar meus serviços
+  </button>
+
+  </div>
+
 </ion-content>

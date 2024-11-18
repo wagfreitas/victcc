@@ -92,30 +92,14 @@ body {
   color: white;
 }
 
-.etapa-header {
-  font-weight: bold;
-}
-
 .processo-item {
   margin-left: 10px;
   /* Ajusta a indentação dos processos */
 }
 
-.atividade-container ion-icon {
-    margin-right: 10px;
-    margin-left: 30px;
-    color: gray;
-    /* Cor cinza para o ícone da atividade */
-  }
-
-.medida-container {
-  margin-left: 45px;
-  /* Ajusta a indentação das medidas */
-}
-
 ion-label {
   --background: transparent !important;
-  padding: 20px;
+  padding: 10px;
 }
 
  ion-input {
@@ -123,7 +107,8 @@ ion-label {
    --padding-start: 10px;
    border-radius: 0.5rem;
    margin-bottom: 10px;
-   background-color: #E5E5E5;
+   margin-top: 10px;
+   background-color: #e2e2e2;
    transition: border-color .3s cubic-bezier(.25, .01, .25, 1) 0s, color .3s cubic-bezier(.25, .01, .25, 1) 0s, background .2s cubic-bezier(.25, .01, .25, 1) 0s;
  }
 

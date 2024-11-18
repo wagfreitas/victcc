@@ -128,7 +128,6 @@ export class NovoProjetoPage implements OnInit {
       }
     });
 
-
     return await modal.present();
   }
 

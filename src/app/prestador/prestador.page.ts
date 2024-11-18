@@ -12,6 +12,7 @@ export class PrestadorPage {
   constructor(private router: Router) { }
 
   voltar() {
-    this.router.navigate(["inicial"]);
+    this.router.navigate(["comunidade"]);
   }
+
 }

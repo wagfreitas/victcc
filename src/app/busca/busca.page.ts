@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './busca.page.html',
   styleUrls: ['./busca.page.scss'],
 })
-export class BuscaPage {
+export class BuscaPage implements OnInit {
 
   public results: string[] = [];
 
@@ -22,9 +22,14 @@ export class BuscaPage {
     'Gesseiro',
     'Telhadista',
     'Engenheiro'
-  ]
+  ];
 
   constructor(private router: Router) { }
+
+  ngOnInit() {
+
+    this.results = [...this.data];
+  }
 
   voltar() {
     this.router.navigate(["inicial"]);
