@@ -2,26 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../_services/data-service.service';
 import { ProjetoService } from '../_services/projeto.service';
+import { Sistema, Material, Etapa } from '../_interfaces/estrutura';
 
-interface Material {
-  descricao: string;
-  grau: number;
-}
 
-interface Atividade {
-  descricao: string;
-  material: Material[];
-}
 
-interface Processo {
-  descricao: string;
-  atividade: Atividade[];
-}
 
-interface Etapa {
-  descricao: string;
-  Processo: Processo[];
-}
 
 @Component({
   selector: 'app-compras',
@@ -31,7 +16,7 @@ interface Etapa {
 export class ComprasPage {
 
   projeto = this.dataService.getData();
-  etapas: Etapa[] = [];
+  sistemas: Sistema[] = [];
   segment: string = 'faltante'; //
 
   abaselecionada = 'faltante';
@@ -41,14 +26,13 @@ export class ComprasPage {
     private dataService: DataServiceService,
     private projetoService: ProjetoService
   ) {
-    console.log(this.projeto)
-    this.etapas = this.projeto.tipoServico.projeto.etapas
-
+    this.sistemas = this.projeto.sistemas
+    console.log(this.sistemas)
   }
 
   // Filtra os materiais com base no status de 'comprado'
-  getMateriais(processo: Processo, comprado: boolean): any {
-    console.log(processo)
+  getMateriais(material: Material, comprado: boolean): any {
+    console.log(material)
     //  return processo.materiais.filter(material => material.grau === 0);
   }
 
@@ -56,41 +40,39 @@ export class ComprasPage {
     this.segment
   }
 
-  onCheckMaterial(atividade: any, material: any) {
-    material.grau = material.grau === 0 ? 1 : 0;
-    this.updateMaterialGrau(atividade.descricao, material.descricao, material.grau);
+  onCheckMaterial(etapa: Etapa, material: Material) {
+    material.comprado = material.comprado === false ? true : false;
+    this.updateMaterialGrau(etapa.descricaoEtapa, material.descricaoMaterial, material.comprado);
   }
 
-  updateMaterialGrau(atividade: string, material: string, grau: number) {
-    console.log(atividade, material)
-    this.etapas.forEach(etapa => {
-      etapa.Processo.forEach(processo => {
-        processo.atividade.forEach(ativ => {
-          if (ativ.descricao === atividade) {
-            ativ.material.forEach(mater => {
-              if (mater.descricao === material) {
-                mater.grau = grau;
-              }
-            });
+  updateMaterialGrau(atividade: string, material: string, comprado: boolean) {
+    console.log(atividade, material, comprado)
+    this.sistemas.forEach(sistema => {
+      sistema.etapas.forEach(etapa => {
+        etapa.materiais.forEach(mat => {
+          if (mat.descricaoMaterial === material) {
+            mat.comprado = !comprado;
           }
         });
       });
     });
-
-  }
-
-  saveProjetoToFirestore() {
     const cleanedProjeto = this.projetoService.removeUndefinedFields(this.projeto);
     this.projetoService.updateProjeto(cleanedProjeto.id, cleanedProjeto).then(() => {
       console.log('Projeto atualizado com sucesso!');
     }).catch((error) => {
       console.error('Erro ao atualizar projeto: ', error);
     });
+
+
+  }
+
+  saveProjetoToFirestore() {
+
   }
 
   // Atualiza o status do material para 'comprado'
   comprarMaterial(material: Material) {
-    material.grau = 1; // Grau 1 para materiais comprados
+    material.comprado = true; // Grau 1 para materiais comprados
   }
 
   voltar() {
