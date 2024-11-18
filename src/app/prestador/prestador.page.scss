@@ -1,0 +1,52 @@
+.verde {
+  background-color: #41f08f;
+  height: 40%;
+  border-radius: 20px;
+}
+
+.seta {
+  display: flex;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+
+.foto {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  margin-left: 30px;
+}
+
+.nome {
+  font-weight: 700;
+  font-size: 32px;
+  color: #ffffff;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+.descricao {
+  font-size: 26px;
+  color: #ffffff;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+.titulo {
+  font-weight: 700;
+  font-size: 28px;
+  color: #000;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.texto {
+  font-size: 20px;
+  color: #000;
+  margin-top: 5px;
+  margin-left: 30px;
+}

@@ -94,7 +94,19 @@ const routes: Routes = [
   {
     path: 'cadastracat',
     loadChildren: () => import('./cadastra-categoria/cadastra-categoria.module').then(m => m.CadastraCategoriaPageModule)
+  },  {
+    path: 'comunidade',
+    loadChildren: () => import('./comunidade/comunidade.module').then( m => m.ComunidadePageModule)
+  },
+  {
+    path: 'prestador',
+    loadChildren: () => import('./prestador/prestador.module').then( m => m.PrestadorPageModule)
+  },
+  {
+    path: 'busca',
+    loadChildren: () => import('./busca/busca.module').then( m => m.BuscaPageModule)
   }
+
 
 
 ];
