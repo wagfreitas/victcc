@@ -26,6 +26,7 @@ body {
   line-height: 40px;
   color: #ffffff;
   background-color: #3D8FEF;
+  padding: 0px;
 }
 
 .botao-finalizar {
@@ -99,10 +100,10 @@ body {
 
 ion-label {
   --background: transparent !important;
-  padding: 10px;
+  padding: 10px 0px 10px 0px;
 }
 
- ion-input {
+ion-input {
    border: 2px solid transparent;
    --padding-start: 10px;
    border-radius: 0.5rem;
