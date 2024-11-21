@@ -1,88 +1,44 @@
 <ion-content [fullscreen]="true">
-
+  <!-- Botão de voltar -->
   <button class="botao-seta" (click)="voltar()">
     <img class="seta" src="../../assets/images/seta.png" />
   </button>
+
+  <!-- Logo e Títulos -->
   <img class="logo" src="../../assets/images/Logo.png" />
   <p class="titulo">Nome Projeto</p>
+  <p class="titulo2">Compras e Contratações</p>
 
-  <p class="titulo2">Compras e contratações</p>
+  <!-- Filtro Dropdown -->
+  <ion-select class="botao" placeholder="Tudo"(ionChange)="menu($event)">
+    <ion-icon slot="start" name="filter"></ion-icon>
+    <ion-select-option value="tudo">Tudo</ion-select-option>
+    <ion-select-option value="comprado">Comprado</ion-select-option>
+    <ion-select-option value="faltante">Faltante</ion-select-option>
+  </ion-select>
 
-  <ion-content class="cinza">
-    <ion-segment [(ngModel)]="segment">
-      <ion-segment-button style="font-size: 20px; height: 40px;" value="faltante">
-        <ion-label>Faltante</ion-label>
-      </ion-segment-button>
-      <ion-segment-button style="font-size: 20px; height: 40px;" value="comprado">
-        <ion-label>Comprado</ion-label>
-      </ion-segment-button>
-    </ion-segment>
 
-    <ng-container *ngIf="segment === 'faltante'">
-      <ion-card *ngFor="let sistema of sistemas">
-        <ion-card-header>
-          <label class="etapa">{{sistema.descricaoSistema}}</label>
-        </ion-card-header>
+  <!-- Lista de Sistemas e Materiais -->
+  <ion-content style="margin: 0px; padding: 0px;">
+    <ion-card *ngFor="let sistema of sistemas">
+      <!-- Header do Sistema -->
+      <ion-card-header>
+        <ion-card-title class="sistemas">{{ sistema.descricaoSistema }}</ion-card-title>
+      </ion-card-header>
 
-        <ion-card-content>
+      <ion-card-content *ngFor="let etapa of sistema.etapas">
+        <ion-card-subtitle class="etapas">{{ etapa.descricaoEtapa }}</ion-card-subtitle>
 
-          <div *ngFor="let etapa of sistema.etapas" class="processo">
-            <div class="processo">
-              <strong>{{ etapa.descricaoEtapa }}</strong>
-            </div>
-            <ng-container *ngIf="etapa.materiais && etapa.materiais.length > 0 ">
-              <div class="atividade">
-
-                <div class="material-list">
-                  <div *ngFor="let material of etapa.materiais">
-                    <div *ngIf="!material.comprado" class="material-item">
-                      <ion-item lines="none">
-                        <ion-checkbox slot="start" (ionChange)="onCheckMaterial(etapa, material)">
-                        </ion-checkbox>
-                        <ion-label>{{ material.descricaoMaterial }}</ion-label>
-                      </ion-item>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
+          <div class="materiais" *ngIf="etapa.materiais && etapa.materiais.length > 0" style="background: gainsboro;">
+            <ion-item class="materiais" *ngFor="let material of getMateriais(etapa.materiais, abaselecionada)" lines="none">
+              <ion-checkbox slot="start" [checked]="material.comprado" (ionChange)="onCheckMaterial(etapa, material)" class="checkbox-custom"></ion-checkbox>
+              <ion-label>{{ material.descricaoMaterial }}</ion-label>
+            </ion-item>
           </div>
-        </ion-card-content>
-      </ion-card>
-    </ng-container>
+      </ion-card-content>
 
-    <ng-container *ngIf="segment === 'comprado'">
-      <ion-card *ngFor="let sistema of sistemas">
-        <ion-card-header>
-          <label class="etapa">{{sistema.descricaoSistema}}</label>
-        </ion-card-header>
+      <ion-button fill="clear" style="color: #ff4c4c;">Adicionar itens</ion-button>
 
-        <ion-card-content>
-
-          <div *ngFor="let etapa of sistema.etapas" class="processo">
-            <div class="processo">
-              <strong>{{ etapa.descricaoEtapa }}</strong>
-            </div>
-            <ng-container *ngIf="etapa.materiais && etapa.materiais.length > 0 ">
-              <div class="atividade">
-
-                <div class="material-list">
-                  <div *ngFor="let material of etapa.materiais">
-                    <div *ngIf="material.comprado" class="material-item">
-                      <ion-item lines="none">
-                        <ion-label>{{ material.descricaoMaterial }}</ion-label>
-                      </ion-item>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-          </div>
-        </ion-card-content>
-      </ion-card>
-
-    </ng-container>
-
+    </ion-card>
   </ion-content>
-
 </ion-content>
