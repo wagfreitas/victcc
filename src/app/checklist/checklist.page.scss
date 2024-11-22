@@ -1,3 +1,14 @@
+.header-fixo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: min-content;
+  z-index: 10;
+  background-color: white;
+  padding-bottom: 10px;
+}
+
 .seta {
   display: flex;
   transform: translate(-50%, -50%);
@@ -7,6 +18,7 @@
   top: 50px;
   left: 50px;
 }
+
 .logo {
   display: flex;
   transform: translate(-50%, -50%);
@@ -18,75 +30,64 @@
 }
 
 .titulo {
-  position: relative;
-  width: calc(100% - 60px);
-  transform: translate(-50%, 0%);
-  left: 50%;
-  top: 50px;
   text-align: center;
   font-weight: 700;
   font-size: 32px;
   line-height: 40px;
+  margin-top: 90px;
+  margin-bottom: 0px;
   color: #000;
-  margin-bottom: 30px;
 }
 
 .titulo2 {
-  position: relative;
-  left: 30px;
-  top: 50px;
+  text-align: left;
   font-size: 28px;
   font-weight: 700;
   color: #000;
-  z-index: 2;
+  margin: 15px 0px 5px 0px;
+  padding-left: 30px;
 }
 
-.info {
-  background: #ffffff;
-  position: fixed;
-  top: 180px;
-  width: 100%;
-  padding: 0px;
-  z-index: 1;
+.conteudo-rolavel {
+  margin-top: 212px;
+  padding: 0px 30px 20px 30px;
+  height: calc(100vh - 180px);
   overflow-y: auto;
 }
 
-.cinza {
-  background-color: gainsboro;
-  position: relative;
-  width: calc(100% - 60px);
-  left: 30px;
-  top: 40px;
-  border-radius: 20px;
+ion-card {
+  margin: 0px 0px 20px 0pX;
+  --background: gainsboro;
+}
+
+ion-card-header {
   padding: 20px;
-  font-size: 28px;
-  font-weight: 500;
-  margin-bottom: 30px;
 }
 
-.etapa {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
-  margin: 0px;
+.sistemas {
+  font-size: 22px;
 }
 
-.processo {
-  font-size: 24px;
-  color: #000;
-  margin: 0px;
-  padding-top: 12px;
-  padding-bottom: 6px;
+.etapas {
+  font-size: 18px;
 }
 
-.passo {
-  font-size: 20px;
-  color: #000;
-  margin: 6px;
-  width: 100%;
-  flex: 1;
+.passos {
+  font-size: 16px;
+  background-color: gainsboro;
+}
+
+ion-checkbox {
+  --size: 25px;
   --checkbox-background-checked: #ff4c4c;
-  --border-width: 0px;
+  --border-checked: 2px solid #ff4c4c;
 }
 
+ion-checkbox::part(container) {
+  border-radius: 50%;
+  border: 1px solid gainsboro;
+}
 
+ion-item::part(native) {
+  background: transparent;
+}

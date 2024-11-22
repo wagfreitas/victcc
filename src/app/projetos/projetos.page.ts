@@ -12,6 +12,7 @@ import { Projeto } from '../_interfaces/projeto';
 export class ProjetosPage implements OnInit {
   projects$ = this.projetoService.getUserProjects();
   public projetos: Projeto[] = [];
+
   constructor(
     private router: Router,
     private projetoService: ProjetoService,

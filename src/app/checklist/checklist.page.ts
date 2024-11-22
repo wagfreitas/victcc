@@ -10,43 +10,69 @@ import { Projeto } from '../_interfaces/projeto';
   templateUrl: './checklist.page.html',
   styleUrls: ['./checklist.page.scss'],
 })
-export class ChecklistPage {
+export class ChecklistPage implements OnInit {
   sistemas: Sistema[] = [];
   projeto = this.dataService.getData();
-  nomeProjeto: string = '';
+  projects$ = this.projetoService.getUserProjects();
+  public projetos: Projeto[] = [];
+
 
   constructor(
     private router: Router,
     private projetoService: ProjetoService,
-    private dataService: DataServiceService) {
-    this.sistemas = this.projeto.sistemas
-    this.nomeProjeto = this.projeto.sistemas.nomeProjeto
+    private dataService: DataServiceService
+    )
+
+  {
+  this.sistemas = this.projeto.sistemas
+  console.log(this.sistemas);
   }
 
+  async ngOnInit() {
+    this.projects$.subscribe((projetos: any[]) => {
+      this.projetos = projetos.map(projeto => ({
+        nomeProjeto: projeto.nomeProjeto,
+        id: projeto.id,
+        status: projeto.status,
+        nomeCliente: projeto.nomeCliente,
+        logradouro: projeto.logradouro,
+        numero: projeto.numero,
+        complemento: projeto.complemento,
+        cep: projeto.cep,
+        dataInicio: projeto.dataInicio,
+        sistemas: projeto.sistemas,
+      }));
+    });
+  }
 
   atualizarPasso(sistema: Sistema, etapa: Etapa, passo: Passo) {
-    // Atualizar o estado do passo (executado ou não)
+    // Alternar o estado do passo
     passo.checked = !passo.checked;
-    etapa.executadoEtapa = 0;
-    sistema.percentualExecutado = 0;
-    console.log(etapa)
 
-    etapa.passos.forEach(p => {
+    // Recalcular o percentual executado da etapa
+    let totalExecutadoEtapa = 0;
+    etapa.passos.forEach((p) => {
       if (p.checked) {
-        etapa.executadoEtapa += (p.percentualPasso / 100) * etapa.percentualEtapa;
+        totalExecutadoEtapa += (p.percentualPasso / 100) * etapa.percentualEtapa;
       }
     });
+    etapa.executadoEtapa = totalExecutadoEtapa;
 
-    sistema.etapas.forEach(e => {
-      console.log(e)
-      console.log(e.executadoEtapa)
-      if (e.executadoEtapa != undefined) {
-        sistema.percentualExecutado += e.executadoEtapa;
+    // Recalcular o percentual executado do sistema
+    let totalExecutadoSistema = 0;
+    sistema.etapas.forEach((et) => {
+      if (et.executadoEtapa != undefined) {
+        totalExecutadoSistema += et.executadoEtapa;
       }
     });
+    sistema.percentualExecutado = totalExecutadoSistema;
 
-    console.log(`Percentual do Sistema ${sistema.descricaoSistema}: ${sistema.percentualExecutado.toFixed(2)}%`);
+    // Logs para depuração
+    console.log(`Passo "${passo.descricaoPasso}" atualizado: ${passo.checked}`);
+    console.log(`Etapa "${etapa.descricaoEtapa}" - Percentual Executado: ${etapa.executadoEtapa.toFixed(2)}%`);
+    console.log(`Sistema "${sistema.descricaoSistema}" - Percentual Executado: ${sistema.percentualExecutado.toFixed(2)}%`);
   }
+
 
   voltar() {
     let id = this.projeto.id;

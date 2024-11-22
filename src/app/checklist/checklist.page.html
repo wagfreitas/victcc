@@ -1,28 +1,30 @@
 <ion-content [fullscreen]="true">
 
-  <button class="botao-seta" (click)="voltar()">
-    <img class="seta" src="../../assets/images/seta.png" />
-  </button>
-  <img class="logo" src="../../assets/images/Logo.png" />
-  <p class="titulo">{{nomeProjeto}}</p>
+  <div class="header-fixo">
+    <button class="botao-seta" (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+    <p class="titulo" *ngFor="let projeto of projetos">{{ projeto.nomeProjeto }}</p>
+    <p class="titulo2">Checklist</p>
+  </div>
 
-  <p class="titulo2">Checklist</p>
+  <div class="conteudo-rolavel">
+    <ion-card *ngFor="let sistema of sistemas">
+      <ion-card-header>
+        <ion-card-title class="sistemas">{{ sistema.descricaoSistema }} - {{ sistema.percentualExecutado | number: '1.2-2' }}%</ion-card-title>
+      </ion-card-header>
 
-  <div class="cinza" *ngFor="let sistema of sistemas">
-    <p class="etapa">
-      {{ sistema.descricaoSistema }} - {{ sistema.percentualExecutado | number: '1.2-2' }}%
-    </p>
-
-    <!-- Loop para cada etapa do sistema -->
-    <div *ngFor="let etapa of sistema.etapas">
-      <p class="processo">{{ etapa.descricaoEtapa }} - {{etapa.executadoEtapa}}%</p>
-
-      <!-- Loop para os passos da etapa -->
-      <ion-checkbox labelPlacement="end" justify="start" class="passo" *ngFor="let passo of etapa.passos"
-        [checked]="passo.checked" (ionChange)="atualizarPasso(sistema,etapa, passo)">
-        {{ passo.descricaoPasso }}
-      </ion-checkbox>
-    </div>
+      <ion-card-content *ngFor="let etapa of sistema.etapas">
+        <ion-card-subtitle class="etapas">{{ etapa.descricaoEtapa }} - {{ etapa.executadoEtapa | number: '1.2-2' }}%</ion-card-subtitle>
+        <ion-item lines="none" class="passos" *ngFor="let passo of etapa.passos">
+          <ion-checkbox slot="start" [checked]="passo.checked"
+            (ionChange)="atualizarPasso(sistema,etapa, passo)">
+          </ion-checkbox>
+          <ion-label>{{ passo.descricaoPasso }}</ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </div>
 
 </ion-content>

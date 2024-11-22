@@ -1,25 +1,51 @@
 <ion-content [fullscreen]="true">
 
-  <button class="botao-seta" (click)="voltar()">
-    <img class="seta" src="../../assets/images/seta.png" />
-  </button>
-  <img class="logo" src="../../assets/images/Logo.png" />
-  <p class="titulo">{{nomeProjeto}}</p>
+  <div class="header-fixo">
+    <button class="botao-seta" (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+    <p class="titulo" *ngFor="let projeto of projetos">{{ projeto.nomeProjeto }}</p>
+    <p class="titulo2">Resumo</p>
+  </div>
 
-  <p class="titulo2">Resumo</p>
+  <div class="conteudo-rolavel">
+    <ion-card>
+      <ion-card-header style="padding-bottom: 0px;">
+        <ion-card-title class="sistema" style="padding-bottom: 0px;">Progresso</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid style="padding: 0px; margin-top: 20px;">
+          <ion-row>
+            <div class="progress-outer">
+              <div class="progress-inner" [style.width.%]="progresso">
+                {{ progresso }}
+              </div>
+            </div>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
 
-  <div class="cinza">
-    <p class="titulo3">Progresso</p>
-    <ion-grid style="padding: 0px; margin-top: 20px;">
-      <ion-row>
-        <div class="progress-outer">
-          <div class="progress-inner" [style.width.%]="progresso">
-            {{ progresso }}
-          </div>
-        </div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="sistema">Semana 1</ion-card-title>
+      </ion-card-header>
 
-      </ion-row>
-    </ion-grid>
+      <ion-card-content>
+        <ion-card-subtitle class="etapas">Serviços</ion-card-subtitle>
+        <ion-item class="passos" lines="none">...</ion-item>
+        <ion-item class="passos" lines="none">...</ion-item>
+        <ion-item class="passos" lines="none">...</ion-item>
+      </ion-card-content>
+
+      <ion-card-content>
+        <ion-card-subtitle class="etapas">Compras</ion-card-subtitle>
+        <ion-item class="passos" lines="none">...</ion-item>
+        <ion-item class="passos" lines="none">...</ion-item>
+        <ion-item class="passos" lines="none">...</ion-item>
+      </ion-card-content>
+    </ion-card>
   </div>
 
 </ion-content>

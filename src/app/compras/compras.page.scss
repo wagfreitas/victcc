@@ -1,3 +1,14 @@
+.header-fixo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: min-content;
+  z-index: 10;
+  background-color: white;
+  padding-bottom: 5px;
+}
+
 .seta {
   display: flex;
   transform: translate(-50%, -50%);
@@ -7,6 +18,7 @@
   top: 50px;
   left: 50px;
 }
+
 .logo {
   display: flex;
   transform: translate(-50%, -50%);
@@ -18,37 +30,56 @@
 }
 
 .titulo {
-  position: relative;
-  width: 100%;
-  top: 50px;
   text-align: center;
   font-weight: 700;
   font-size: 32px;
   line-height: 40px;
+  margin-top: 90px;
+  margin-bottom: 0px;
   color: #000;
-  margin-bottom: 30px;
 }
 
 .titulo2 {
-  position: relative;
-  width: 100%;
-  top: 40px;
-  text-align: center;
-  font-weight: 700;
+  text-align: left;
   font-size: 28px;
-  line-height: 40px;
+  font-weight: 700;
   color: #000;
-  margin-bottom: 30px;
+  margin: 15px 0px 5px 0px;
+  padding-left: 30px;
 }
 
 .botao {
-  padding: 20px 0px 0px 30px;
+  display: block;
+  padding-left: 30px;
 }
 
-ion-select::part(icon) {
-  color: #767676;
-  opacity: 1;
-  size: 20px;
+.conteudo-rolavel {
+  margin-top: 290px;
+  padding: 0px 30px 20px 30px;
+  height: calc(100vh - 180px);
+  overflow-y: auto;
+}
+
+ion-card {
+  margin: 0px 0px 20px 0pX;
+  --background: gainsboro;
+}
+
+ion-card-header {
+  padding: 20px;
+}
+
+.sistemas {
+  font-size: 22px;
+}
+
+.etapas {
+  font-size: 18px;
+}
+
+.materiais {
+  font-size: 16px;
+  background-color: gainsboro;
 }
 
 ion-checkbox {
@@ -62,39 +93,10 @@ ion-checkbox::part(container) {
   border: 1px solid gainsboro;
 }
 
-ion-card {
-  --background: gainsboro;
-  margin: 0px 20px 20px 20px;
-  --width: calc(100% - 100px);
-}
-
-ion-card-content {
-  padding: 10px 10px 0px 10px;
-}
-
-ion-card-header {
-  padding: 20px 20px 0px 20px;
-}
-
-.sistemas {
-  font-size: 22px;
-}
-
-.etapas {
-  font-size: 18px;
-  padding-left: 10px;
-}
-
-.materiais {
-  font-size: 16px;
-  background-color: gainsboro;
-}
-
 ion-item::part(native) {
   background: transparent;
 }
 
-ion-content {
-  height: calc(100% - 260px);
-  top: 0px;
+ion-select::part(icon) {
+  opacity: 0;
 }
