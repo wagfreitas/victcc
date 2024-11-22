@@ -6,6 +6,7 @@ export interface Estrutura {
 export interface Sistema {
   descricaoSistema: string,
   percentualSistema: number,
+  percentualExecutado: number,
   ordemSistema: number,
   etapas: Etapa[]
 }
@@ -18,6 +19,8 @@ export interface Etapa {
   coeficiente: string
   coeficienteInput: string,
   expanded: boolean,
+  percentualEtapa: number,
+  executadoEtapa: number,
   medidas: Medida[],
   materiais: Material[],
   passos: Passo[],
@@ -39,7 +42,9 @@ export interface Material {
 export interface Passo {
   descricaoPasso: string,
   ordemPasso: string,
-  percentual: number
+  percentualPasso: number,
+  executadoPasso: number,
+  checked: boolean
 }
 
 

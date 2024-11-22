@@ -10,19 +10,27 @@ import { DataServiceService } from '../_services/data-service.service';
 export class ResumoPage {
   projeto = this.dataService.getData();
   progresso: number = 0;
+  nomeProjeto: string = '';
   constructor(
     private router: Router,
     private dataService: DataServiceService) {
     this.progresso = this.projeto.status;
-    console.log(this.projeto.status);
-  }
+    this.nomeProjeto = this.projeto.nomeProjeto;
+    this.normalizarPercentuais();
 
-  testar() {
-    console.log("Cliquei no botão");
   }
 
   voltar() {
     this.router.navigate(["projetos"]);
+
+  }
+
+  normalizarPercentuais() {
+    const totalPeso = this.projeto.sistemas.reduce((acc: number, sistema: { percentualSistema: any; }) => acc + parseFloat(sistema.percentualSistema), 0);
+    console.log(totalPeso);
+    this.projeto.sistemas.forEach((sistema: { percentualSistema: any; }) => {
+      sistema.percentualSistema = (parseFloat(sistema.percentualSistema) / totalPeso) * 100;
+    });
 
   }
 

@@ -56,7 +56,7 @@ export class ModalProjetoComponent {
       dataInicio: dataIniConv,
       status: this.status,
       userId: this.userId,
-      tipoServico: this.tipoServico,
+
     };
 
     await this.modalController.dismiss(agenda);

@@ -1,48 +1,27 @@
 <ion-content [fullscreen]="true">
 
-  <button class="botao-seta"
-    (click)="voltar()">
+  <button class="botao-seta" (click)="voltar()">
     <img class="seta" src="../../assets/images/seta.png" />
   </button>
   <img class="logo" src="../../assets/images/Logo.png" />
-  <p class="titulo">Nome Projeto</p>
+  <p class="titulo">{{nomeProjeto}}</p>
 
   <p class="titulo2">Checklist</p>
 
-  <div class="info">
-    <div class="cinza">
-      <p class="etapa">Fundação</p>
-      <p class="processo">RADIER</p>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Camada de brita</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Impermeabilização</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Armadura</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Concretagem</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Cura</ion-checkbox>
-    </div>
+  <div class="cinza" *ngFor="let sistema of sistemas">
+    <p class="etapa">
+      {{ sistema.descricaoSistema }} - {{ sistema.percentualExecutado | number: '1.2-2' }}%
+    </p>
 
-    <div class="cinza">
-      <p class="etapa">Estruturas</p>
-      <p class="processo">PILAR</p>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Montagem da forma</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Armadura</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Concretagem</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Cura</ion-checkbox>
-      <br />
-      <p class="processo">VIGA</p>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Montagem da forma</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Armadura</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Concretagem</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Cura</ion-checkbox>
-    </div>
+    <!-- Loop para cada etapa do sistema -->
+    <div *ngFor="let etapa of sistema.etapas">
+      <p class="processo">{{ etapa.descricaoEtapa }} - {{etapa.executadoEtapa}}%</p>
 
-    <div class="cinza">
-      <p class="etapa">Fundação</p>
-      <p class="processo">RADIER</p>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Camada de brita</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Impermeabilização</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Armadura</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Concretagem</ion-checkbox>
-      <ion-checkbox labelPlacement="end" justify="start" class="passo">Cura</ion-checkbox>
+      <!-- Loop para os passos da etapa -->
+      <ion-checkbox labelPlacement="end" justify="start" class="passo" *ngFor="let passo of etapa.passos"
+        [checked]="passo.checked" (ionChange)="atualizarPasso(sistema,etapa, passo)">
+        {{ passo.descricaoPasso }}
+      </ion-checkbox>
     </div>
   </div>
 

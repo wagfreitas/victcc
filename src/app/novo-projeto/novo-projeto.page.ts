@@ -35,7 +35,6 @@ export class NovoProjetoPage implements OnInit {
     private projService: ProjetoService,
     private modalController: ModalController,
     private utilService: UtilService,
-    private etapasService: EtapasService,
     private categorieService: CategoriesService) {
     // this.getSelectedItems();
   }
@@ -45,7 +44,8 @@ export class NovoProjetoPage implements OnInit {
       data.forEach((doc) => {
         const estrutura = {
           descricaoSistema: doc.sistemas[0].descricaoSistema,
-          percentualSistema: doc.sistemas[0].percentualSistema,
+          percentualSistema: doc.sistemas[0].percentualSistema || 0,
+          percentualExecutado: doc.sistemas[0].percentualExecutado || 0,
           ordemSistema: doc.sistemas[0].ordemSistema,
           etapas: doc.sistemas[0].etapas,
         }
@@ -75,10 +75,13 @@ export class NovoProjetoPage implements OnInit {
       return {
         descricaoSistema: sistema.descricaoSistema,
         ordemSistema: sistema.ordemSistema,
+        percentualSistema: sistema.percentualSistema || 0,
+        percentualExecutado: 0,
         etapas: sistema.etapas.map(etapa => {
           return {
             descricaoEtapa: etapa.descricaoEtapa,
             coeficiente: etapa.coeficiente,
+            percentualEtapa: etapa.percentualEtapa || 0,
             duracao: etapa.duracao,
             ordem: etapa.ordemEtapa,
             materiais: etapa.materiais.map(material => ({
@@ -89,7 +92,9 @@ export class NovoProjetoPage implements OnInit {
             passos: etapa.passos.map(passo => ({
               descricaoPasso: passo.descricaoPasso,
               ordemPasso: passo.ordemPasso,
-              percentual: passo.percentual || '0'
+              percentualPasso: passo.percentualPasso || 0,
+              executadoPasso: passo.executadoPasso || 0,
+              checked: passo.checked || false
             })),
             medidas: etapa.medidas.filter(medida => parseInt(medida.valor) > 0)
           };

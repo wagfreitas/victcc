@@ -5,9 +5,6 @@ import { ProjetoService } from '../_services/projeto.service';
 import { Sistema, Material, Etapa } from '../_interfaces/estrutura';
 
 
-
-
-
 @Component({
   selector: 'app-compras',
   templateUrl: './compras.page.html',
@@ -17,8 +14,8 @@ export class ComprasPage {
 
   projeto = this.dataService.getData();
   sistemas: Sistema[] = [];
-  segment: string = 'faltante'; //
-
+  segment: string = 'faltante';
+  nomeProjeto: string = ''
   abaselecionada = 'faltante';
 
   constructor(
@@ -27,6 +24,8 @@ export class ComprasPage {
     private projetoService: ProjetoService
   ) {
     this.sistemas = this.projeto.sistemas
+    this.nomeProjeto = this.projeto.nomeProjeto
+
     console.log(this.sistemas)
   }
 

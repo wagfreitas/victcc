@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { CategoriesService } from '../_services/categories.service';
-import { Estrutura, Sistema } from '../_interfaces/estrutura';
+import { Estrutura, Etapa, Material, Medida, Passo, Sistema } from '../_interfaces/estrutura';
 
 
 @Component({
@@ -53,7 +53,7 @@ export class CadastraCategoriaPage implements OnInit {
     const sistemasArray = this.sistemaForm.get('sistemas') as FormArray;
     sistemasArray.clear();
 
-    categoria.sistemas.forEach((sistema: any) => {
+    categoria.sistemas.forEach((sistema: Sistema) => {
       const sistemaForm = this.fb.group({
         descricaoSistema: [sistema.descricaoSistema],
         percentualSistema: [sistema.percentualSistema],
@@ -61,7 +61,7 @@ export class CadastraCategoriaPage implements OnInit {
         etapas: this.fb.array([])
       });
 
-      sistema.etapas.forEach((etapa: any) => {
+      sistema.etapas.forEach((etapa: Etapa) => {
         const etapaForm = this.fb.group({
           descricaoEtapa: [etapa.descricaoEtapa],
           ordemEtapa: [etapa.ordemEtapa],
@@ -75,7 +75,7 @@ export class CadastraCategoriaPage implements OnInit {
         });
 
         // Preenchendo medidas, materiais e passos
-        etapa.medidas.forEach((medida: any) => {
+        etapa.medidas.forEach((medida: Medida) => {
           (etapaForm.get('medidas') as FormArray).push(this.fb.group({
             descricaoMedida: [medida.descricaoMedida],
             unidade: [medida.unidade],
@@ -84,14 +84,14 @@ export class CadastraCategoriaPage implements OnInit {
           }));
         });
 
-        etapa.materiais.forEach((material: any) => {
+        etapa.materiais.forEach((material: Material) => {
           (etapaForm.get('materiais') as FormArray).push(this.fb.group({
             descricaoMaterial: [material.descricaoMaterial],
             coeficiente: [material.coeficiente]
           }));
         });
 
-        etapa.passos.forEach((passo: any) => {
+        etapa.passos.forEach((passo: Passo) => {
           (etapaForm.get('passos') as FormArray).push(this.fb.group({
             descricaoPasso: [passo.descricaoPasso],
             ordemPasso: [passo.ordemPasso],
@@ -135,6 +135,7 @@ export class CadastraCategoriaPage implements OnInit {
     return this.fb.group({
       descricaoEtapa: ['', Validators.required],
       percentualEtapa: [0, Validators.required],
+      executadoEtapa: [0, Validators.required],
       ordemEtapa: [0, Validators.required],
       duracao: [0, Validators.required],
       duracaoInput: ['N'],
@@ -190,7 +191,11 @@ export class CadastraCategoriaPage implements OnInit {
   newPasso(): FormGroup {
     return this.fb.group({
       descricaoPasso: ['', Validators.required],
-      ordemPasso: ['', Validators.required]
+      ordemPasso: ['', Validators.required],
+      percentualPasso: [0, Validators.required],
+      executadoPasso: [0, Validators.required],
+      checked: [false]
+
     })
 
   }
