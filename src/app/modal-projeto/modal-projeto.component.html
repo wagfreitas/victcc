@@ -1,70 +1,58 @@
-<ion-content class="ion-padding">
+<ion-content class="borda">
+  <div class="caixa">
+
+  <p style="color: #3d8FEF">
+    Cadastre seu <br/> projeto aqui
+  </p>
+
   <ion-list>
 
-    <ion-item lines="none">
       <ion-label position="stacked">Nome do Projeto</ion-label>
-      <ion-input type="text" [(ngModel)]="nomeProjeto" placeholder="digite o nome do projeto ."></ion-input>
-    </ion-item>
+      <ion-input type="text" [(ngModel)]="nomeProjeto" placeholder="Digite aqui"></ion-input>
 
-    <ion-item lines="none">
       <ion-label position="stacked">Cliente</ion-label>
-      <ion-input type="text" [(ngModel)]="cliente" placeholder="digite o nome do cliente ."></ion-input>
-    </ion-item>
+      <ion-input type="text" [(ngModel)]="cliente" placeholder="Digite aqui"></ion-input>
 
-    <ion-item lines="none">
-      <ion-label position="stacked">Cep da Obra</ion-label>
+      <ion-label position="stacked">CEP</ion-label>
 
-      <div class="input-button-container">
-        <ion-input type="text" [(ngModel)]="cep" placeholder="Digite um CEP Válido ."></ion-input>
-        <button class="content_button" (click)="getCep()">Confirma</button>
-      </div>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-label position="stacked">Endereço</ion-label>
-      <ion-input type="text" [(ngModel)]="logradouro" placeholder="Endereço."></ion-input>
-    </ion-item>
-
-    <div class="loc-container">
-      <ion-item lines="none">
-        <ion-label position="stacked">Bairro</ion-label>
-        <ion-input type="text" [(ngModel)]="bairro" placeholder="Entre com o bairro ."></ion-input>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label position="stacked">Número</ion-label>
-        <ion-input type="number" [(ngModel)]="numero" placeholder="Entre com o numero ."></ion-input>
-      </ion-item>
-    </div>
-
-    <ion-item lines="none">
-      <ion-label position="stacked">Complemento</ion-label>
-      <ion-input type="text" [(ngModel)]="complemento" placeholder="Entre com o complemento ."></ion-input>
-    </ion-item>
-
-    <div class="loc-container">
-      <ion-item lines="none">
-        <ion-label position="stacked">Data Inicio</ion-label>
-        <ion-input type="date" [(ngModel)]="dataInicio" placeholder="Início do  Atendimento ."></ion-input>
-      </ion-item>
-    </div>
-
-
-  </ion-list>
-</ion-content>
-
-<ion-footer>
-  <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-button type="submit" class="content_button" (click)="onSave()" expand="full">
-          Salvar
-        </ion-button>
+      <ion-col size="7">
+        <ion-input type="text" [(ngModel)]="cep" placeholder=" Digite aqui"></ion-input>
       </ion-col>
       <ion-col>
-        <ion-button type="submit" class="content_button" (click)="onCancel()" expand="full">
-          Cancelar
-        </ion-button>
+        <button class="confirma" (click)="getCep()">Confirma</button>
       </ion-col>
     </ion-row>
-  </ion-grid>
-</ion-footer>
+
+      <ion-label position="stacked">Endereço</ion-label>
+      <ion-input type="text" [(ngModel)]="logradouro" placeholder=" Digite aqui"></ion-input>
+
+      <ion-label position="stacked">Número</ion-label>
+      <ion-input type="number" [(ngModel)]="numero" placeholder=" Digite aqui"></ion-input>
+
+      <ion-label position="stacked">Bairro</ion-label>
+      <ion-input type="text" [(ngModel)]="bairro" placeholder=" Digite aqui"></ion-input>
+
+      <ion-label position="stacked">Complemento</ion-label>
+      <ion-input type="text" [(ngModel)]="complemento" placeholder=" Digite aqui"></ion-input>
+
+      <ion-label position="stacked">Data Inicio</ion-label>
+      <ion-input type="date" [(ngModel)]="dataInicio"></ion-input>
+
+  </ion-list>
+
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" (click)="onSave()" expand="full">
+        Salvar
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button type="submit" class="content_button" (click)="onCancel()" expand="full">
+        Cancelar
+      </ion-button>
+    </ion-col>
+
+  </ion-row>
+  </div>
+</ion-content>

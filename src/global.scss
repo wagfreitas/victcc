@@ -36,3 +36,9 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 //@import "@ionic/angular/css/palettes/dark.system.css";
 
+ion-button {
+  --background: transparent;
+  --border-radius: 20px;
+  --margin: 0px;
+  --padding: 0px;
+}

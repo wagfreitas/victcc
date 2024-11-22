@@ -19,9 +19,7 @@
 
 .titulo {
   position: relative;
-  width: calc(100% - 60px);
-  transform: translate(-50%, 0%);
-  left: 50%;
+  width: 100%;
   top: 50px;
   text-align: center;
   font-weight: 700;
@@ -33,105 +31,70 @@
 
 .titulo2 {
   position: relative;
-  left: 30px;
-  top: 50px;
-  font-size: 28px;
-  font-weight: 700;
-  color: #000;
-  z-index: 2;
-}
-
-.cinza {
-  background-color: gainsboro;
-  position: relative;
-  width: calc(100% - 60px);
-  left: 30px;
-  top: 40px;
-  border-radius: 20px;
-  padding: 20px;
-  height: calc(100% - 330px);
-}
-
-
-.passo {
-  font-size: 20px;
-  color: #000;
-  margin: 6px;
   width: 100%;
-  flex: 1;
-  --checkbox-background-checked: #ff4c4c;
-  --border-width: 0px;
-}
-
-.adicionar {
-  background-color: #ff4c4c;
-  color: white;
-  position: relative;
-  width: calc(100% - 60px);
-  left: 30px;
-  border-radius: 20px;
-  height: 60px;
-  top: 60px;
-  font-size: 40px;
-  font-weight: bold;
-}
-
-ion-col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 40px;
   text-align: center;
-}
-
-
-
-ion-label {
-  margin-right: 10px;
-}
-
-.etapa {
-  font-size: 20px;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 40px;
   color: #000;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
-.processo {
-  font-size: 15px;
-  color: #000;
-  margin: 0px;
-  padding-top: 12px;
-  padding-bottom: 6px;
+.botao {
+  padding: 20px 0px 0px 30px;
 }
 
-.atividade-list {
-  padding-left: 15px;
-  font-weight: bold;
-    font-size: 18px;
-    margin-top: 10px;
-    display: block;
-  /* Indentação para atividades */
-}
-
-.material-list {
-  padding-left: 30px;
-  /* Indentação para materiais */
-}
-
-ion-item {
-  display: block;
-  /* Forçar todos os itens a serem exibidos como bloco, evitando que fiquem lado a lado */
-  margin-bottom: 5px;
-  /* Espaçamento entre os itens */
+ion-select::part(icon) {
+  color: #767676;
+  opacity: 1;
+  size: 20px;
 }
 
 ion-checkbox {
-  margin-right: 10px;
-  /* Espaçamento entre checkbox e texto */
+  --size: 25px;
+  --checkbox-background-checked: #ff4c4c;
+  --border-checked: 2px solid #ff4c4c;
 }
 
-ion-label {
-  margin-left: 10px;
-  /* Espaçamento entre o checkbox e o texto */
+ion-checkbox::part(container) {
+  border-radius: 50%;
+  border: 1px solid gainsboro;
+}
+
+ion-card {
+  --background: gainsboro;
+  margin: 0px 20px 20px 20px;
+  --width: calc(100% - 100px);
+}
+
+ion-card-content {
+  padding: 10px 10px 0px 10px;
+}
+
+ion-card-header {
+  padding: 20px 20px 0px 20px;
+}
+
+.sistemas {
+  font-size: 22px;
+}
+
+.etapas {
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.materiais {
+  font-size: 16px;
+  background-color: gainsboro;
+}
+
+ion-item::part(native) {
+  background: transparent;
+}
+
+ion-content {
+  height: calc(100% - 260px);
+  top: 0px;
 }

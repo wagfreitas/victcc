@@ -1,46 +1,38 @@
 <ion-content [fullscreen]="true" style="--background: #3D8FEF;">
   <button class="botao-seta" (click)="voltar()">
-    <img class="seta" src="../../assets/images/seta.png" />
+    <img class="seta" src="../../assets/images/setaB.png" />
   </button>
 
 
-  <ion-input class="titulo" ionFocus="openModal()" placeholder="NOVO PROJETO" [(ngModel)]="nomeProjeto" type="string"
+  <ion-input style="padding: 0px; color: white;" class="titulo" ionFocus="openModal()" placeholder="NOVO PROJETO" [(ngModel)]="nomeProjeto" type="string"
     disabled></ion-input>
 
 
   <ion-accordion-group class="caixa" expand="inset">
     <ion-accordion *ngFor="let sistema of sistemas">
+
       <!-- Header da etapa -->
-      <ion-item slot="header" color="light" class="caixa1">
-        <ion-label>{{sistema.descricaoSistema}} </ion-label>
+      <ion-item slot="header" color="light">
+        <ion-label style="font-size: 20px; font-weight: bold;">{{sistema.descricaoSistema}} </ion-label>
       </ion-item>
 
       <!-- Conteúdo da etapa -->
-      <div class="ion-padding" slot="content">
+      <div slot="content" class="caixa2">
         <ion-list *ngFor="let etapa of sistema.etapas">
           <ion-item (click)="toggleProcess(etapa)">
-            <ion-icon [name]="etapa.expanded ? 'remove-circle' : 'add-circle'" slot="start"></ion-icon>
-            <ion-label>{{ etapa.descricaoEtapa }}</ion-label>
+            <ion-icon [name]="etapa.expanded ? 'checkmark-circle' : 'add-circle'" slot="start" [ngStyle]="{'color': etapa.expanded ? '#3D8FEF' : 'black'}"></ion-icon>
+            <ion-label style="font-size: 20px;">{{ etapa.descricaoEtapa }}</ion-label>
           </ion-item>
-          <div *ngIf="etapa.expanded">
-            <ion-item class="medida-container" *ngIf="etapa.coeficienteInput === 'S' || etapa.duracaoInput=== 'S'">
-              <ion-label *ngIf="etapa.coeficienteInput === 'S'">Coeficiente:
-                <ion-input type="text" [(ngModel)]="etapa.coeficiente"></ion-input>
-              </ion-label>
 
-              <ion-label *ngIf="etapa.duracaoInput === 'S'">Duração:
-                <ion-input type="text" [(ngModel)]="etapa.duracao"></ion-input>
-              </ion-label>
+          <div *ngIf="etapa.expanded">
+            <ion-item *ngIf="etapa.duracaoInput=== 'S'">
+              <ion-label *ngIf="etapa.duracaoInput === 'S'">Duração:</ion-label>
+              <ion-input type="text" [(ngModel)]="etapa.duracao"></ion-input>
             </ion-item>
           </div>
-
           <div *ngIf="etapa.expanded && etapa.medidas.length > 0">
-            <ion-item-divider class="medida-container">
-              <ion-label>Medidas</ion-label>
-            </ion-item-divider>
-
             <div *ngFor="let medida of etapa.medidas">
-              <ion-item class="medida-container">
+              <ion-item>
                 <ion-label>{{ medida.descricaoMedida }}: </ion-label>
                 <ion-input type="text" [(ngModel)]="medida.valor"></ion-input>
               </ion-item>

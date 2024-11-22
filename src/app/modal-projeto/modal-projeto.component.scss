@@ -1,58 +1,56 @@
-ion-padding {
-  margin: 0 10px;
+.borda {
+  --background: transparent;
+  border-left: 40px solid;
+  border-right: 40px solid;
+  border-top: 60px solid;
+  border-bottom: 60px solid;
+  border-color: #3D8FEF;
 }
 
-ion-item {
-  --padding-start: 0;
-  margin: 15px 0;
-  ion-label {
-    color: gray;
-    margin-bottom: 6px;
-  }
-  ion-input {
-    border: 2px solid transparent;
-    --padding-start: 10px;
-    border-radius: 0.5rem;
-    margin-bottom: 10px;
-    background-color: #E5E5E5;
-    transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
-  }
-  ion-input:hover, ion-input:focus{
-    outline: none;
-    border-color: #05060f;
-  }
-  ion-select {
-    border: 2px solid transparent;
-    --padding-start: 10px;
-    border-radius: 0.5rem;
-    margin-bottom: 10px;
-    background-color: #E5E5E5;
-    transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
-
-  }
-  ion-select:hover, ion-select:focus{
-    outline: none;
-    border-color: #05060f;
-  }
-  h6 {
-    margin: 5px 0px;
-  }
-  .input-button-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    button{
-      background: rgb(166, 193, 13);
-      color: white;
-      height: 37px;
-      padding: 0 20px;
-      border-radius: 30px;
-      margin-bottom: 10px;
-      font-family: "regular";
-    }
-  }
+.caixa {
+  height: 100%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 24px;
+  overflow-y: scroll;
+  border: 2px solid black;
 }
 
-.loc-container {
-  display: flex;
+ion-content ion-label {
+  font-size: 18px;
+  margin: 0px;
 }
+
+ion-content ion-input {
+  font-size: 16px;
+  margin: 10px 0px 30px 0px;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  --padding-start: 15px;
+}
+
+ion-content ion-col {
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+}
+
+.confirma {
+  background-color: #3def52;
+  border-radius: 20px;
+  font-size: 18px;
+  color: white;
+  margin: 10px 0px 30px 10px;
+  height: calc(100% - 40px);
+  width: calc(100% - 10px);
+}
+
+ion-content ion-button {
+    border-radius: 20px;
+    font-size: 20px;
+    height: 80%;
+    width: calc(100% - 10px);
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: black;
+  }

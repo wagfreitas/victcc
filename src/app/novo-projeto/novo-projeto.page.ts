@@ -40,6 +40,7 @@ export class NovoProjetoPage implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.categorieService.getCategories().subscribe((data) => {
       data.forEach((doc) => {
         const estrutura = {
@@ -56,6 +57,10 @@ export class NovoProjetoPage implements OnInit {
     })
 
     this.openModal()
+
+    this.sistemas.sort((a, b) => a.ordemSistema - b.ordemSistema);
+
+    console.log(this.sistemas)
   }
 
   getMedidaLabel(medida: any): string {
@@ -127,7 +132,6 @@ export class NovoProjetoPage implements OnInit {
 
       }
     });
-
 
     return await modal.present();
   }
