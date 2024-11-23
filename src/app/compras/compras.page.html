@@ -8,7 +8,7 @@
 
     <!-- Logo e Títulos -->
     <img class="logo" src="../../assets/images/Logo.png" />
-    <p class="titulo" *ngFor="let projeto of projetos">{{ projeto.nomeProjeto }}</p>
+    <p class="titulo">{{ projeto.nomeProjeto }}</p>
     <p class="titulo2">Compras e <br> Contratações</p>
 
     <!-- Filtro Dropdown -->
@@ -31,8 +31,7 @@
         <ion-card-subtitle class="etapas">{{ etapa.descricaoEtapa }}</ion-card-subtitle>
         <div class="materiais" *ngIf="etapa.materiais && etapa.materiais.length > 0">
           <ion-item *ngFor="let material of getMateriais(etapa.materiais, abaselecionada)" lines="none">
-            <ion-checkbox slot="start" [checked]="material.comprado"
-              (ionChange)="onCheckMaterial(etapa, material)">
+            <ion-checkbox slot="start" [checked]="material.comprado" (ionChange)="onCheckMaterial(etapa, material)">
             </ion-checkbox>
             <ion-label>{{ material.descricaoMaterial }}</ion-label>
           </ion-item>

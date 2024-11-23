@@ -79,15 +79,15 @@ export class CadastraCategoriaPage implements OnInit {
           (etapaForm.get('medidas') as FormArray).push(this.fb.group({
             descricaoMedida: [medida.descricaoMedida],
             unidade: [medida.unidade],
-            valor: [medida.valor]
-
+            valor: [medida.valor],
           }));
         });
 
         etapa.materiais.forEach((material: Material) => {
           (etapaForm.get('materiais') as FormArray).push(this.fb.group({
             descricaoMaterial: [material.descricaoMaterial],
-            coeficiente: [material.coeficiente]
+            coeficiente: [material.coeficiente],
+            medidas: [material.medidas]
           }));
         });
 
@@ -176,7 +176,8 @@ export class CadastraCategoriaPage implements OnInit {
     return this.fb.group({
       descricaoMaterial: ['', Validators.required],
       grau: [0, Validators.required],
-      comprado: [false, Validators.required]
+      comprado: [false, Validators.required],
+      medidas: [0, Validators.required]
     });
   }
 

@@ -21,7 +21,7 @@ export class ModalProjetoComponent {
   cliente: string = '';
   tipoServico: [] = [];
   categoria: string = '';
-  status: string = '';
+  status: number = 0;
   nomeProjeto: string = '';
   nomeCliente: string = '';
   userId: string = '';
@@ -43,7 +43,7 @@ export class ModalProjetoComponent {
 
   async onSave() {
     const dataIniConv = this.utilService.convertData(this.dataInicio);
-    const dataFimConv = this.utilService.convertData(this.dataFim);
+
 
     const agenda: Projeto = {
       logradouro: this.logradouro,
@@ -52,15 +52,12 @@ export class ModalProjetoComponent {
       cep: this.cep,
       complemento: this.complemento,
       nomeCliente: this.cliente,
-      dataFim: dataFimConv,
       dataInicio: dataIniConv,
       status: this.status,
       userId: this.userId,
-
     };
 
     await this.modalController.dismiss(agenda);
-
 
   }
 

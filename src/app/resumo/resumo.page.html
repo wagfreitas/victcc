@@ -5,7 +5,7 @@
       <img class="seta" src="../../assets/images/seta.png" />
     </button>
     <img class="logo" src="../../assets/images/Logo.png" />
-    <p class="titulo" *ngFor="let projeto of projetos">{{ projeto.nomeProjeto }}</p>
+    <p class="titulo">{{ projeto.nomeProjeto }}</p>
     <p class="titulo2">Resumo</p>
   </div>
 
@@ -18,8 +18,8 @@
         <ion-grid style="padding: 0px; margin-top: 20px;">
           <ion-row>
             <div class="progress-outer">
-              <div class="progress-inner" [style.width.%]="progresso">
-                {{ progresso }}
+              <div class="progress-inner" [style.width.%]="projeto.status">
+                {{ projeto.status }}
               </div>
             </div>
           </ion-row>

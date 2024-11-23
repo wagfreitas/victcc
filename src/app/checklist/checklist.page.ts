@@ -12,37 +12,38 @@ import { Projeto } from '../_interfaces/projeto';
 })
 export class ChecklistPage implements OnInit {
   sistemas: Sistema[] = [];
-  projeto = this.dataService.getData();
-  projects$ = this.projetoService.getUserProjects();
-  public projetos: Projeto[] = [];
+  projeto!: Projeto;
+
+
 
 
   constructor(
     private router: Router,
     private projetoService: ProjetoService,
     private dataService: DataServiceService
-    )
-
-  {
-  this.sistemas = this.projeto.sistemas
-  console.log(this.sistemas);
-  }
+  ) { }
 
   async ngOnInit() {
-    this.projects$.subscribe((projetos: any[]) => {
-      this.projetos = projetos.map(projeto => ({
-        nomeProjeto: projeto.nomeProjeto,
-        id: projeto.id,
-        status: projeto.status,
-        nomeCliente: projeto.nomeCliente,
-        logradouro: projeto.logradouro,
-        numero: projeto.numero,
-        complemento: projeto.complemento,
-        cep: projeto.cep,
-        dataInicio: projeto.dataInicio,
-        sistemas: projeto.sistemas,
-      }));
-    });
+    try {
+      await this.carregarProjeto();
+    } catch (error) {
+
+    }
+  }
+
+  async carregarProjeto(): Promise<void> {
+    try {
+      const projetoSelecionado = this.dataService.getProjetoSelecionado();
+      console.log(projetoSelecionado)
+      if (projetoSelecionado) {
+        this.projeto = projetoSelecionado;
+        this.sistemas = this.projeto.sistemas || []
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   atualizarPasso(sistema: Sistema, etapa: Etapa, passo: Passo) {
@@ -68,19 +69,21 @@ export class ChecklistPage implements OnInit {
     sistema.percentualExecutado = totalExecutadoSistema;
 
     // Logs para depuração
-    console.log(`Passo "${passo.descricaoPasso}" atualizado: ${passo.checked}`);
-    console.log(`Etapa "${etapa.descricaoEtapa}" - Percentual Executado: ${etapa.executadoEtapa.toFixed(2)}%`);
-    console.log(`Sistema "${sistema.descricaoSistema}" - Percentual Executado: ${sistema.percentualExecutado.toFixed(2)}%`);
   }
 
 
-  voltar() {
+  atualizarProjeto() {
     let id = this.projeto.id;
     this.projeto.status = 0
     this.sistemas.forEach(sistema => {
-      this.projeto.status += sistema.percentualExecutado
+      this.projeto.status! += sistema.percentualExecutado
     });
-    this.projetoService.updateProjeto(id, this.projeto);
+    this.projetoService.updateProjeto(this.projeto.id!, this.projeto);
+
+  }
+
+  voltar() {
+    this.atualizarProjeto();
     this.router.navigate(["projetos"]);
   }
 

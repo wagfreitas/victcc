@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { ProjetoService } from '../_services/projeto.service';
 import { DataServiceService } from '../_services/data-service.service';
 import { Projeto } from '../_interfaces/projeto';
+import { Sistema } from '../_interfaces/estrutura';
 
 @Component({
   selector: 'app-projetos',
@@ -10,8 +12,9 @@ import { Projeto } from '../_interfaces/projeto';
   styleUrls: ['./projetos.page.scss'],
 })
 export class ProjetosPage implements OnInit {
-  projects$ = this.projetoService.getUserProjects();
-  public projetos: Projeto[] = [];
+  projeto!: Projeto;
+  projetos: Projeto[] = [];
+  sistemas: Sistema[] = [];
 
   constructor(
     private router: Router,
@@ -21,36 +24,36 @@ export class ProjetosPage implements OnInit {
 
 
   async ngOnInit() {
-    this.projects$.subscribe((projetos: any[]) => {
-      console.log(projetos)
-      projetos.forEach(projeto => {
-        let resul = {
-          nomeProjeto: projeto.nomeProjeto,
-          id: projeto.id,
-          status: projeto.status,
-          nomeCliente: projeto.nomeCliente,
-          logradouro: projeto.logradouro,
-          numero: projeto.numero,
-          complemento: projeto.complemento,
-          cep: projeto.cep,
-          dataInicio: projeto.dataInicio,
-          sistemas: projeto.sistemas,
-        }
-        this.projetos.push(resul)
-      })
-    })
+    try {
+      await this.carregarProjetos();
+      console.log(this.projetos);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async carregarProjetos(): Promise<void> {
+    try {
+      const projetosResponse = await firstValueFrom(this.projetoService.getUserByProjects());
+      this.projetos = projetosResponse.map(projeto => ({
+        ...projeto,
+        sistemas: projeto.sistemas
+      }));
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  abrir(proj: Projeto) {
+    console.log(proj)
+    this.dataService.setProjetoSelecionado(proj);
+    this.router.navigate(["tabs/resumo"]);
+
   }
 
   voltar() {
     this.router.navigate(["inicial"]);
   }
-
-  abrir(proj: Projeto) {
-    console.log(proj)
-    this.dataService.setData(proj);
-    this.router.navigate(["tabs/resumo"]);
-
-  }
-
 
 }
