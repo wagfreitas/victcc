@@ -18,27 +18,22 @@
 }
 
 .titulo {
-  position: relative;
-  width: calc(100% - 60px);
-  transform: translate(-50%, 0%);
-  left: 50%;
-  top: 50px;
   text-align: center;
   font-weight: 700;
   font-size: 32px;
   line-height: 40px;
+  margin-top: 90px;
+  margin-bottom: 0px;
   color: #000;
-  margin-bottom: 30px;
 }
 
 .titulo2 {
-  position: relative;
-  left: 30px;
-  top: 50px;
+  text-align: left;
   font-size: 28px;
   font-weight: 700;
   color: #000;
-  z-index: 2;
+  margin: 15px 0px 5px 0px;
+  padding-left: 30px;
 }
 
 .cinza {
@@ -47,7 +42,7 @@
   width: calc(100% - 60px);
   left: 30px;
   top: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 20px;
   height: calc(100% - 330px);
 }
@@ -58,6 +53,7 @@
   justify-content: space-between;
   margin: 0px 0px 10px 0px;
   align-items: center;
+  font-size: 18px;
 }
 
 .calendar {
@@ -133,4 +129,8 @@
       font-size: 15px;
     }
   }
+}
+
+td.monthview-selected.monthview-current {
+  background-color: #f14c4c;
 }

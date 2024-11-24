@@ -77,17 +77,6 @@ ion-card-header {
   background-color: gainsboro;
 }
 
-ion-checkbox {
-  --size: 25px;
-  --checkbox-background-checked: #ff4c4c;
-  --border-checked: 2px solid #ff4c4c;
-}
-
-ion-checkbox::part(container) {
-  border-radius: 50%;
-  border: 1px solid gainsboro;
-}
-
 ion-item::part(native) {
   background: transparent;
 }

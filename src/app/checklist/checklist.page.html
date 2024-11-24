@@ -12,6 +12,13 @@
   <div class="conteudo-rolavel">
     <ion-card *ngFor="let sistema of sistemas">
       <ion-card-header>
+<<<<<<< HEAD
+        <ion-card-title class="sistemas">{{ sistema.descricaoSistema }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content *ngFor="let etapa of sistema.etapas">
+        <ion-card-subtitle class="etapas">{{ etapa.descricaoEtapa }}</ion-card-subtitle>
+=======
         <ion-card-title class="sistemas">{{ sistema.descricaoSistema }} - {{ sistema.percentualExecutado | number:
           '1.2-2' }}%</ion-card-title>
       </ion-card-header>
@@ -19,6 +26,7 @@
       <ion-card-content *ngFor="let etapa of sistema.etapas">
         <ion-card-subtitle class="etapas">{{ etapa.descricaoEtapa }} - {{ etapa.executadoEtapa | number: '1.2-2'
           }}%</ion-card-subtitle>
+>>>>>>> 1f6aed6403f9d88e103c4cbf8e0426a60df3600c
         <ion-item lines="none" class="passos" *ngFor="let passo of etapa.passos">
           <ion-checkbox slot="start" [checked]="passo.checked" (ionChange)="atualizarPasso(sistema,etapa, passo)">
           </ion-checkbox>

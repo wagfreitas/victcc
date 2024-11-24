@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+import { Component } from '@angular/core';
+=======
 
 import { Component, OnInit } from '@angular/core';
+>>>>>>> 1f6aed6403f9d88e103c4cbf8e0426a60df3600c
 import { Router } from '@angular/router';
 import { DataServiceService } from '../_services/data-service.service';
 import { ProjetoService } from '../_services/projeto.service';
@@ -12,8 +16,13 @@ import { Projeto } from '../_interfaces/projeto';
   templateUrl: './resumo.page.html',
   styleUrls: ['./resumo.page.scss'],
 })
+<<<<<<< HEAD
+export class ResumoPage {
+  projeto = this.dataService.getData();
+=======
 export class ResumoPage implements OnInit {
   projeto!: Projeto;
+>>>>>>> 1f6aed6403f9d88e103c4cbf8e0426a60df3600c
   progresso: number = 0;
   sistemas: Sistema[] = [];
 
@@ -33,6 +42,8 @@ export class ResumoPage implements OnInit {
 
     }
 
+<<<<<<< HEAD
+=======
   }
 
   async carregarProjeto(): Promise<void> {
@@ -60,6 +71,7 @@ export class ResumoPage implements OnInit {
 
   }
 
+>>>>>>> 1f6aed6403f9d88e103c4cbf8e0426a60df3600c
   voltar() {
     this.router.navigate(["projetos"]);
 
