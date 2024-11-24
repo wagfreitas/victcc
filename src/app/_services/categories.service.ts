@@ -17,8 +17,8 @@ export class CategoriesService {
     return this.db.collection('categorias').snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...(data as object) };
+        const idCategoria = a.payload.doc.id;
+        return { idCategoria, ...(data as object) };
       }))
     );
   }

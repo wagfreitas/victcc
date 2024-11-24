@@ -14,9 +14,6 @@ export class ChecklistPage implements OnInit {
   sistemas: Sistema[] = [];
   projeto!: Projeto;
 
-
-
-
   constructor(
     private router: Router,
     private projetoService: ProjetoService,
@@ -67,23 +64,28 @@ export class ChecklistPage implements OnInit {
       }
     });
     sistema.percentualExecutado = totalExecutadoSistema;
-
+    this.atualizarProjeto(false);
     // Logs para depuração
   }
 
 
-  atualizarProjeto() {
+  atualizarProjeto(gravar: boolean = false) {
     let id = this.projeto.id;
     this.projeto.status = 0
     this.sistemas.forEach(sistema => {
       this.projeto.status! += sistema.percentualExecutado
     });
-    this.projetoService.updateProjeto(this.projeto.id!, this.projeto);
+
+    if (gravar) {
+      this.projetoService.updateProjeto(this.projeto.id!, this.projeto);
+    } else {
+      this.dataService.setProjetoSelecionado(this.projeto);
+    }
 
   }
 
   voltar() {
-    this.atualizarProjeto();
+    this.atualizarProjeto(true);
     this.router.navigate(["projetos"]);
   }
 

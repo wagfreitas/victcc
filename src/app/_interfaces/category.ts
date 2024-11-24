@@ -1,4 +1,10 @@
- export interface Category {
+import { Sistema } from './estrutura';
+export interface Categoria {
+  idCategoria: string;
+  sistemas: Sistema[];
+}
+
+export interface Category {
   name: string;
   items: Item[];
 }
@@ -10,7 +16,7 @@ export interface Item {
   [key: string]: any;
 }
 
-interface Medidas{
+interface Medidas {
   Quantidade?: number;
   Volume?: number;
   Área?: number;
@@ -19,3 +25,5 @@ interface Medidas{
   Altura?: number;
   [key: string]: any;
 }
+
+

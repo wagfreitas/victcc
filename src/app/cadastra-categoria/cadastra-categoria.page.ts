@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { CategoriesService } from '../_services/categories.service';
 import { Estrutura, Etapa, Material, Medida, Passo, Sistema } from '../_interfaces/estrutura';
+import { Categoria } from '../_interfaces/category';
 
 
 @Component({
@@ -12,8 +13,8 @@ import { Estrutura, Etapa, Material, Medida, Passo, Sistema } from '../_interfac
 export class CadastraCategoriaPage implements OnInit {
   sistemaForm!: FormGroup;
   sistMostra: boolean = true;
-  categorias: Estrutura[] = [];
-  selectCategoria: { idSistema: string, descricaoSistema: string }[] = [];
+  categorias: Categoria[] = [];
+  selectCategoria: { idCategoria: string, descricaoSistema: string }[] = [];
   showFormArrays: boolean = true;
   isEdit: boolean = false;
   idSelected: string = '';
@@ -28,24 +29,34 @@ export class CadastraCategoriaPage implements OnInit {
 
   ngOnInit() {
     this.categoriesService.getCategories().subscribe((data) => {
+      console.log(data)
       this.categorias = data
-      this.selectCategoria = this.categorias.map((cat) => {
-        console.log(cat.sistemas)
-        return { idSistema: cat.idSistema, descricaoSistema: cat.sistemas[0].descricaoSistema }
-      }
-      )
+      this.selectCategoria = this.categorias.map((cat) => ({
+        idCategoria: cat.idCategoria, // Certifique-se de que este campo existe
+        descricaoSistema: cat.sistemas[0]?.descricaoSistema || "Sem descrição" // Lida com possíveis valores indefinidos
+      }));
     })
   }
 
   onCategorySelected(event: any) {
-    const categoria = event.detail.value;
-    this.idSelected = categoria.id;
+    console.log("Evento recebido:", event);
+    console.log("Valor selecionado:", event.detail.value);
 
-    if (categoria) {
+    const categoriaId = event.detail.value;
+
+    if (categoriaId) {
       this.isEdit = true;
-      this.sistemaForm.reset();
-      const categoriaData = this.categorias.find((cat) => cat.idSistema === categoria.id);
-      this.loadCategoriaData(categoria);
+      this.idSelected = categoriaId;
+
+      const categoria = this.categorias.find(cat => cat.idCategoria === categoriaId);
+      if (categoria) {
+        console.log("Categoria encontrada:", categoria);
+        this.loadCategoriaData(categoria);
+      } else {
+        console.error("Categoria não encontrada com ID:", categoriaId);
+      }
+    } else {
+      console.error("Nenhuma categoria foi selecionada.");
     }
   }
 
@@ -55,54 +66,50 @@ export class CadastraCategoriaPage implements OnInit {
 
     categoria.sistemas.forEach((sistema: Sistema) => {
       const sistemaForm = this.fb.group({
-        descricaoSistema: [sistema.descricaoSistema],
-        percentualSistema: [sistema.percentualSistema],
-        ordemSistema: [sistema.ordemSistema],
-        etapas: this.fb.array([])
+        descricaoSistema: [sistema.descricaoSistema, Validators.required],
+        percentualSistema: [sistema.percentualSistema, Validators.required],
+        ordemSistema: [sistema.ordemSistema, Validators.required],
+        etapas: this.fb.array(sistema.etapas.map(etapa => this.createEtapaForm(etapa)))
       });
-
-      sistema.etapas.forEach((etapa: Etapa) => {
-        const etapaForm = this.fb.group({
-          descricaoEtapa: [etapa.descricaoEtapa],
-          ordemEtapa: [etapa.ordemEtapa],
-          coeficiente: [etapa.coeficiente],
-          coeficienteInput: [etapa.coeficienteInput],
-          duracaoInput: [etapa.duracaoInput],
-          percentualEtapa: [etapa.percentualEtapa],
-          medidas: this.fb.array([]),
-          materiais: this.fb.array([]),
-          passos: this.fb.array([])
-        });
-
-        // Preenchendo medidas, materiais e passos
-        etapa.medidas.forEach((medida: Medida) => {
-          (etapaForm.get('medidas') as FormArray).push(this.fb.group({
-            descricaoMedida: [medida.descricaoMedida],
-            unidade: [medida.unidade],
-            valor: [medida.valor],
-          }));
-        });
-
-        etapa.materiais.forEach((material: Material) => {
-          (etapaForm.get('materiais') as FormArray).push(this.fb.group({
-            descricaoMaterial: [material.descricaoMaterial],
-            coeficiente: [material.coeficiente],
-            medidas: [material.medidas]
-          }));
-        });
-
-        etapa.passos.forEach((passo: Passo) => {
-          (etapaForm.get('passos') as FormArray).push(this.fb.group({
-            descricaoPasso: [passo.descricaoPasso],
-            ordemPasso: [passo.ordemPasso],
-            percentualPasso: [passo.percentualPasso]
-          }));
-        });
-
-        (sistemaForm.get('etapas') as FormArray).push(etapaForm);
-      });
-
       sistemasArray.push(sistemaForm);
+    });
+  }
+
+  createEtapaForm(etapa: Etapa): FormGroup {
+    return this.fb.group({
+      descricaoEtapa: [etapa.descricaoEtapa, Validators.required],
+      ordemEtapa: [etapa.ordemEtapa, Validators.required],
+      coeficiente: [etapa.coeficiente],
+      coeficienteInput: [etapa.coeficienteInput],
+      duracaoInput: [etapa.duracaoInput],
+      percentualEtapa: [etapa.percentualEtapa, Validators.required],
+      medidas: this.fb.array(etapa.medidas.map(medida => this.createMedidaForm(medida))),
+      materiais: this.fb.array(etapa.materiais.map(material => this.createMaterialForm(material))),
+      passos: this.fb.array(etapa.passos.map(passo => this.createPassoForm(passo)))
+    });
+  }
+
+  createMedidaForm(medida: Medida): FormGroup {
+    return this.fb.group({
+      descricaoMedida: [medida.descricaoMedida, Validators.required],
+      unidade: [medida.unidade, Validators.required],
+      valor: [medida.valor, Validators.required]
+    });
+  }
+
+  createMaterialForm(material: Material): FormGroup {
+    return this.fb.group({
+      descricaoMaterial: [material.descricaoMaterial, Validators.required],
+      coeficiente: [material.coeficiente, Validators.required],
+      medidas: [material.medidas, Validators.required]
+    });
+  }
+
+  createPassoForm(passo: Passo): FormGroup {
+    return this.fb.group({
+      descricaoPasso: [passo.descricaoPasso, Validators.required],
+      ordemPasso: [passo.ordemPasso, Validators.required],
+      percentualPasso: [passo.percentualPasso, Validators.required]
     });
   }
 
@@ -153,7 +160,7 @@ export class CadastraCategoriaPage implements OnInit {
 
   // Medidas e Material
   medidas(sistemaIndex: number, etapaIndex: number): FormArray {
-    return this.etapas(sistemaIndex,).at(etapaIndex).get('medidas') as FormArray;
+    return (this.sistemas().at(sistemaIndex).get('etapas') as FormArray).at(etapaIndex).get('medidas') as FormArray;
   }
 
   newMedida(): FormGroup {
@@ -169,7 +176,7 @@ export class CadastraCategoriaPage implements OnInit {
   }
 
   materiais(sistemaIndex: number, etapaIndex: number): FormArray {
-    return this.etapas(sistemaIndex).at(etapaIndex).get('materiais') as FormArray;
+    return (this.sistemas().at(sistemaIndex).get('etapas') as FormArray).at(etapaIndex).get('materiais') as FormArray;
   }
 
   newMaterial(): FormGroup {
@@ -185,8 +192,8 @@ export class CadastraCategoriaPage implements OnInit {
     this.materiais(sistemaIndex, etapaIndex).push(this.newMaterial());
   }
 
-  passos(sistemasIndex: number, etapaIndex: number) {
-    return this.etapas(sistemasIndex).at(etapaIndex).get('passos') as FormArray
+  passos(sistemaIndex: number, etapaIndex: number) {
+    return (this.sistemas().at(sistemaIndex).get('etapas') as FormArray).at(etapaIndex).get('passos') as FormArray;
   }
 
   newPasso(): FormGroup {
@@ -239,7 +246,8 @@ export class CadastraCategoriaPage implements OnInit {
     if (this.isEdit) {
       console.log("Atualizando projeto")
       this.categoriesService.updateCategory(this.idSelected, data).then((docRef) => {
-        this.sistemaForm.reset();
+        this.reloadCategories;
+        this.resetForm();
         this.sistMostra = true;
         this.hideAllFormArrays();
       }).catch((error) => {
@@ -248,7 +256,8 @@ export class CadastraCategoriaPage implements OnInit {
     } else {
       this.categoriesService.createCategory(data).then((docRef) => {
         if (docRef) {
-          this.sistemaForm.reset();
+          this.reloadCategories();
+          this.resetForm();
           this.sistMostra = true;
           this.hideAllFormArrays();
         }
@@ -258,6 +267,17 @@ export class CadastraCategoriaPage implements OnInit {
     }
   }
 
+  resetForm() {
+    this.sistemaForm.reset();
+    this.isEdit = false;
+    this.idSelected = '';
+    this.sistMostra = true;
+  }
+  reloadCategories() {
+    this.categoriesService.getCategories().subscribe((data) => {
+      this.categorias = data;
+    });
+  }
   hideAllFormArrays() {
     this.showFormArrays = false;
     // Iterar sobre os controles do formulário e resetar os FormArray
