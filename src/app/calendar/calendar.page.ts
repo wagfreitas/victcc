@@ -23,12 +23,12 @@ registerLocaleData(localePt);
 export class CalendarPage {
   projectName: string = '';
   projectId: string = '';
-  projeto: Projeto = {  }
+  projeto: Projeto = {}
   eventSource: any[] = [];
   viewTitle: string = ''
   numEvent: number = 0;
-  dtInicio : string= '';
-  dtFim: string= '';
+  dtInicio: string = '';
+  dtFim: string = '';
 
   calendar = {
     mode: 'month' as CalendarMode,
@@ -54,19 +54,19 @@ export class CalendarPage {
 
     this.projService.getIdProject().subscribe((res: any) => {
       this.projeto = res;
+    })
+
+
+    if (this.projeto.id) {
+      console.log('numero do projeto', this.projeto.id)
+      this.agendaService.getAgendaById(this.projeto.id).subscribe((ret) => {
+        if (ret) {
+          this.createEvents(ret)
+
+        }
+
       })
-
-
-      if (this.projeto.id) {
-        console.log('numero do projeto', this.projeto.id)
-        this.agendaService.getAgendaById(this.projeto.id).subscribe((ret) => {
-          if (ret) {
-            this.createEvents(ret)
-
-          }
-
-      })
-      }
+    }
 
   }
 
@@ -83,7 +83,7 @@ export class CalendarPage {
 
   createEvents(agendaList: Agenda[]) {
 
-    this.dtInicio= this.utilService.convertData2(agendaList[0].dateInicio || '');
+    this.dtInicio = this.utilService.convertData2(agendaList[0].dateInicio || '');
     this.dtFim = this.utilService.convertData2(agendaList[0].dateFim || '');
     console.log(this.dtFim, this.dtInicio)
     var events: Agenda[] = [];
@@ -165,7 +165,7 @@ export class CalendarPage {
   }
 
   goToAddEvent() {
-    this.router.navigate(['./tabs/newEvent'])
+    this.router.navigate(['./tabs/addEvent'])
   }
 
   testar() {
@@ -175,6 +175,6 @@ export class CalendarPage {
   voltar() {
     this.router.navigate(["projetos"]);
 
-}
+  }
 
 }

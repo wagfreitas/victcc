@@ -1,5 +1,5 @@
 export interface Agenda {
-  title?  : string,
+  title?: string,
   idProjeto?: string,
   tipoAgenda?: string,
   nomeProjeto?: string,
@@ -10,7 +10,7 @@ export interface Agenda {
   nomeCliente?: string,
   dateFim?: string,
   dateInicio?: string,
-  status?: string,
+  status?: number,
   startTime?: Date,
   endTime?: Date,
   nomeProfissional?: string

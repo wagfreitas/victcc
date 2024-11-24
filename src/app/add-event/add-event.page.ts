@@ -45,7 +45,7 @@ export class AddEventPage implements OnInit {
       this.tempAgenda.push(res);
 
       console.log(this.tempAgenda)
-     });
+    });
 
 
   }
@@ -62,7 +62,7 @@ export class AddEventPage implements OnInit {
       logradouro: this.tempAgenda[0].logradouro,
       numero: this.tempAgenda[0].numero,
       complemento: this.tempAgenda[0].complemento,
-      nomeCliente: this.tempAgenda[0].nomeCliente ,
+      nomeCliente: this.tempAgenda[0].nomeCliente,
       dateFim: dataFimConv,
       dateInicio: dataIniConv,
       status: this.tempAgenda[0].status,
@@ -80,16 +80,16 @@ export class AddEventPage implements OnInit {
 
         this.utilService.success_msg('Agenda criada com sucesso');
 
-       this.router.navigate(['tabs/calendar']);
+        this.router.navigate(['tabs/calendar']);
       } else {
-       this.utilService.showErrorAlert('Houve algum erro ')
-       this.router.navigate(['tabs/calendar']);
+        this.utilService.showErrorAlert('Houve algum erro ')
+        this.router.navigate(['tabs/calendar']);
       }
     });
   }
 
 
-  onCancel(){
+  onCancel() {
 
     this.router.navigate(['tabs/calendar']);
   }

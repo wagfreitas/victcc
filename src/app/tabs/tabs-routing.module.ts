@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('../calendar/calendar.module').then(m => m.CalendarPageModule)
       },
       {
+        path: 'addEvent',
+        loadChildren: () => import('../add-event/add-event.module').then(m => m.AddEventPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/resumo',
         pathMatch: 'full'
@@ -44,4 +48,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
