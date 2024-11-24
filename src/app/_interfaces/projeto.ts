@@ -1,5 +1,4 @@
-import { Category } from './category';
-import { Estrutura } from './estrutura';
+import { Sistema } from './estrutura';
 
 
 export interface Projeto {
@@ -11,10 +10,9 @@ export interface Projeto {
   complemento?: string;
   cep?: string;
   dataInicio?: string;
-  dataFim?: string;
   userId?: string;
-  status?: string;
-  sistemas?: Estrutura;
+  status?: number;
+  sistemas?: Sistema[];
 }
 
 

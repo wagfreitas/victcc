@@ -101,7 +101,7 @@ export class NovoProjetoPage implements OnInit {
               executadoPasso: passo.executadoPasso || 0,
               checked: passo.checked || false
             })),
-            medidas: etapa.medidas.filter(medida => parseInt(medida.valor) > 0)
+            medidas: etapa.medidas.filter(medida => medida.valor > 0)
           };
         }).filter(etapa => etapa.medidas.length > 0)
       };
@@ -147,7 +147,6 @@ export class NovoProjetoPage implements OnInit {
       complemento: this.dadosProjeto[0].complemento,
       cep: this.dadosProjeto[0].cep,
       dataInicio: this.dadosProjeto[0].dataInicio,
-      dataFim: this.dadosProjeto[0].dataFim,
       userId: this.dadosProjeto[0].userId,
       status: this.dadosProjeto[0].status,
       sistemas: data.projeto

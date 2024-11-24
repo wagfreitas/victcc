@@ -29,14 +29,15 @@ export interface Etapa {
 
 export interface Medida {
   descricaoMedida: string,
-  valor: string,
+  valor: number,
   unidade: string
 }
 
 export interface Material {
   descricaoMaterial: string,
   coeficiente: number,
-  comprado: boolean
+  comprado: boolean,
+  medidas: number
 }
 
 export interface Passo {

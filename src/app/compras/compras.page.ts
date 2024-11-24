@@ -11,38 +11,34 @@ import { Projeto } from '../_interfaces/projeto';
   styleUrls: ['./compras.page.scss'],
 })
 export class ComprasPage implements OnInit {
-  projeto = this.dataService.getData();
+  projeto!: Projeto;
   sistemas: Sistema[] = [];
   abaselecionada = 'tudo';
-  projects$ = this.projetoService.getUserProjects();
-  public projetos: Projeto[] = [];
 
   constructor(
     private router: Router,
     private dataService: DataServiceService,
     private projetoService: ProjetoService
-  )
-
-  {
-    this.sistemas = this.projeto.sistemas || [];
-    console.log(this.sistemas);
-  }
+  ) { }
 
   async ngOnInit() {
-    this.projects$.subscribe((projetos: any[]) => {
-      this.projetos = projetos.map(projeto => ({
-        nomeProjeto: projeto.nomeProjeto,
-        id: projeto.id,
-        status: projeto.status,
-        nomeCliente: projeto.nomeCliente,
-        logradouro: projeto.logradouro,
-        numero: projeto.numero,
-        complemento: projeto.complemento,
-        cep: projeto.cep,
-        dataInicio: projeto.dataInicio,
-        sistemas: projeto.sistemas,
-      }));
-    });
+    try {
+      await this.carregarProjeto();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async carregarProjeto(): Promise<void> {
+    try {
+      const projetoSelecionado = this.dataService.getProjetoSelecionado();
+      if (projetoSelecionado) {
+        this.projeto = projetoSelecionado;
+        this.sistemas = this.projeto.sistemas || [];
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // Filtra os materiais com base no filtro selecionado
@@ -50,8 +46,8 @@ export class ComprasPage implements OnInit {
     return filtro === 'tudo'
       ? materials
       : materials.filter(material =>
-          filtro === 'comprado' ? material.comprado : !material.comprado
-        );
+        filtro === 'comprado' ? material.comprado : !material.comprado
+      );
   }
 
   // Altera o filtro atual

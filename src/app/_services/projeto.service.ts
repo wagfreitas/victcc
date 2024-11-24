@@ -34,12 +34,12 @@ export class ProjetoService {
     return obj;
   }
 
-  getUserProjects() {
+  getUserByProjects(): Observable<Projeto[]> {
     return this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
           const userId = user.uid;
-          return this.db.collection('projetos', ref => ref.where('userId', '==', userId)).valueChanges();
+          return this.db.collection('projetos', ref => ref.where('userId', '==', userId)).valueChanges() as Observable<Projeto[]>;
         } else {
           return of([]); // Retorna um array vazio se o usuário não estiver logado
         }
