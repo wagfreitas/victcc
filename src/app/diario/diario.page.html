@@ -1,17 +1,37 @@
 <ion-content [fullscreen]="true">
-
-  <button class="botao-seta"
-    (click)="voltar()">
-    <img class="seta" src="../../assets/images/seta.png" />
-  </button>
-  <img class="logo" src="../../assets/images/Logo.png" />
-  <p class="titulo">Nome Projeto</p>
-
-  <p class="titulo2">Diário de obras</p>
-
-  <div class="cinza">
-
-
+  <div class="header-fixo">
+    <button class="botao-seta" (click)="voltar()">
+      <img class="seta" src="../../assets/images/seta.png" />
+    </button>
+    <img class="logo" src="../../assets/images/Logo.png" />
+    <p class="titulo">{{ projeto.nomeProjeto }}</p>
+    <p class="titulo2">Diário de Obras</p>
+    <ion-button class="botao" (click)="voltar()">+</ion-button>
   </div>
 
+  <div class="conteudo-rolavel">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="titulo-nota">Finalização do contrapiso</ion-card-title>
+        <ion-card-subtitle class="data">22/11</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p style="font-size: 18px;">Na sexta feira foi finalizada a concretagem do contrapiso após com traço 3:1.</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="titulo-nota">Limpeza da área</ion-card-title>
+        <ion-card-subtitle class="data">19/11</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p style="font-size: 18px;">Hoje foi feita a limpeza da área de construção. A equipe de limpeza fez um ótimo trabalho e a área está
+          pronta para a próxima etapa.</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-modal trigger="open-modal">
+
+  </ion-modal>
 </ion-content>

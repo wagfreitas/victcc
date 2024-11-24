@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../_services/data-service.service';
 import { ProjetoService } from '../_services/projeto.service';
@@ -10,7 +10,7 @@ import { Projeto } from '../_interfaces/projeto';
   templateUrl: './resumo.page.html',
   styleUrls: ['./resumo.page.scss'],
 })
-export class ResumoPage implements OnInit{
+export class ResumoPage {
   projeto = this.dataService.getData();
   progresso: number = 0;
   sistemas: Sistema[] = [];
@@ -26,24 +26,6 @@ export class ResumoPage implements OnInit{
     this.progresso = this.projeto.status;
     this.normalizarPercentuais();
     }
-
-    async ngOnInit() {
-      this.projects$.subscribe((projetos: any[]) => {
-        this.projetos = projetos.map(projeto => ({
-          nomeProjeto: projeto.nomeProjeto,
-          id: projeto.id,
-          status: projeto.status,
-          nomeCliente: projeto.nomeCliente,
-          logradouro: projeto.logradouro,
-          numero: projeto.numero,
-          complemento: projeto.complemento,
-          cep: projeto.cep,
-          dataInicio: projeto.dataInicio,
-          sistemas: projeto.sistemas,
-        }));
-      });
-    }
-
 
   voltar() {
     this.router.navigate(["projetos"]);

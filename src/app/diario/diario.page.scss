@@ -1,3 +1,14 @@
+.header-fixo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: min-content;
+  z-index: 10;
+  background-color: white;
+  padding-bottom: 10px;
+}
+
 .seta {
   display: flex;
   transform: translate(-50%, -50%);
@@ -19,77 +30,62 @@
 }
 
 .titulo {
-  position: relative;
-  width: calc(100% - 60px);
-  transform: translate(-50%, 0%);
-  left: 50%;
-  top: 50px;
   text-align: center;
   font-weight: 700;
   font-size: 32px;
   line-height: 40px;
+  margin-top: 90px;
+  margin-bottom: 0px;
   color: #000;
-  margin-bottom: 30px;
 }
 
 .titulo2 {
-  position: relative;
-  left: 30px;
-  top: 50px;
+  text-align: left;
   font-size: 28px;
   font-weight: 700;
   color: #000;
-  z-index: 2;
+  margin: 15px 0px 10px 0px;
+  padding-left: 30px;
 }
 
-.cinza {
-  background-color: gainsboro;
-  position: relative;
-  width: calc(100% - 60px);
-  left: 30px;
-  top: 40px;
-  border-radius: 20px;
-  padding: 20px;
-  height: calc(100% - 330px);
+.conteudo-rolavel {
+  margin-top: 330px;
+  padding: 0px 30px 20px 30px;
+  height: calc(100vh - 180px);
+  overflow-y: auto;
 }
 
-.etapa {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.processo {
-  font-size: 24px;
-  color: #000;
-  margin: 0px;
-  padding-top: 12px;
-  padding-bottom: 6px;
-}
-
-.passo {
-  font-size: 20px;
-  color: #000;
-  margin: 6px;
-  width: 100%;
-  flex: 1;
-  --checkbox-background-checked: #ff4c4c;
-  --border-width: 0px;
-}
-
-.adicionar {
+.botao {
+  height: 60px !important;
+  width: calc(100% - 60px) !important;
+  margin: 5px 30px 10px 30px;
   background-color: #ff4c4c;
-  color: white;
-  position: relative;
-  width: calc(100% - 60px);
-  left: 30px;
   border-radius: 20px;
-  height: 60px;
-  top: 60px;
-  font-size: 40px;
+  color: white;
+  font-size: 30px;
   font-weight: bold;
+  text-align: center;
 }
 
 
+
+ion-card {
+  margin: 0px 0px 20px 0pX;
+  --background: gainsboro;
+}
+
+ion-card-header {
+  padding: 20px;
+}
+
+.titulo-nota {
+  font-size: 22px;
+}
+
+.data {
+  font-size: 18px;
+}
+
+ion-item::part(native) {
+  background: transparent;
+}

@@ -13,11 +13,11 @@
 
     <div class="head">
     <ion-button fill="clear" (click)="back()">
-      <ion-icon name="chevron-back-outline" slot="icon-only" color="dark"></ion-icon>
+      <ion-icon name="chevron-back-outline" slot="icon-only" style="color: #ff4c4c;"></ion-icon>
     </ion-button>
     <p>{{ viewTitle }}</p>
     <ion-button fill="clear" (click)="next()">
-      <ion-icon name="chevron-forward-outline" slot="icon-only" color="dark"></ion-icon>
+      <ion-icon name="chevron-forward-outline" slot="icon-only" style="color: #ff4c4c;"></ion-icon>
     </ion-button>
     </div>
 
@@ -52,9 +52,6 @@
       </div>
     </ng-template>
 
-    <div class="ittl2">
-      <ion-label class="ttl1">Agendados({{numEvent}})</ion-label>
-    </div>
 
     <div class="main_content_div">
 
@@ -92,9 +89,6 @@
 </div>
 
 
-<div class="add_btn" (click)="goToAddEvent()">
-  <ion-label>Nova Agenda</ion-label>
-</div>
     </div>
 
   </div>
