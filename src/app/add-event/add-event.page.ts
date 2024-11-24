@@ -90,7 +90,6 @@ export class AddEventPage implements OnInit {
 
 
   onCancel() {
-
     this.router.navigate(['tabs/calendar']);
   }
 

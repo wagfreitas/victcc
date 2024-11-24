@@ -1,4 +1,4 @@
-import { Component, Inject  } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../_services/data-service.service';
 import { ProjetoService } from '../_services/projeto.service';
@@ -14,17 +14,16 @@ import { Projeto } from '../_interfaces/projeto';
 export class DiarioPage {
   sistemas: Sistema[] = [];
   projeto = this.dataService.getData();
-  projects$ = this.projetoService.getUserProjects();
+  projects$ = this.projetoService.getUserByProjects();
   public projetos: Projeto[] = [];
 
   constructor(
     private router: Router,
     private projetoService: ProjetoService,
-    private dataService: DataServiceService)
-    {
+    private dataService: DataServiceService) {
     this.sistemas = this.projeto.sistemas
     console.log(this.sistemas);
-    }
+  }
 
   voltar() {
     this.router.navigate(["projetos"]);
